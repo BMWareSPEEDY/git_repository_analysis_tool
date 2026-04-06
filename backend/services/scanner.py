@@ -6,55 +6,58 @@ from utils.file_utils import get_repo_path
 
 # Supported code file extensions
 SUPPORTED_EXTENSIONS = {
-    # Python
-    ".py",
-    # JavaScript / TypeScript
-    ".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs",
-    # Web
-    ".html", ".htm", ".css", ".scss", ".sass", ".less",
-    # Java / Kotlin
-    ".java", ".kt", ".kts",
-    # C / C++
-    ".c", ".h", ".cpp", ".hpp", ".cc", ".cxx",
-    # C#
-    ".cs",
-    # Go
-    ".go",
-    # Rust
-    ".rs",
-    # Ruby
-    ".rb",
-    # PHP
-    ".php",
-    # Swift
-    ".swift",
-    # Shell
-    ".sh", ".bash", ".zsh",
-    # SQL
-    ".sql",
-    # Dart
-    ".dart",
-    # Scala
-    ".scala",
-    # R
-    ".r", ".R",
-    # Lua
-    ".lua",
-    # Perl
-    ".pl", ".pm",
-    # Config / Markup
-    ".json", ".yaml", ".yml", ".toml", ".xml",
-    ".md", ".markdown", ".rst",
-    # Docker / CI
-    ".dockerfile",
+    # Main logic
+    ".py", ".js", ".ts", ".java", ".c", ".cpp", ".cs", ".go", ".rs", ".kt",
+    
+    # Web Dev
+    ".html", ".css", ".scss", ".json", ".xml", ".yaml", ".yml",
+    ".jsx", ".tsx", ".vue", ".php",
+    
+    # Config & Environment
+    ".env", ".ini", ".toml", ".cfg", ".conf",
+    
+    # Database & Data
+    ".sql", ".db", ".sqlite", ".csv", ".parquet", ".avro",
+    
+    # Testing & Docs
+    ".md", ".rst", ".txt", ".log", ".coverage",
+    
+    # DevOps exclusions/attributes
+    ".dockerignore", ".gitignore", ".gitattributes",
+    
+    # Bonus
+    ".ipynb", ".sh", ".bat", ".ps1", ".lock",
+
+    # Existing from old list just in case
+    ".mjs", ".cjs", ".htm", ".sass", ".less", ".kts",
+    ".h", ".hpp", ".cc", ".cxx", ".rb", ".swift",
+    ".bash", ".zsh", ".dart", ".scala", ".r", ".lua", ".pl", ".pm",
+    ".markdown", ".dockerfile"
 }
 
-# Also match specific filenames without extensions
+# Also match specific filenames without extensions (or full filenames that might be missed)
 SUPPORTED_FILENAMES = {
+    # Package & Dependency
+    "package.json",
+    "package-lock.json",
+    "requirements.txt",
+    "Pipfile",
+    "Pipfile.lock",
+    "pyproject.toml",
+    "poetry.lock",
+    "Cargo.toml",
+    "Cargo.lock",
+    "go.mod",
+    "go.sum",
+    "Gemfile",
+    "Gemfile.lock",
+    "composer.json",
+    "composer.lock",
+    
+    # DevOps / Build
     "Dockerfile",
     "Makefile",
     "CMakeLists.txt",
-    "Gemfile",
     "Rakefile",
     "Procfile",
 }

@@ -1,20 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { askQuestion } from '../api';
+import { askQuestion, getConversations, getConversation } from '../api';
 
 const SUGGESTIONS = [
   'What does this project do?',
-  'Explain the overall architecture.',
+  'Which modules handle user authentication?',
+  'Trace the data flow from input to output.',
   'What are the main entry points?',
-  'What dependencies does it use?',
+  'What external dependencies does it use?',
+  'Show me the most complex functions.',
 ];
 
 export default function ChatPanel({ repoId }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [conversationId, setConversationId] = useState(null);
+  const [conversations, setConversations] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Load conversation history on mount
+  useEffect(() => {
+    if (!repoId) return;
+    getConversations(repoId)
+      .then(data => setConversations(data.conversations || []))
+      .catch(() => {});
+  }, [repoId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -28,8 +41,12 @@ export default function ChatPanel({ repoId }) {
     setLoading(true);
 
     try {
-      const res = await askQuestion(repoId, q);
+      const res = await askQuestion(repoId, q, conversationId);
       setMessages(prev => [...prev, { role: 'ai', text: res.answer }]);
+      // Track conversation ID for follow-ups
+      if (res.conversation_id) {
+        setConversationId(res.conversation_id);
+      }
     } catch (e) {
       setMessages(prev => [...prev, { role: 'ai', text: `Error: ${e.message}`, err: true }]);
     } finally {
@@ -38,12 +55,132 @@ export default function ChatPanel({ repoId }) {
     }
   };
 
+  const loadConversation = async (convId) => {
+    try {
+      const data = await getConversation(repoId, convId);
+      setConversationId(convId);
+      setMessages((data.messages || []).map(m => ({
+        role: m.role, text: m.content,
+      })));
+      setShowHistory(false);
+    } catch (e) {
+      console.error('Failed to load conversation:', e);
+    }
+  };
+
+  const startNewChat = () => {
+    setMessages([]);
+    setConversationId(null);
+    setShowHistory(false);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Header */}
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
-        <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Ask about this repo</span>
+      <div style={{
+        padding: '10px 14px', borderBottom: '1px solid var(--border)', flexShrink: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ fontSize: '13px' }}>💬</span>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Query Engine
+          </span>
+          {conversationId && (
+            <span style={{
+              fontSize: '10px', padding: '1px 6px', borderRadius: 10,
+              background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.15)',
+              color: '#818cf8', fontFamily: 'var(--mono)',
+            }}>
+              🧠 memory
+            </span>
+          )}
+        </div>
+        <div style={{ display: 'flex', gap: 4 }}>
+          <button
+            onClick={() => setShowHistory(!showHistory)}
+            title="Conversation history"
+            style={{
+              background: showHistory ? 'var(--bg-3)' : 'none',
+              border: '1px solid ' + (showHistory ? 'var(--border-2)' : 'var(--border)'),
+              borderRadius: 5, padding: '3px 7px', fontSize: '11px',
+              color: 'var(--text-3)', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 4,
+            }}
+          >
+            <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {conversations.length > 0 && conversations.length}
+          </button>
+          <button
+            onClick={startNewChat}
+            title="New conversation"
+            style={{
+              background: 'none', border: '1px solid var(--border)',
+              borderRadius: 5, padding: '3px 7px', fontSize: '11px',
+              color: 'var(--text-3)', cursor: 'pointer',
+            }}
+          >
+            <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {/* History sidebar overlay */}
+      {showHistory && (
+        <div className="fade-up" style={{
+          borderBottom: '1px solid var(--border)',
+          maxHeight: 220, overflowY: 'auto', flexShrink: 0,
+          background: 'var(--bg-2)',
+        }}>
+          {conversations.length === 0 ? (
+            <div style={{ padding: '16px', fontSize: '12px', color: 'var(--text-3)', textAlign: 'center' }}>
+              No conversations yet. Start chatting!
+            </div>
+          ) : (
+            conversations.map(c => (
+              <button
+                key={c.id}
+                onClick={() => loadConversation(c.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  width: '100%', textAlign: 'left', padding: '9px 14px',
+                  background: conversationId === c.id ? 'var(--bg-3)' : 'none',
+                  border: 'none', borderBottom: '1px solid var(--border)',
+                  cursor: 'pointer', fontSize: '12px', color: 'var(--text-2)',
+                  transition: 'background 0.1s',
+                }}
+                onMouseEnter={e => { if (conversationId !== c.id) e.currentTarget.style.background = 'var(--bg-1)'; }}
+                onMouseLeave={e => { if (conversationId !== c.id) e.currentTarget.style.background = 'none'; }}
+              >
+                <div style={{ minWidth: 0 }}>
+                  <div style={{
+                    fontSize: '12px', fontWeight: 500, color: 'var(--text)',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>
+                    {c.title}
+                  </div>
+                  <div style={{ fontSize: '10px', color: 'var(--text-3)', marginTop: 2 }}>
+                    {c.message_count} messages
+                  </div>
+                </div>
+                {conversationId === c.id && (
+                  <span style={{
+                    fontSize: '9px', padding: '1px 5px', borderRadius: 8,
+                    background: 'rgba(99,102,241,0.1)', color: '#818cf8',
+                    fontWeight: 600, flexShrink: 0,
+                  }}>
+                    active
+                  </span>
+                )}
+              </button>
+            ))
+          )}
+        </div>
+      )}
 
       {/* Messages */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
@@ -140,7 +277,14 @@ export default function ChatPanel({ repoId }) {
             </svg>
           </button>
         </div>
-        <p style={{ fontSize: '11px', color: 'var(--text-3)', marginTop: 5, paddingLeft: 4 }}>Press Enter to send</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 5, paddingLeft: 4 }}>
+          <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>Press Enter to send</span>
+          {conversationId && (
+            <span style={{ fontSize: '10px', color: '#818cf8', fontFamily: 'var(--mono)' }}>
+              conv:{conversationId}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

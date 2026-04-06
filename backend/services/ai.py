@@ -1,4 +1,4 @@
-"""AI service — Gemini-powered code explanation, repo summarization, and Q&A."""
+"""PEEK AI service — Gemini-powered code explanation, repo summarization, and Q&A."""
 
 import os
 from pathlib import Path
@@ -17,7 +17,7 @@ load_dotenv()
 
 # Initialize Gemini client
 _client = None
-MODEL = "gemini-3-flash-preview"
+MODEL = "gemini-3.1-flash-lite-preview"
 
 
 def _get_client() -> genai.Client:
@@ -59,28 +59,28 @@ def explain_file(repo_id: str, relative_path: str) -> dict:
         return result
 
     # Build prompt
-    prompt = f"""You are a senior software engineer. Analyze this code file and provide a clear explanation.
+    prompt = f"""You are an elite Staff Software Engineer. Your task is to analyze the following code file and extract its core semantics to build an architectural knowledge graph.
 
-**File:** `{relative_path}`
+**File Path:** `{relative_path}`
 
-**Code:**
+**Source Code:**
 ```
 {content}
 ```
 
-Provide your analysis in the following format:
+Please analyze the file and structure your response strictly in the following format:
 
 ## Purpose
-What this file does and why it exists.
+Provide a concise explanation of what this file is responsible for within the macroscopic architecture. What problem does it solve?
 
-## Key Logic
-The main algorithms, patterns, or logic flows in this file.
+## Key Logic & Mechanisms
+Identify the primary algorithms, design patterns, internal data transformations, or complex logic flows utilized in this file. Be specific, mentioning crucial classes, functions, or variable names.
 
-## Dependencies
-What this file imports, uses, or depends on.
+## Dependencies & Side Effects
+Detail what external or internal resources this file relies on (libraries, services, databases, or sibling modules). Also, note if it modifies global state, touches the file system, or performs network calls.
 
 ## Summary
-A one-paragraph summary a developer can quickly scan.
+A sharp, high-density 2-3 sentence technical summary mapping the file's inputs to its outputs. Optimize this for another AI to quickly grasp the file's exact architectural role.
 """
 
     try:
@@ -112,10 +112,44 @@ def summarize_repo(repo_id: str, file_summaries: list[dict]) -> dict:
     if cached is not None:
         return cached
 
-    # Build context from file summaries (limit to avoid token overflow)
+    # 1. Graph-Based Prioritization
+    try:
+        from services.mental_model import MentalModel
+        model = MentalModel.load(repo_id)
+        if model:
+            # Score each file based on its node degrees (in-degree + out-degree)
+            file_scores = {}
+            for summary in file_summaries:
+                file_path = summary['file']
+                score = 0
+                deps = model.get_module_dependencies(file_path)
+                score += len(deps.get("imported_by", [])) * 2  # Being imported a lot = high importance
+                score += len(deps.get("imports_from", []))      # Importing a lot = coordinator logic
+                file_scores[file_path] = score
+                
+            # Sort summaries by score descending
+            file_summaries.sort(key=lambda s: file_scores.get(s['file'], 0), reverse=True)
+    except Exception:
+        pass # Fallback to normal ordering if no model exists
+
+    # 2. Build Context
     context_parts = []
     total_chars = 0
-    max_context = 30000  # ~7500 tokens
+    max_context = 40000  # ~10000 tokens
+
+    # Collect filenames for dynamic project type detection
+    all_filenames = [s['file'].lower() for s in file_summaries]
+    is_web_app = any(f.endswith('.html') or f.endswith('.jsx') or f.endswith('.tsx') or f.endswith('.vue') for f in all_filenames)
+    is_cli = any("cli.py" in f or "main.go" in f or f.endswith('.sh') for f in all_filenames)
+    is_library = "setup.py" in all_filenames or "cargo.toml" in all_filenames or any("lib.rs" in f for f in all_filenames)
+
+    project_type_hint = ""
+    if is_web_app:
+        project_type_hint = "The project appears to be a Web Application. Focus heavily on UI/UX components, client-server communication, state management, and API routes."
+    elif is_cli:
+        project_type_hint = "The project appears to be a CLI Tool. Focus on command-line argument parsing, file I/O operations, text formatting, and execution flow."
+    elif is_library:
+        project_type_hint = "The project appears to be a Library/SDK. Focus on the public API surface, internal abstractions, module exports, and dependency management."
 
     for summary in file_summaries:
         entry = f"### {summary['file']}\n{summary['explanation']}\n"
@@ -126,29 +160,32 @@ def summarize_repo(repo_id: str, file_summaries: list[dict]) -> dict:
 
     context = "\n".join(context_parts)
 
-    prompt = f"""You are a senior software architect. Based on the following file-by-file summaries of a codebase, provide a comprehensive overview.
+    prompt = f"""You are a Principal Software Architect. You are tasked with generating a comprehensive, high-level architectural overview of a codebase based purely on synthesized file-by-file summaries.
 
+**Project Type Context:** {project_type_hint}
+
+**File Summaries (Context prioritized by graph importance):**
 {context}
 
-Provide your analysis in the following format:
+Based strictly on the provided summaries, generate an architectural technical design document (TDD) structured as follows:
 
-## Architecture Overview
-Describe the overall architecture, design patterns, and structure of this project.
+## 🧭 Architecture Overview
+Describe the macroscopic system architecture, dominant design patterns (e.g., MVC, Event-Driven, Microkernel), and the structural separation of concerns across the project. 
 
-## Technology Stack
-List the main technologies, frameworks, and libraries used.
+## 🛠️ Technology Stack
+Identify all programming languages, major frameworks, libraries, and infrastructural tools evident in the project. Deduce the likely deployment environment if possible.
 
-## Data Flow
-Explain how data flows through the application — from input to processing to output.
+## 🔄 Data Flow & Lifecycle
+Trace how data enters the system (the ingress/entry points), how it is processed or transformed through the core logic, and its final egress or storage mechanism. Mention specific module interactions.
 
-## Key Components
-List and briefly describe the most important modules or components.
+## 🧱 Core Components
+List the 3-5 most critical modules, subsystems, or files, using the prioritized summaries provided. Briefly describe the responsibility of each and why it acts as a load-bearing pillar for the system.
 
-## How to Run
-Based on the files you see, provide instructions on how to set up and run this project.
+## 🚀 Setup & Execution 
+Synthesizing hints from build files (Makefiles, Dockerfiles, package.json, requirements.txt, etc.), outline the probable steps required for a new developer to configure and run this project locally.
 
-## Summary
-A concise 2-3 paragraph overview that a new developer could read to quickly understand this codebase.
+## 📝 Executive Summary
+Provide a concise, 2-3 paragraph architectural abstract. This should be highly technical, avoiding fluff, allowing a senior engineer to instantly understand what the project is, how it's built, and what it achieves.
 """
 
     try:
@@ -171,15 +208,32 @@ A concise 2-3 paragraph overview that a new developer could read to quickly unde
     return result
 
 
-def ask_question(repo_id: str, question: str) -> str:
+def ask_question(repo_id: str, question: str, conversation_id: str | None = None) -> str:
     """
-    Answer a question about the codebase using file summaries as context.
+    Answer a question about the codebase using Graph RAG + file summaries + conversation memory.
+
+    Pipeline:
+    1. Load the mental model and search for relevant graph nodes
+    2. Traverse call chains / dependencies for multi-hop context
+    3. Include relevant file summaries as supporting evidence
+    4. If conversation_id is provided, include chat history for follow-ups
+    5. Send the enriched prompt to Gemini
     """
-    # Load available file summaries for context
+    # ── 1. Graph RAG context ──────────────────────────────────────────
+    graph_context = ""
+    try:
+        from services.mental_model import MentalModel
+        model = MentalModel.load(repo_id)
+        if model is not None:
+            graph_context = _build_graph_rag_context(model, question)
+    except Exception:
+        pass  # Mental model may not exist yet; proceed without it
+
+    # ── 2. File summary context ───────────────────────────────────────
     summaries_dir = Path(get_file_summary_path(repo_id, "")).parent
     context_parts = []
     total_chars = 0
-    max_context = 20000
+    max_context = 15000
 
     if summaries_dir.exists():
         for json_file in sorted(summaries_dir.glob("*.json")):
@@ -191,25 +245,64 @@ def ask_question(repo_id: str, question: str) -> str:
                 context_parts.append(entry)
                 total_chars += len(entry)
 
-    # Also load repo summary if available
+    # ── 3. Repo summary context ───────────────────────────────────────
     repo_summary = load_json(get_repo_summary_path(repo_id))
     repo_context = ""
     if repo_summary:
         repo_context = f"\n## Overall Architecture\n{repo_summary.get('summary', '')}\n"
 
-    context = "\n".join(context_parts)
+    file_context = "\n".join(context_parts)
 
-    prompt = f"""You are a senior software engineer who has thoroughly analyzed a codebase. Use the following context about the codebase to answer the developer's question.
+    # ── 4. Conversation history ───────────────────────────────────────
+    chat_history = ""
+    if conversation_id:
+        try:
+            from services.conversation_store import get_store
+            store = get_store()
+            history = store.get_history(conversation_id, limit=10)
+            if history:
+                history_parts = []
+                for msg in history:
+                    prefix = "Developer" if msg["role"] == "user" else "PEEK"
+                    # Truncate long AI responses in history to save tokens
+                    content = msg["content"]
+                    if msg["role"] == "ai" and len(content) > 300:
+                        content = content[:300] + "…"
+                    history_parts.append(f"**{prefix}:** {content}")
+                chat_history = "\n\n".join(history_parts)
+        except Exception:
+            pass
 
-## Codebase Context
-{context}
-{repo_context}
+    # ── 5. Build the enriched prompt ──────────────────────────────────
+    prompt_parts = [
+        "You are **PEEK**, an elite AI Staff Engineer and architectural reasoning engine. ",
+        "You possess a perfect, multi-dimensional understanding of the user codebase derived from an AST-based mental model, ",
+        "file-by-file semantics, and conversational memory. Your goal is to answer the developer's question with authoritative precision.\n\n",
+        "### Rules for Answering:\n",
+        "1. **Be Exact:** Cite specific file paths, class names, function signatures, and variables. Do not generalize.\n",
+        "2. **Trace the Graph:** If asked about flow or interaction, explicitly trace the call chain (A calls B which mutates C) using the Context Graph.\n",
+        "3. **Code over Prose:** Whenever explaining logic, prefer short, illustrative code snippets. Keep paragraphs brief.\n",
+        "4. **Acknowledge Gaps:** If the provided context lacks the absolute answer, state clearly what is missing rather than hallucinating.\n\n"
+    ]
 
-## Developer's Question
-{question}
+    if graph_context:
+        prompt_parts.append(f"## Architecture Graph Context (from Mental Model)\n{graph_context}\n")
 
-Provide a clear, helpful, and specific answer. Reference particular files or components when relevant. If you're unsure about something, say so rather than guessing.
-"""
+    if file_context:
+        prompt_parts.append(f"## File Summaries\n{file_context}\n")
+
+    if repo_context:
+        prompt_parts.append(repo_context)
+
+    if chat_history:
+        prompt_parts.append(f"## Previous Conversation\n{chat_history}\n")
+
+    prompt_parts.append(
+        f"## Developer's Target Query\n{question}\n\n"
+        "Synthesize the context above and formulate a masterful, senior-level response."
+    )
+
+    prompt = "\n".join(prompt_parts)
 
     try:
         client = _get_client()
@@ -220,3 +313,89 @@ Provide a clear, helpful, and specific answer. Reference particular files or com
         return response.text
     except Exception as e:
         return f"Error generating answer: {str(e)}"
+
+
+def _build_graph_rag_context(model, question: str) -> str:
+    """
+    Build structured context from the mental model graph for a given question.
+
+    Strategy:
+    1. Extract keywords from the question
+    2. Search the graph for matching nodes (functions, classes, modules)
+    3. For the top matches, trace the subgraph (call chains, dependencies)
+    4. Return a textual representation of the relevant subgraph
+    """
+    import re
+
+    # Extract meaningful keywords (skip common words)
+    stop_words = {
+        "what", "how", "does", "the", "this", "that", "which", "where", "when",
+        "why", "who", "is", "are", "was", "were", "do", "can", "could", "would",
+        "should", "have", "has", "had", "will", "shall", "may", "might", "must",
+        "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of",
+        "with", "by", "from", "about", "into", "through", "during", "before",
+        "after", "above", "below", "between", "out", "off", "up", "down",
+        "it", "its", "my", "your", "all", "each", "every", "both", "few",
+        "more", "most", "other", "some", "such", "no", "not", "only", "own",
+        "same", "so", "than", "too", "very", "just", "also", "then",
+        "show", "me", "tell", "explain", "describe", "list", "find",
+        "trace", "data", "flow", "code", "file", "function", "class", "module",
+    }
+
+    words = re.findall(r'\b\w+\b', question.lower())
+    keywords = [w for w in words if w not in stop_words and len(w) > 2]
+
+    if not keywords:
+        # Fall back to using the full question for search
+        keywords = [w for w in words if len(w) > 3][:5]
+
+    if not keywords:
+        return ""
+
+    # Search the graph for matching nodes
+    search_query = " ".join(keywords)
+    search_results = model.search_nodes(search_query, limit=10)
+
+    context_parts = []
+
+    if search_results:
+        context_parts.append("### Matching Entities")
+        for result in search_results:
+            if result["type"] == "function":
+                params = ", ".join(result.get("params", []))
+                context_parts.append(
+                    f"- **fn** `{result['name']}({params})` in `{result['module']}` "
+                    f"[L{result.get('lines', '?')}]"
+                )
+                if result.get("calls"):
+                    context_parts.append(f"  → calls: {', '.join(result['calls'][:6])}")
+                if result.get("called_by"):
+                    context_parts.append(f"  ← called by: {', '.join(result['called_by'][:6])}")
+            elif result["type"] == "class":
+                context_parts.append(
+                    f"- **class** `{result['name']}` in `{result['module']}` "
+                    f"bases={result.get('bases', [])}, methods={result.get('methods', [])[:8]}"
+                )
+            elif result["type"] == "module":
+                context_parts.append(
+                    f"- **module** `{result['name']}` ({result.get('language', '?')}, "
+                    f"{result.get('loc', 0)} LOC)"
+                )
+
+    # For top matches, get subgraph context (multi-hop traversal)
+    subgraph_texts = []
+    traced_names = set()
+    for result in search_results[:3]:
+        name = result.get("qualified_name", result.get("name", ""))
+        if name and name not in traced_names:
+            traced_names.add(name)
+            subgraph = model.get_subgraph(name, depth=2)
+            if subgraph["context_text"]:
+                subgraph_texts.append(subgraph["context_text"])
+
+    if subgraph_texts:
+        context_parts.append("\n### Call Chain & Dependency Traversal")
+        context_parts.extend(subgraph_texts)
+
+    return "\n".join(context_parts)
+

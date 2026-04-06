@@ -1,0 +1,244 @@
+{
+  "repo_id": "repo_32314c34a52a",
+  "modules": {
+    ".travis.yml": {
+      "path": ".travis.yml",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 5
+    },
+    "docs/Makefile": {
+      "path": "docs/Makefile",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 192
+    },
+    "docs/about.rst": {
+      "path": "docs/about.rst",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 6
+    },
+    "docs/conf.py": {
+      "path": "docs/conf.py",
+      "language": "python",
+      "docstring": "",
+      "imports": [
+        "sys",
+        "os",
+        "shlex",
+        "pydna"
+      ],
+      "exports": [],
+      "loc": 38
+    },
+    "docs/index.rst": {
+      "path": "docs/index.rst",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 23
+    },
+    "docs/modules.rst": {
+      "path": "docs/modules.rst",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 7
+    },
+    "docs/pydna.rst": {
+      "path": "docs/pydna.rst",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 22
+    },
+    "pydna/__init__.py": {
+      "path": "pydna/__init__.py",
+      "language": "python",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 2
+    },
+    "pydna/seq_utils.py": {
+      "path": "pydna/seq_utils.py",
+      "language": "python",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 35
+    },
+    "tests.py": {
+      "path": "tests.py",
+      "language": "python",
+      "docstring": "",
+      "imports": [
+        "unittest",
+        "pydna"
+      ],
+      "exports": [],
+      "loc": 13
+    }
+  },
+  "functions": {
+    "pydna/seq_utils.py::complement_codon": {
+      "name": "complement_codon",
+      "module": "pydna/seq_utils.py",
+      "class_name": "",
+      "params": [
+        "input_codon"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1,
+      "line_end": 19,
+      "complexity": 1
+    },
+    "pydna/seq_utils.py::is_codon_correct": {
+      "name": "is_codon_correct",
+      "module": "pydna/seq_utils.py",
+      "class_name": "",
+      "params": [
+        "input_codon"
+      ],
+      "return_type": "",
+      "docstring": "Function to check for correctness of input codons. It checks\nif bases belong to one of the allowed DNA bases.\n\n:param input_codon: It is expected to be a three base codon.\n:return: True or False\n\n>>> ",
+      "calls": [
+        "type",
+        "print"
+      ],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 22,
+      "line_end": 46,
+      "complexity": 4
+    },
+    "tests.py::TestSeqUtils::test_is_codon_correct": {
+      "name": "test_is_codon_correct",
+      "module": "tests.py",
+      "class_name": "TestSeqUtils",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [
+        "is_codon_correct",
+        "assertEqual"
+      ],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 7,
+      "line_end": 11,
+      "complexity": 1
+    },
+    "tests.py::TestSeqUtils::test_is_codon_correct_bad_codon": {
+      "name": "test_is_codon_correct_bad_codon",
+      "module": "tests.py",
+      "class_name": "TestSeqUtils",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [
+        "is_codon_correct",
+        "assertEqual"
+      ],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 13,
+      "line_end": 17,
+      "complexity": 1
+    }
+  },
+  "classes": {
+    "tests.py::TestSeqUtils": {
+      "name": "TestSeqUtils",
+      "module": "tests.py",
+      "bases": [
+        "unittest.TestCase"
+      ],
+      "methods": [
+        "test_is_codon_correct",
+        "test_is_codon_correct_bad_codon"
+      ],
+      "attributes": [],
+      "docstring": "",
+      "decorators": [],
+      "line_start": 6,
+      "line_end": 17
+    }
+  },
+  "dependencies": [
+    {
+      "source": "docs/conf.py",
+      "target": "sys",
+      "imports": [
+        "sys"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "docs/conf.py",
+      "target": "os",
+      "imports": [
+        "os"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "docs/conf.py",
+      "target": "shlex",
+      "imports": [
+        "shlex"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "docs/conf.py",
+      "target": "pydna",
+      "imports": [
+        "pydna"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests.py",
+      "target": "unittest",
+      "imports": [
+        "unittest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests.py",
+      "target": "pydna",
+      "imports": [
+        "pydna"
+      ],
+      "is_external": false
+    }
+  ],
+  "metadata": {
+    "parser_stats": {
+      "python_ast": 4,
+      "treesitter": 0,
+      "regex_fallback": 0,
+      "unknown": 6
+    }
+  }
+}

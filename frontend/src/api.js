@@ -1,5 +1,7 @@
 /**
- * API client for the AI Codebase Explainer backend.
+ * API client for the PEEK backend.
+ * Program Exploration & Examination Kit
+ *
  * All calls go through the Vite proxy at /api → http://localhost:8000
  */
 
@@ -32,7 +34,7 @@ export async function cloneRepo(repoUrl) {
 }
 
 /**
- * Trigger full analysis (file explanations + repo summary).
+ * Trigger full analysis (file explanations + mental model + repo summary).
  * @param {string} repoId
  */
 export async function analyzeRepo(repoId) {
@@ -42,7 +44,7 @@ export async function analyzeRepo(repoId) {
 /**
  * Get analysis status/progress.
  * @param {string} repoId
- * @returns {{ status: string, total_files: number, files_processed: number, current_file: string }}
+ * @returns {{ status: string, total_files: number, files_processed: number, current_file: string, current_phase: string }}
  */
 export async function getAnalysisStatus(repoId) {
   return request(`/repo/${repoId}/status`);
@@ -75,14 +77,95 @@ export async function getRepoSummary(repoId) {
 }
 
 /**
- * Ask a question about the codebase.
+ * Ask a question about the codebase (Graph RAG + conversation memory).
  * @param {string} repoId
  * @param {string} question
- * @returns {{ answer: string }}
+ * @param {string} [conversationId]
+ * @returns {{ answer: string, conversation_id: string }}
  */
-export async function askQuestion(repoId, question) {
+export async function askQuestion(repoId, question, conversationId) {
+  const body = { repo_id: repoId, question };
+  if (conversationId) body.conversation_id = conversationId;
   return request('/ask', {
     method: 'POST',
-    body: JSON.stringify({ repo_id: repoId, question }),
+    body: JSON.stringify(body),
   });
+}
+
+// ─── Conversation APIs ──────────────────────────────────────────────
+
+/**
+ * List all conversations for a repo.
+ * @param {string} repoId
+ * @returns {{ conversations: Array }}
+ */
+export async function getConversations(repoId) {
+  return request(`/repo/${repoId}/conversations`);
+}
+
+/**
+ * Get a conversation with full message history.
+ * @param {string} repoId
+ * @param {string} convId
+ */
+export async function getConversation(repoId, convId) {
+  return request(`/repo/${repoId}/conversations/${convId}`);
+}
+
+// ─── Mental Model APIs ──────────────────────────────────────────────
+
+/**
+ * Get the full mental model as a ReactFlow-compatible graph.
+ * @param {string} repoId
+ * @returns {{ nodes: Array, edges: Array }}
+ */
+export async function getMentalModel(repoId) {
+  return request(`/repo/${repoId}/mental-model`);
+}
+
+/**
+ * Get mental model summary statistics.
+ * @param {string} repoId
+ */
+export async function getMentalModelSummary(repoId) {
+  return request(`/repo/${repoId}/mental-model/summary`);
+}
+
+/**
+ * Get call graph, optionally for a specific function.
+ * @param {string} repoId
+ * @param {string} [functionName]
+ * @param {number} [depth=3]
+ */
+export async function getCallGraph(repoId, functionName, depth = 3) {
+  const params = new URLSearchParams();
+  if (functionName) params.set('function', functionName);
+  params.set('depth', depth.toString());
+  return request(`/repo/${repoId}/call-graph?${params}`);
+}
+
+/**
+ * Get dependency tree.
+ * @param {string} repoId
+ * @param {string} [modulePath]
+ */
+export async function getDependencies(repoId, modulePath) {
+  const params = modulePath ? `?module=${encodeURIComponent(modulePath)}` : '';
+  return request(`/repo/${repoId}/dependencies${params}`);
+}
+
+/**
+ * Get code smells and architectural issues.
+ * @param {string} repoId
+ */
+export async function getCodeSmells(repoId) {
+  return request(`/repo/${repoId}/code-smells`);
+}
+
+/**
+ * Get security analysis report.
+ * @param {string} repoId
+ */
+export async function getSecurityReport(repoId) {
+  return request(`/repo/${repoId}/security`);
 }
