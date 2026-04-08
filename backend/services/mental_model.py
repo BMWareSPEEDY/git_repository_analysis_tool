@@ -45,7 +45,7 @@ class FunctionNode:
     is_async: bool = False
     line_start: int = 0
     line_end: int = 0
-    complexity: int = 0  # cyclomatic complexity estimate
+    complexity: int = 1  # cyclomatic complexity estimate (baseline is 1)
 
 
 @dataclass
@@ -111,16 +111,65 @@ class MentalModel:
         self.dependencies.append(edge)
 
     def build_call_graph(self):
-        """Build forward and reverse call graphs from function nodes."""
+        """Build forward and reverse call graphs from function nodes with cross-module resolution."""
         self.call_graph = {}
         self.reverse_call_graph = {}
 
+        # 1. Map simple function names to qualified names
+        # name -> [qname1, qname2, ...]
+        name_map: dict[str, list[str]] = {}
         for qname, func in self.functions.items():
-            self.call_graph[qname] = func.calls
-            for callee in func.calls:
-                if callee not in self.reverse_call_graph:
-                    self.reverse_call_graph[callee] = []
-                self.reverse_call_graph[callee].append(qname)
+            if func.name not in name_map:
+                name_map[func.name] = []
+            name_map[func.name].append(qname)
+
+        # 2. Map module paths to their internal imports (targets that are internal)
+        module_imports: dict[str, list[str]] = {}
+        for edge in self.dependencies:
+            if not edge.is_external:
+                if edge.source not in module_imports:
+                    module_imports[edge.source] = []
+                module_imports[edge.source].append(edge.target)
+
+        for qname, func in self.functions.items():
+            resolved_calls = []
+            for callee_name in func.calls:
+                # Basic Resolution Strategy:
+                # 1. Same module?
+                same_mod_qname = f"{func.module}::{callee_name}"
+                # Also check with class prefix if we could resolve that, but simple is best for now
+                
+                found_qname = ""
+                if same_mod_qname in self.functions:
+                    found_qname = same_mod_qname
+                
+                # 2. Defined in an imported module?
+                if not found_qname:
+                    for imp in module_imports.get(func.module, []):
+                        imported_qname = f"{imp}::{callee_name}"
+                        if imported_qname in self.functions:
+                            found_qname = imported_qname
+                            break
+
+                # 3. Fuzzy fallback: if only 1 function with this name in the entire repo, 
+                # and it's not a common generic name, assume it's the one.
+                if not found_qname:
+                    if callee_name in name_map and len(name_map[callee_name]) == 1:
+                        # Skip very common names and constructors for fuzzy matching
+                        if callee_name not in ("constructor", "render", "init", "handle", "setup"):
+                            found_qname = name_map[callee_name][0]
+
+                if found_qname:
+                    resolved_calls.append(found_qname)
+                else:
+                    # Fallback to the name itself (might be external library)
+                    resolved_calls.append(callee_name)
+
+            self.call_graph[qname] = resolved_calls
+            for rcallee in resolved_calls:
+                if rcallee not in self.reverse_call_graph:
+                    self.reverse_call_graph[rcallee] = []
+                self.reverse_call_graph[rcallee].append(qname)
 
     def get_function_call_chain(self, function_name: str, depth: int = 3) -> dict:
         """
@@ -226,6 +275,20 @@ class MentalModel:
                     "message": f"Module '{path}' has {len(mod.imports)} imports. This may indicate high coupling.",
                     "line": 0,
                 })
+
+        # Unreachable functions (dead code)
+        for qname, func in self.functions.items():
+            if not func.called_by and func.name not in ["main", "__init__"] and not func.name.startswith("test_"):
+                # Also ignore routes/endpoints if decorators exist
+                if not func.decorators:
+                    smells.append({
+                        "type": "unreachable_function",
+                        "severity": "warning",
+                        "location": qname,
+                        "module": func.module,
+                        "message": f"Function '{func.name}' has no incoming calls and no decorators. This might be dead code.",
+                        "line": func.line_start,
+                    })
 
         # Circular dependencies
         circular = self._detect_circular_deps()
@@ -466,51 +529,314 @@ class MentalModel:
 
     def to_reactflow_graph(self) -> dict:
         """
-        Convert the mental model into ReactFlow-compatible nodes and edges
-        for interactive visualization.
+        Convert the mental model into ReactFlow-compatible nodes and edges.
+        Uses a hierarchical layering algorithm for a clean, non-blocking layout.
         """
+        # 1. Identify connected modules and entry points
+        connected_modules = set()
+        edges_to_render = []
+        
+        # Adjacency list for internal dependencies
+        adj = {path: [] for path in self.modules}
+        in_degree = {path: 0 for path in self.modules}
+        
+        for dep in self.dependencies:
+            if not dep.is_external and dep.source in self.modules and dep.target in self.modules:
+                connected_modules.add(dep.source)
+                connected_modules.add(dep.target)
+                edges_to_render.append(dep)
+                adj[dep.source].append(dep.target)
+                in_degree[dep.target] += 1
+        
+        entry_points = {path for path, mod in self.modules.items() 
+                        if any(path.endswith(ep) for ep in [
+                            "main.py", "index.js", "index.ts", "app.py", "App.jsx", "App.tsx", 
+                            "main.go", "cli.py", "__init__.py", "vite.config.ts", "vite.config.js",
+                            "package.json", "tsconfig.json", "go.mod", "Cargo.toml"
+                        ])}
+        
+        modules_to_show = connected_modules | entry_points
+
+        # Fallback: if we found nothing to show, show the largest modules
+        if not modules_to_show:
+            sorted_by_size = sorted(self.modules.keys(), key=lambda x: self.modules[x].loc, reverse=True)
+            modules_to_show = set(sorted_by_size[:15])
+
+        # 2. Hierarchical Ranking (Layers)
+        layers = {} # path -> layer_index
+        queue = []
+        
+        # Start with nodes that have in-degree 0 (or entry points)
+        for path in modules_to_show:
+            if in_degree.get(path, 0) == 0 or path in entry_points:
+                layers[path] = 0
+                queue.append(path)
+        
+        # BFS to assign layers (hierarchical). 
+        # Safety circuit-breaker for cycles:
+        max_possible_layer = len(self.modules)
+        while queue:
+            u = queue.pop(0)
+            if layers.get(u, 0) > max_possible_layer: continue # Cycle safety
+            
+            for v in adj.get(u, []):
+                if v in modules_to_show:
+                    # Move child to at least u's layer + 1
+                    try:
+                        new_layer = layers.get(u, 0) + 1
+                        # Update only if it moves further right, up to a limit
+                        if v not in layers or (new_layer > layers[v] and new_layer <= max_possible_layer):
+                            layers[v] = new_layer
+                            if v not in queue: 
+                                queue.append(v)
+                    except Exception:
+                        pass
+       
+        # Ensure every visible module has a layer
+        for path in modules_to_show:
+            if path not in layers:
+                layers[path] = 0
+
+        # Group by layer
+        layer_members = {}
+        for path, layer in layers.items():
+            if layer not in layer_members:
+                layer_members[layer] = []
+            layer_members[layer].append(path)
+
+        # Invert layers if needed to flow Left (Dependents) -> Right (Core Dependencies)
+        # For now, we follow BFS order: 0 is entry, higher is dependency
+        max_layer = max(layers.values()) if layers else 0
+
+        # Grouping by root directory
+        group_layer_map = {}
+        for path in sorted(modules_to_show):
+            d = path.split("/")[0] if "/" in path else "_root"
+            if d not in group_layer_map:
+                group_layer_map[d] = {}
+            l = layers.get(path, 0)
+            if l not in group_layer_map[d]:
+                group_layer_map[d][l] = []
+            group_layer_map[d][l].append(path)
+
+        nodes = []
+        edges = []
+        current_group_y = 0
+        group_padding = 100
+        node_width, node_height = 240, 100
+        x_spacing, y_spacing = 450, 160
+
+        # 6. Create Each Group and its Children
+        for d in sorted(group_layer_map.keys()):
+            is_root = (d == "_root")
+            # Calculate internal dimensions for this group
+            g_layers = group_layer_map[d]
+            max_l = max(g_layers.keys())
+            min_l = min(g_layers.keys())
+            
+            # Max nodes in any single layer within this group
+            max_y_in_g = max(len(paths) for paths in g_layers.values())
+            
+            g_width = (max_l - min_l + 1) * x_spacing + 100
+            g_height = max_y_in_g * y_spacing + 100
+            
+            # Label management
+            display_label = "Root & Core" if is_root else d
+            group_id = f"group_{d}"
+            
+            # Visible boundary for ALL groups (including root)
+            nodes.append({
+                "id": group_id,
+                "type": "group",
+                "position": {"x": min_l * x_spacing, "y": current_group_y},
+                "data": {"label": display_label},
+                "style": {
+                    "backgroundColor": "rgba(99, 102, 241, 0.04)" if is_root else "rgba(255, 255, 255, 0.02)",
+                    "border": "1px solid rgba(99, 102, 241, 0.2)" if is_root else "1px dashed rgba(255, 255, 255, 0.2)",
+                    "borderRadius": "20px",
+                    "width": g_width,
+                    "height": g_height
+                }
+            })
+
+            # Add Modules in this group
+            for l_idx in sorted(g_layers.keys()):
+                for sub_y_idx, path in enumerate(sorted(g_layers[l_idx])):
+                    mod = self.modules[path]
+                    func_count = sum(1 for f in self.functions.values() if f.module == path)
+                    category = "frontend" if ("frontend/" in path or mod.language in ["javascript", "typescript", "jsx", "tsx"]) else "backend"
+                    
+                    # Target relative positions
+                    rel_x = (l_idx - min_l) * x_spacing + 50
+                    rel_y = sub_y_idx * y_spacing + 60
+                    
+                    nodes.append({
+                        "id": f"mod_{path}",
+                        "type": "moduleNode",
+                        "position": {"x": rel_x, "y": rel_y},
+                        "parentId": group_id,
+                        "extent": "parent",
+                        "data": {
+                            "label": path.split("/")[-1],
+                            "fullPath": path,
+                            "language": mod.language,
+                            "loc": mod.loc,
+                            "functions": func_count,
+                            "importance": layers[path] + 1,
+                            "category": category,
+                            "color": "#3b82f6" if category == "frontend" else "#10b981"
+                        },
+                    })
+            
+            # Increment Y for the next group stack
+            current_group_y += g_height + group_padding
+
+        # 7. Dependency edges - Grouped by (source, target) to ensure unique keys
+        grouped_deps = {}
+        for dep in edges_to_render:
+            key = (dep.source, dep.target)
+            if key not in grouped_deps:
+                grouped_deps[key] = []
+            grouped_deps[key].extend(dep.imports)
+
+        node_ids = {n["id"] for n in nodes}
+        for (src, tgt), imports in grouped_deps.items():
+            source_id = f"mod_{src}"
+            target_id = f"mod_{tgt}"
+            if source_id in node_ids and target_id in node_ids:
+                # Deduplicate and sort symbols
+                unique_imports = sorted(list(set(imports)))
+                # Flow lines with truncated labels for clarity, but full data for hover
+                short_label = ", ".join(unique_imports[:2]) + ("..." if len(unique_imports) > 2 else "")
+                edges.append({
+                    "id": f"dep_{src}_{tgt}",
+                    "source": source_id,
+                    "target": target_id,
+                    "type": "smoothstep",
+                    "animated": True,
+                    "label": short_label,
+                    "data": {
+                        "allImports": unique_imports,
+                        "shortLabel": short_label
+                    },
+                    "style": {"stroke": "#6366f1", "strokeWidth": 2, "opacity": 0.6},
+                })
+
+        return {"nodes": nodes, "edges": edges}
+
+    def to_reactflow_graph_functions(self) -> dict:
+        """
+        Convert the mental model into ReactFlow-compatible nodes and edges.
+        Only includes function nodes that take part in the call graph.
+        """
+        edges_to_render = []
+        connected_functions = set()
+        
+        # 1. Identify connected functions via call graph
+        for caller, callees in self.call_graph.items():
+            for callee in callees:
+                if callee in self.functions:
+                    edges_to_render.append((caller, callee))
+                    connected_functions.add(caller)
+                    connected_functions.add(callee)
+
         nodes = []
         edges = []
 
-        # Module nodes
-        for i, (path, mod) in enumerate(self.modules.items()):
-            func_count = sum(1 for f in self.functions.values() if f.module == path)
-            class_count = sum(1 for c in self.classes.values() if c.module == path)
+        # 2. Function nodes (sorted for consistency)
+        for i, qname in enumerate(sorted(connected_functions)):
+            if qname not in self.functions: continue
+            func = self.functions[qname]
+            
+            category = "shared"
+            color = "#f59e0b"
+            if "frontend/" in func.module:
+                category = "frontend"
+                color = "#3b82f6"
+            elif "backend/" in func.module:
+                category = "backend"
+                color = "#10b981"
+
+            label = f"{func.class_name}.{func.name}" if func.class_name else func.name
 
             nodes.append({
-                "id": f"mod_{path}",
-                "type": "moduleNode",
-                "position": {"x": (i % 5) * 280, "y": (i // 5) * 200},
+                "id": f"func_{qname}",
+                "type": "functionNode",
+                "position": {"x": (i % 8) * 200, "y": (i // 8) * 150},
                 "data": {
-                    "label": path.split("/")[-1],
-                    "fullPath": path,
-                    "language": mod.language,
-                    "loc": mod.loc,
-                    "functions": func_count,
-                    "classes": class_count,
-                    "imports": len(mod.imports),
+                    "label": label,
+                    "qualifiedName": qname,
+                    "module": func.module,
+                    "params": len(func.params),
+                    "complexity": func.complexity,
+                    "category": category,
+                    "color": color
                 },
             })
 
-        # Dependency edges
-        for dep in self.dependencies:
-            if not dep.is_external:
-                source_id = f"mod_{dep.source}"
-                target_id = f"mod_{dep.target}"
-                # Only add edge if both nodes exist
-                node_ids = {n["id"] for n in nodes}
-                if source_id in node_ids and target_id in node_ids:
-                    edges.append({
-                        "id": f"dep_{dep.source}_{dep.target}",
-                        "source": source_id,
-                        "target": target_id,
-                        "type": "smoothstep",
-                        "animated": True,
-                        "label": ", ".join(dep.imports[:3]) + ("…" if len(dep.imports) > 3 else ""),
-                        "style": {"stroke": "#3b82f6", "strokeWidth": 1.5},
-                    })
+        # 3. Call edges
+        for caller, callee in edges_to_render:
+            edges.append({
+                "id": f"call_{caller}_{callee}",
+                "source": f"func_{caller}",
+                "target": f"func_{callee}",
+                "type": "smoothstep",
+                "animated": True,
+                "style": {"stroke": "#a855f7", "strokeWidth": 1.5},
+            })
 
         return {"nodes": nodes, "edges": edges}
+
+    def get_impact_analysis(self, target: str) -> dict:
+        """
+        Perform an impact analysis for a changed file or function.
+        If target is a module path, finds dependent modules.
+        If target is a function qualified name, finds calling functions.
+        """
+        impacted_modules = set()
+        impacted_functions = set()
+        
+        # Analyze module impact
+        if target in self.modules:
+            # Find modules that import this one (reverse DFS)
+            adj: dict[str, set[str]] = {}
+            for edge in self.dependencies:
+                if not edge.is_external:
+                    if edge.target not in adj:
+                        adj[edge.target] = set()
+                    adj[edge.target].add(edge.source)
+            
+            visited = set()
+            def dfs_mod(node):
+                if node in visited:
+                    return
+                visited.add(node)
+                impacted_modules.add(node)
+                for caller in adj.get(node, []):
+                    dfs_mod(caller)
+            dfs_mod(target)
+            
+        # Analyze function impact
+        if target in self.functions:
+            # Find functions that call this one
+            visited_funcs = set()
+            def dfs_func(node):
+                if node in visited_funcs:
+                    return
+                visited_funcs.add(node)
+                impacted_functions.add(node)
+                # module containing impacted function is also impacted
+                if node in self.functions:
+                    impacted_modules.add(self.functions[node].module)
+                for caller in self.reverse_call_graph.get(node, []):
+                    dfs_func(caller)
+            dfs_func(target)
+            
+        return {
+            "target": target,
+            "impacted_modules": list(impacted_modules - {target}),
+            "impacted_functions": list(impacted_functions - {target})
+        }
 
     def to_dict(self) -> dict:
         """Serialize the mental model to a dict for JSON storage."""
@@ -552,14 +878,25 @@ class MentalModel:
 
     @classmethod
     def load(cls, repo_id: str) -> Optional[MentalModel]:
-        """Load a mental model from disk, if it exists."""
-        path = MENTAL_MODELS_DIR / f"{repo_id}.json"
-        data = load_json(path)
-        if data is None:
-            return None
-        model = cls.from_dict(data)
-        model.build_call_graph()
-        return model
+        """Load a mental model from disk, if it exists. Handles prefix mismatches."""
+        # Try exact match, then with repo_ prefix, then without
+        variants = [repo_id]
+        if not repo_id.startswith("repo_"):
+            variants.append(f"repo_{repo_id}")
+        else:
+            variants.append(repo_id.replace("repo_", "", 1))
+
+        for v in variants:
+            path = MENTAL_MODELS_DIR / f"{v}.json"
+            if path.exists():
+                data = load_json(path)
+                if data:
+                    model = cls.from_dict(data)
+                    model.build_call_graph()
+                    return model
+        
+        print(f"DEBUG: Mental model for {repo_id} not found in {MENTAL_MODELS_DIR}. Tried: {variants}")
+        return None
 
 
 # ─── Convenience ──────────────────────────────────────────────────────

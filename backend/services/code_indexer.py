@@ -268,13 +268,49 @@ def _process_python_class(node: ast.ClassDef, module: str, model: MentalModel):
 
 
 def _get_internal_modules(model: MentalModel) -> set[str]:
-    """Get set of module names that are part of the repo."""
+    """Get set of module names and sub-paths that are part of the repo."""
     internal = set()
     for path in model.modules:
+        # Full path
+        internal.add(path)
+        # Without extension
+        no_ext = str(Path(path).with_suffix(""))
+        internal.add(no_ext)
+        # Path parts for Python dot notation
         parts = Path(path).with_suffix("").parts
         for i in range(len(parts)):
             internal.add(".".join(parts[i:]))
+            internal.add("/".join(parts[i:]))
     return internal
+
+
+def _resolve_path(source_file: str, target_path: str, model: MentalModel) -> str:
+    """
+    Resolve a relative or absolute path to an actual file in the repo.
+    """
+    if not target_path.startswith('.'):
+        return target_path  # Might be external package or absolute
+
+    # src_dir = "lib" if source_file = "lib/express.js"
+    src_dir = os.path.dirname(source_file)
+    # Join and normalize: "lib" + "../router" -> "router"
+    normalized = os.path.normpath(os.path.join(src_dir, target_path))
+    
+    # If the normalized path starts with '..', it's outside the repo (though normpath handles it)
+    if normalized.startswith('..'):
+        return target_path
+
+    # Check candidates with various extensions
+    all_paths = set(model.modules.keys())
+    for ext in ['', '.js', '.ts', '.jsx', '.tsx', '/index.js', '/index.ts', '.py']:
+        candidate = normalized + ext
+        if candidate in all_paths:
+            return candidate
+        # Also check without leading /
+        if candidate.startswith('/') and candidate[1:] in all_paths:
+            return candidate[1:]
+            
+    return normalized
 
 
 # ─── tree-sitter Deep Indexer ─────────────────────────────────────────
@@ -628,9 +664,16 @@ def index_generic_file(file_path: str, relative_path: str, language: str, model:
             params_str = match.group(2) if match.lastindex >= 2 else ""
             params = [p.strip().split()[-1].strip(",") for p in params_str.split(",") if p.strip()] if params_str else []
             line_no = source[:match.start()].count("\n") + 1
+            # Simple complexity estimate: 1 + log10(match length) or just default 1
+            complexity = 1
+            if match.lastindex and match.lastindex >= 2:
+                # If we have a body (rare with simple regex, but let's be safe)
+                pass 
+                
             model.add_function(FunctionNode(
                 name=name, module=relative_path, params=params,
                 line_start=line_no, line_end=line_no,
+                complexity=complexity,
             ))
 
     for pattern in CLASS_PATTERNS.get(language, []):
@@ -695,10 +738,23 @@ def build_mental_model(repo_id: str, file_paths: list[str]) -> MentalModel:
     # Build the call graph from collected data
     model.build_call_graph()
 
-    # Refine dependency classification
+    # Refine dependency classification and resolve paths
     internal_modules = _get_internal_modules(model)
     for dep in model.dependencies:
-        dep.is_external = dep.target.split(".")[0] not in internal_modules
+        # Resolve path for relative JS/TS imports
+        if dep.target.startswith('.'):
+            resolved = _resolve_path(dep.source, dep.target, model)
+            dep.target = resolved
+            
+        # Determine if external
+        first_part_dot = dep.target.split(".")[0]
+        first_part_slash = dep.target.split("/")[0]
+        
+        dep.is_external = (
+            dep.target not in internal_modules and
+            first_part_dot not in internal_modules and
+            first_part_slash not in internal_modules
+        )
 
     # Store parsing stats in metadata
     model.metadata["parser_stats"] = {

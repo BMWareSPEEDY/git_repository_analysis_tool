@@ -73,6 +73,9 @@ Please analyze the file and structure your response strictly in the following fo
 ## Purpose
 Provide a concise explanation of what this file is responsible for within the macroscopic architecture. What problem does it solve?
 
+## Role in Architecture
+Explain **why** this file exists in the context of the overall system. How does it interact with other load-bearing pillars of the repository? What unique responsibility does it hold that other files do not?
+
 ## Key Logic & Mechanisms
 Identify the primary algorithms, design patterns, internal data transformations, or complex logic flows utilized in this file. Be specific, mentioning crucial classes, functions, or variable names.
 
@@ -206,113 +209,121 @@ Provide a concise, 2-3 paragraph architectural abstract. This should be highly t
     }
     save_json(summary_path, result)
     return result
+import json
+
+def classify_intent(user_input: str) -> dict:
+    """
+    Classify whether the user is asking to trace an architectural flow.
+    Returns: { "type": "flow" | "question", "target": "file1, file2..." | null }
+    """
+    prompt = f"""You are the PEEK Intent Engine. 
+Your job is to identify if a developer is asking to trace an execution pipeline, state transition, or architectural flow.
+
+EXAMPLES:
+Input: "How does the login work?"
+Response: {{"type": "flow", "target": "auth.ts, login.ts, session.ts"}}
+
+Input: "Show me the Zustand state flow"
+Response: {{"type": "flow", "target": "vanilla.ts, index.ts, middleware.ts"}}
+
+Input: "What are our dependencies?"
+Response: {{"type": "question", "target": null}}
+
+Input: "{user_input}"
+Response:
+"""
+    try:
+        client = _get_client()
+        response = client.models.generate_content(model=MODEL, contents=prompt)
+        text = response.text.replace('```json', '').replace('```', '').strip()
+        data = json.loads(text)
+        return {"type": data.get("type", "question"), "target": data.get("target")}
+    except Exception:
+        return {"type": "question", "target": None}
 
 
 def ask_question(repo_id: str, question: str, conversation_id: str | None = None) -> str:
-    """
-    Answer a question about the codebase using Graph RAG + file summaries + conversation memory.
+    """Answer a question about the codebase (Synchronous)."""
+    prompt = _build_ask_prompt(repo_id, question, conversation_id)
+    try:
+        client = _get_client()
+        response = client.models.generate_content(model=MODEL, contents=prompt)
+        return response.text
+    except Exception as e:
+        return f"Error generating answer: {str(e)}"
 
-    Pipeline:
-    1. Load the mental model and search for relevant graph nodes
-    2. Traverse call chains / dependencies for multi-hop context
-    3. Include relevant file summaries as supporting evidence
-    4. If conversation_id is provided, include chat history for follow-ups
-    5. Send the enriched prompt to Gemini
-    """
-    # ── 1. Graph RAG context ──────────────────────────────────────────
+
+def stream_ask_question(repo_id: str, question: str, conversation_id: str | None = None):
+    """Generator that yields chunks of the AI's response in real-time."""
+    prompt = _build_ask_prompt(repo_id, question, conversation_id)
+    try:
+        client = _get_client()
+        for chunk in client.models.generate_content_stream(model=MODEL, contents=prompt):
+            if chunk.text:
+                yield chunk.text
+    except Exception as e:
+        yield f"Error in stream: {str(e)}"
+
+
+def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None = None) -> str:
+    """Synthesize graph RAG, file summaries, and conversation memory into an enriched prompt."""
+    # ── 1. Graph RAG context
     graph_context = ""
     try:
         from services.mental_model import MentalModel
         model = MentalModel.load(repo_id)
-        if model is not None:
+        if model:
             graph_context = _build_graph_rag_context(model, question)
     except Exception:
-        pass  # Mental model may not exist yet; proceed without it
+        pass
 
-    # ── 2. File summary context ───────────────────────────────────────
+    # ── 2. File context
     summaries_dir = Path(get_file_summary_path(repo_id, "")).parent
     context_parts = []
     total_chars = 0
     max_context = 15000
-
     if summaries_dir.exists():
         for json_file in sorted(summaries_dir.glob("*.json")):
             data = load_json(json_file)
             if data:
                 entry = f"### {data.get('file', 'unknown')}\n{data.get('explanation', '')}\n"
-                if total_chars + len(entry) > max_context:
-                    break
+                if total_chars + len(entry) > max_context: break
                 context_parts.append(entry)
                 total_chars += len(entry)
 
-    # ── 3. Repo summary context ───────────────────────────────────────
+    # ── 3. Repo summary
     repo_summary = load_json(get_repo_summary_path(repo_id))
-    repo_context = ""
-    if repo_summary:
-        repo_context = f"\n## Overall Architecture\n{repo_summary.get('summary', '')}\n"
+    repo_context = f"\n## Overall Architecture\n{repo_summary.get('summary', '')}\n" if repo_summary else ""
 
-    file_context = "\n".join(context_parts)
-
-    # ── 4. Conversation history ───────────────────────────────────────
+    # ── 4. Chat history
     chat_history = ""
     if conversation_id:
         try:
             from services.conversation_store import get_store
-            store = get_store()
-            history = store.get_history(conversation_id, limit=10)
+            history = get_store().get_history(conversation_id, limit=10)
             if history:
-                history_parts = []
+                h_parts = []
                 for msg in history:
                     prefix = "Developer" if msg["role"] == "user" else "PEEK"
-                    # Truncate long AI responses in history to save tokens
-                    content = msg["content"]
-                    if msg["role"] == "ai" and len(content) > 300:
-                        content = content[:300] + "…"
-                    history_parts.append(f"**{prefix}:** {content}")
-                chat_history = "\n\n".join(history_parts)
-        except Exception:
-            pass
+                    content = msg["content"][:300] + "…" if msg["role"] == "ai" and len(msg["content"]) > 300 else msg["content"]
+                    h_parts.append(f"**{prefix}:** {content}")
+                chat_history = "\n\n".join(h_parts)
+        except Exception: pass
 
-    # ── 5. Build the enriched prompt ──────────────────────────────────
+    # ── 5. Assemble
     prompt_parts = [
-        "You are **PEEK**, an elite AI Staff Engineer and architectural reasoning engine. ",
-        "You possess a perfect, multi-dimensional understanding of the user codebase derived from an AST-based mental model, ",
-        "file-by-file semantics, and conversational memory. Your goal is to answer the developer's question with authoritative precision.\n\n",
-        "### Rules for Answering:\n",
-        "1. **Be Exact:** Cite specific file paths, class names, function signatures, and variables. Do not generalize.\n",
-        "2. **Trace the Graph:** If asked about flow or interaction, explicitly trace the call chain (A calls B which mutates C) using the Context Graph.\n",
-        "3. **Code over Prose:** Whenever explaining logic, prefer short, illustrative code snippets. Keep paragraphs brief.\n",
-        "4. **Acknowledge Gaps:** If the provided context lacks the absolute answer, state clearly what is missing rather than hallucinating.\n\n"
+        "You are **PEEK**, an elite AI Staff Engineer. Answer with authoritative precision.\n",
+        "1. **Be Exact:** Cite specific file paths, class names, functions.\n",
+        "2. **Trace the Graph:** Trace call chains (A -> B mutates C) using Context Graph.\n",
+        "3. **Code over Prose:** Prefer short, illustrative code snippets.\n",
     ]
+    if graph_context: prompt_parts.append(f"## Architecture Graph Context\n{graph_context}\n")
+    if "\n".join(context_parts): prompt_parts.append(f"## File Summaries\n" + "\n".join(context_parts) + "\n")
+    if repo_context: prompt_parts.append(repo_context)
+    if chat_history: prompt_parts.append(f"## Previous Conversation\n{chat_history}\n")
+    prompt_parts.append(f"## Developer's Query\n{question}\n\nFormulate a senior-level response.")
 
-    if graph_context:
-        prompt_parts.append(f"## Architecture Graph Context (from Mental Model)\n{graph_context}\n")
-
-    if file_context:
-        prompt_parts.append(f"## File Summaries\n{file_context}\n")
-
-    if repo_context:
-        prompt_parts.append(repo_context)
-
-    if chat_history:
-        prompt_parts.append(f"## Previous Conversation\n{chat_history}\n")
-
-    prompt_parts.append(
-        f"## Developer's Target Query\n{question}\n\n"
-        "Synthesize the context above and formulate a masterful, senior-level response."
-    )
-
-    prompt = "\n".join(prompt_parts)
-
-    try:
-        client = _get_client()
-        response = client.models.generate_content(
-            model=MODEL,
-            contents=prompt,
-        )
-        return response.text
-    except Exception as e:
-        return f"Error generating answer: {str(e)}"
+    return "\n".join(prompt_parts)
 
 
 def _build_graph_rag_context(model, question: str) -> str:

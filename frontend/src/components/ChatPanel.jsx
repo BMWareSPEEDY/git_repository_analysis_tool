@@ -11,7 +11,7 @@ const SUGGESTIONS = [
   'Show me the most complex functions.',
 ];
 
-export default function ChatPanel({ repoId }) {
+export default function ChatPanel({ repoId, onChatAction }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,9 +43,15 @@ export default function ChatPanel({ repoId }) {
     try {
       const res = await askQuestion(repoId, q, conversationId);
       setMessages(prev => [...prev, { role: 'ai', text: res.answer }]);
+      
       // Track conversation ID for follow-ups
       if (res.conversation_id) {
         setConversationId(res.conversation_id);
+      }
+      
+      // Notify parent if the question was identified as a tracing intent
+      if (res.intent && res.intent.type === 'flow' && res.intent.target) {
+        if (onChatAction) onChatAction({ type: 'trace', target: res.intent.target });
       }
     } catch (e) {
       setMessages(prev => [...prev, { role: 'ai', text: `Error: ${e.message}`, err: true }]);
@@ -82,7 +88,9 @@ export default function ChatPanel({ repoId }) {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-          <span style={{ fontSize: '13px' }}>💬</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
           <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Query Engine
           </span>
@@ -92,7 +100,10 @@ export default function ChatPanel({ repoId }) {
               background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.15)',
               color: '#818cf8', fontFamily: 'var(--mono)',
             }}>
-              🧠 memory
+              <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" style={{ marginRight: 4 }}>
+                <path d="M12 2v4m0 12v4m-7.07-2.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4" />
+              </svg>
+              memory
             </span>
           )}
         </div>
@@ -225,10 +236,40 @@ export default function ChatPanel({ repoId }) {
                 borderRadius: '2px 10px 10px 10px',
                 padding: '10px 14px', maxWidth: '100%', width: '100%',
                 color: m.err ? 'var(--red)' : undefined,
+                position: 'relative'
               }}>
                 <div className="chat-prose">
                   <ReactMarkdown>{m.text}</ReactMarkdown>
                 </div>
+                
+                {/* Contextual Trace Button */}
+                {m.text && !m.err && (
+                  <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end' }}>
+                    <button
+                      onClick={() => {
+                        // Regex to find file-like strings (e.g., vanilla.ts, index.js, src/store.py)
+                        const matches = m.text.match(/[a-zA-Z0-9_-]+\.(ts|js|jsx|tsx|py|md|json)/g);
+                        if (matches && matches.length > 0) {
+                          onChatAction({ type: 'trace', target: matches.join(',') });
+                        }
+                      }}
+                      style={{
+                        background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)',
+                        borderRadius: 5, padding: '3px 8px', fontSize: '10px',
+                        color: '#818cf8', cursor: 'pointer', fontWeight: 600,
+                        display: 'flex', alignItems: 'center', gap: 4
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(99,102,241,0.15)'}
+                      onMouseLeave={e => e.currentTarget.style.background = 'rgba(99,102,241,0.1)'}
+                    >
+                      <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 2v4m0 12v4m-7.07-2.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4" />
+                      </svg>
+                      Trace this Path
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

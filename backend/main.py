@@ -28,7 +28,7 @@ from dotenv import load_dotenv
 
 from services.repo import clone_repo
 from services.scanner import scan_files
-from services.ai import explain_file, summarize_repo, ask_question
+from services.ai import explain_file, summarize_repo, ask_question, classify_intent
 from services.code_indexer import build_mental_model
 from services.mental_model import MentalModel, get_mental_model_summary
 from services.security_analyzer import analyze_repo_security
@@ -92,6 +92,7 @@ class AskRequest(BaseModel):
 class AskResponse(BaseModel):
     answer: str
     conversation_id: str = ""
+    intent: dict | None = None
 
 
 class AnalysisStatus(BaseModel):
@@ -102,6 +103,25 @@ class AnalysisStatus(BaseModel):
     current_phase: str = ""
     error: str = ""
 
+
+# ─── Helpers ──────────────────────────────────────────────────────────
+
+def _resolve_repo_id(repo_id: str) -> str:
+    """Check if the repo exists with or without the 'repo_' prefix."""
+    if repo_id in _analysis_status:
+        return repo_id
+    
+    # Check physical existence of repo directory
+    variants = [repo_id]
+    if not repo_id.startswith("repo_"):
+        variants.append(f"repo_{repo_id}")
+    else:
+        variants.append(repo_id.replace("repo_", "", 1))
+        
+    for v in variants:
+        if get_repo_path(v).exists():
+            return v
+    return repo_id
 
 # ─── Endpoints ────────────────────────────────────────────────────────
 
@@ -118,6 +138,7 @@ async def api_clone(req: CloneRequest):
 @app.get("/repo/{repo_id}/files")
 async def api_list_files(repo_id: str):
     """List all scanned code files in a repository."""
+    repo_id = _resolve_repo_id(repo_id)
     repo_path = get_repo_path(repo_id)
     if not repo_path.exists():
         raise HTTPException(status_code=404, detail="Repository not found")
@@ -132,6 +153,7 @@ async def api_list_files(repo_id: str):
 @app.get("/repo/{repo_id}/file-summary")
 async def api_file_summary(repo_id: str, path: str = Query(..., description="Relative file path")):
     """Get the AI-generated explanation for a specific file."""
+    repo_id = _resolve_repo_id(repo_id)
     repo_path = get_repo_path(repo_id)
     if not repo_path.exists():
         raise HTTPException(status_code=404, detail="Repository not found")
@@ -250,6 +272,7 @@ async def _run_analysis(repo_id: str):
 @app.get("/repo/{repo_id}/summary")
 async def api_repo_summary(repo_id: str):
     """Get the overall architecture summary for a repository."""
+    repo_id = _resolve_repo_id(repo_id)
     summary = load_json(get_repo_summary_path(repo_id))
     if summary is None:
         raise HTTPException(
@@ -262,6 +285,7 @@ async def api_repo_summary(repo_id: str):
 @app.get("/repo/{repo_id}/status", response_model=AnalysisStatus)
 async def api_status(repo_id: str):
     """Get the current analysis progress for a repository."""
+    repo_id = _resolve_repo_id(repo_id)
     if repo_id not in _analysis_status:
         # Check if analysis was already completed (cached)
         summary = load_json(get_repo_summary_path(repo_id))
@@ -295,13 +319,16 @@ async def api_ask(req: AskRequest):
     # Store the user message
     store.add_message(conv_id, "user", req.question)
 
+    # Classify intent (e.g. flow tracing)
+    intent = await asyncio.to_thread(classify_intent, req.question)
+
     # Get the answer (with Graph RAG + conversation memory)
     answer = await asyncio.to_thread(ask_question, req.repo_id, req.question, conv_id)
 
     # Store the AI response
     store.add_message(conv_id, "ai", answer)
 
-    return AskResponse(answer=answer, conversation_id=conv_id)
+    return AskResponse(answer=answer, conversation_id=conv_id, intent=intent)
 
 
 # ─── Conversation Endpoints ──────────────────────────────────────────
@@ -330,6 +357,7 @@ async def api_get_conversation(repo_id: str, conv_id: str):
 @app.get("/repo/{repo_id}/mental-model")
 async def api_mental_model(repo_id: str):
     """Get the full mental model as a ReactFlow-compatible graph."""
+    repo_id = _resolve_repo_id(repo_id)
     model = await asyncio.to_thread(MentalModel.load, repo_id)
     if model is None:
         raise HTTPException(
@@ -339,10 +367,37 @@ async def api_mental_model(repo_id: str):
     graph = model.to_reactflow_graph()
     return graph
 
+@app.get("/repo/{repo_id}/mental-model/functions")
+async def api_mental_model_functions(repo_id: str):
+    """Get the function-level mental model as a ReactFlow-compatible graph."""
+    model = await asyncio.to_thread(MentalModel.load, repo_id)
+    if model is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Mental model not built yet. Run /repo/{repo_id}/analyze first.",
+        )
+    graph = model.to_reactflow_graph_functions()
+    return graph
+
+@app.get("/repo/{repo_id}/impact")
+async def api_impact_analysis(
+    repo_id: str,
+    target: str = Query(..., description="Module path or function qualified name")
+):
+    """Get impact analysis for a specific changed file or function."""
+    model = await asyncio.to_thread(MentalModel.load, repo_id)
+    if model is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Mental model not built yet. Run /repo/{repo_id}/analyze first.",
+        )
+    return model.get_impact_analysis(target)
+
 
 @app.get("/repo/{repo_id}/mental-model/summary")
 async def api_mental_model_summary(repo_id: str):
     """Get summary statistics for the mental model."""
+    repo_id = _resolve_repo_id(repo_id)
     model = await asyncio.to_thread(MentalModel.load, repo_id)
     if model is None:
         raise HTTPException(

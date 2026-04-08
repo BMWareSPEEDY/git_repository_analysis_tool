@@ -212,9 +212,27 @@ def analyze_repo_security(repo_id: str, file_paths: list[str]) -> dict:
         by_category[f.category].append(asdict(f))
 
     # Heuristics for Insights Panel
+    # Improved complexity heuristic based on code volume and structure
     test_files = [f for f in file_paths if "test" in f.lower() or "spec" in f.lower() or "mock" in f.lower()]
     test_coverage_est = round((len(test_files) / len(file_paths)) * 100) if file_paths else 0
-    complexity_score = min(100, round((len(all_findings) / max(1, len(file_paths))) * 25))
+    
+    # Calculate a more realistic complexity score based on control structures and findings
+    findings_weight = len(all_findings) * 5
+    file_count_weight = min(50, len(file_paths) / 2)
+    
+    # Try to get data from mental model if available
+    from services.mental_model import MentalModel
+    model = MentalModel.load(repo_id)
+    if model and model.functions:
+        avg_func_complexity = sum(f.complexity for f in model.functions.values()) / len(model.functions)
+        complexity_score = min(100, round((avg_func_complexity * 8) + (len(model.classes) / 5) + (len(file_paths) / 10)))
+    else:
+        # Fallback heuristic if mental model not loaded
+        complexity_score = min(100, round(findings_weight + file_count_weight))
+    
+    # Ensure it's not 0 for non-empty repos
+    if file_paths and complexity_score < 5:
+        complexity_score = 5 + min(15, len(file_paths))
 
     # Summary
     return {

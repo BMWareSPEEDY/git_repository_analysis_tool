@@ -171,3 +171,55 @@ code, pre { font-family: var(--mono); }
   margin: 0.5em 0;
 }
 .chat-prose pre code { background: none; border: none; padding: 0; color: var(--text); }
+
+/* ── ReactFlow Theme Overrides ─────────────────────── */
+.react-flow__controls {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 9px !important;
+  overflow: hidden !important;
+  background: var(--bg-1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-1) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: #888 !important;
+  fill: #888 !important;
+  transition: all 0.2s !important;
+  height: 28px !important;
+  width: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--bg-3) !important;
+  color: var(--text) !important;
+  fill: var(--text) !important;
+}
+
+.react-flow__minimap {
+  background: var(--bg-1) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(30, 30, 30, 0.7) !important;
+}
+
+.react-flow__edge {
+  transition: opacity 0.2s, stroke-width 0.2s;
+}

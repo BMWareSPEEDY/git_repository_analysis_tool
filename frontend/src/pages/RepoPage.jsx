@@ -13,9 +13,34 @@ const CHAT_W    = 340;
 
 // View tabs for the main content area
 const VIEWS = [
-  { id: 'code',    label: 'Code',          icon: '📄' },
-  { id: 'model',   label: 'Mental Model',  icon: '🧠' },
-  { id: 'insights', label: 'Insights',     icon: '🔒' },
+  { 
+    id: 'code',    
+    label: 'Code',          
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+      </svg>
+    ) 
+  },
+  { 
+    id: 'model',   
+    label: 'Mental Model',  
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 14v-2m0-4h.01" />
+        <path d="M15 9a3 3 0 10-6 0c0 1.657 1.343 3 3 3s3-1.343 3-3z" />
+      </svg>
+    ) 
+  },
+  { 
+    id: 'insights', 
+    label: 'Insights',     
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ) 
+  },
 ];
 
 export default function RepoPage() {
@@ -29,6 +54,40 @@ export default function RepoPage() {
   const [showChat,    setShowChat]    = useState(true);
   const [showSummary, setShowSummary] = useState(false);
   const [activeView,  setActiveView]  = useState('code');
+  const [traceTarget, setTraceTarget] = useState(null);
+
+  // Resizable Chat logic
+  const [chatWidth, setChatWidth] = useState(340);
+  const [isResizing, setIsResizing] = useState(false);
+
+  const startResizing = useCallback(() => setIsResizing(true), []);
+  const stopResizing  = useCallback(() => setIsResizing(false), []);
+  const onResize      = useCallback((e) => {
+    if (!isResizing) return;
+    const newWidth = window.innerWidth - e.clientX;
+    if (newWidth > 240 && newWidth < 900) setChatWidth(newWidth);
+  }, [isResizing]);
+
+  useEffect(() => {
+    if (isResizing) {
+      window.addEventListener('mousemove', onResize);
+      window.addEventListener('mouseup', stopResizing);
+    } else {
+      window.removeEventListener('mousemove', onResize);
+      window.removeEventListener('mouseup', stopResizing);
+    }
+    return () => {
+      window.removeEventListener('mousemove', onResize);
+      window.removeEventListener('mouseup', stopResizing);
+    };
+  }, [isResizing, onResize, stopResizing]);
+
+  const handleChatAction = useCallback((action) => {
+    if (action.type === 'trace') {
+      setActiveView('model');
+      setTraceTarget(action.target);
+    }
+  }, []);
 
   /* ── Poll analysis status ──────────────────────── */
   useEffect(() => {
@@ -280,23 +339,34 @@ export default function RepoPage() {
             <ExplanationPanel repoId={repoId} selectedFile={selected} />
           )}
           {activeView === 'model' && (
-            <MentalModelPanel repoId={repoId} />
+            <MentalModelPanel repoId={repoId} traceTarget={traceTarget} />
           )}
           {activeView === 'insights' && (
             <InsightsPanel repoId={repoId} />
           )}
         </main>
 
-        {/* Chat panel (query engine) */}
+        {/* Chat panel (query engine) with Resizer */}
         {showChat && (
-          <aside style={{
-            width: CHAT_W, flexShrink: 0,
-            borderLeft: '1px solid var(--border)',
-            background: 'var(--bg-1)',
-            display: 'flex', flexDirection: 'column', overflow: 'hidden',
-          }}>
-            <ChatPanel repoId={repoId} />
-          </aside>
+          <>
+            <div 
+              onMouseDown={startResizing}
+              style={{
+                width: 4, cursor: 'col-resize',
+                background: isResizing ? 'var(--blue)' : 'transparent',
+                transition: 'background 0.2s', zIndex: 10,
+                borderLeft: '1px solid var(--border)',
+                marginLeft: -2
+              }}
+            />
+            <aside style={{
+              width: chatWidth, flexShrink: 0,
+              background: 'var(--bg-1)',
+              display: 'flex', flexDirection: 'column', overflow: 'hidden',
+            }}>
+              <ChatPanel repoId={repoId} onChatAction={handleChatAction} />
+            </aside>
+          </>
         )}
       </div>
 

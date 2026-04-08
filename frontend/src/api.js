@@ -77,11 +77,60 @@ export async function getRepoSummary(repoId) {
 }
 
 /**
- * Ask a question about the codebase (Graph RAG + conversation memory).
+ * Ask a question about the codebase with real-time streaming tokens.
  * @param {string} repoId
  * @param {string} question
  * @param {string} [conversationId]
- * @returns {{ answer: string, conversation_id: string }}
+ * @param {Function} onChunk - Callback for each stream chunk: ({ type, ...data })
+ */
+export async function streamAskQuestion(repoId, question, conversationId, onChunk) {
+  const body = { repo_id: repoId, question };
+  if (conversationId) body.conversation_id = conversationId;
+
+  const response = await fetch(`${BASE_URL}/ask`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
+    throw new Error(error.detail || `HTTP ${response.status}`);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let metadataReceived = false;
+  let buffer = '';
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    
+    const chunk = decoder.decode(value, { stream: true });
+    buffer += chunk;
+
+    if (!metadataReceived && buffer.includes('\n--SEP--\n')) {
+      const parts = buffer.split('\n--SEP--\n');
+      try {
+        const metadata = JSON.parse(parts[0]);
+        metadataReceived = true;
+        buffer = parts.slice(1).join('\n--SEP--\n');
+        onChunk({ type: 'metadata', ...metadata });
+      } catch (e) {
+        // Maybe partial metadata, wait for next chunk
+      }
+    }
+
+    if (metadataReceived && buffer) {
+      onChunk({ type: 'text', text: buffer });
+      buffer = '';
+    }
+  }
+}
+
+/**
+ * Ask a question (Legacy synchronous version).
  */
 export async function askQuestion(repoId, question, conversationId) {
   const body = { repo_id: repoId, question };
@@ -121,6 +170,24 @@ export async function getConversation(repoId, convId) {
  */
 export async function getMentalModel(repoId) {
   return request(`/repo/${repoId}/mental-model`);
+}
+
+/**
+ * Get the function-level mental model as a ReactFlow-compatible graph.
+ * @param {string} repoId
+ * @returns {{ nodes: Array, edges: Array }}
+ */
+export async function getMentalModelFunctions(repoId) {
+  return request(`/repo/${repoId}/mental-model/functions`);
+}
+
+/**
+ * Get impact analysis for a specific file or function.
+ * @param {string} repoId
+ * @param {string} target - Module path or function qualified name
+ */
+export async function getImpactAnalysis(repoId, target) {
+  return request(`/repo/${repoId}/impact?target=${encodeURIComponent(target)}`);
 }
 
 /**
