@@ -730,13 +730,17 @@ def build_mental_model(repo_id: str, file_paths: list[str]) -> MentalModel:
         else:
             try:
                 with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
-                    loc = len(f.readlines())
+                    content = f.read()
+                    loc = len(content.splitlines())
             except Exception:
                 loc = 0
             model.add_module(ModuleNode(path=rel_path, language="unknown", loc=loc))
 
     # Build the call graph from collected data
     model.build_call_graph()
+    
+    # Calculate architectural importance scores
+    model.compute_importance_scores()
 
     # Refine dependency classification and resolve paths
     internal_modules = _get_internal_modules(model)

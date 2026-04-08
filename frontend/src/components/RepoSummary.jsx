@@ -16,7 +16,11 @@ export default function RepoSummary({ summary }) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: '13px' }}>🗂</span>
+          <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v12a2 2 0 01-2 2z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14 2v6h6" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 13h8M8 17h8" />
+          </svg>
           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)' }}>Architecture Overview</span>
           {summary.files_analyzed > 0 && (
             <span style={{ fontSize: '11px', color: 'var(--text-3)', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 20, padding: '1px 8px' }}>
@@ -24,7 +28,12 @@ export default function RepoSummary({ summary }) {
             </span>
           )}
         </div>
-        <span style={{ fontSize: '11px', color: 'var(--text-3)', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▼</span>
+        <svg 
+          width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
+          style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', color: 'var(--text-3)' }}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
 
       {open && (

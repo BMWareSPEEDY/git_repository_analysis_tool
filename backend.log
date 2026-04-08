@@ -1,2 +1,80 @@
 INFO:     Will watch for changes in these directories: ['/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/backend']
-ERROR:    [Errno 48] Address already in use
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [26663] using WatchFiles
+INFO:     Started server process [26695]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:54263 - "POST /clone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54264 - "POST /repo/repo_75279b216fe8/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54265 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54266 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54269 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54271 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54267 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54274 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54277 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54280 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54283 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54288 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54289 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54292 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54295 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54301 - "GET /repo/repo_75279b216fe8/code-smells HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54304 - "GET /repo/repo_75279b216fe8/code-smells HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54300 - "GET /repo/repo_75279b216fe8/security HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54307 - "GET /repo/repo_75279b216fe8/security HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54315 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54316 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54319 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54322 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54325 - "GET /repo/repo_75279b216fe8/file-summary?path=src%2Ftraditional.ts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54424 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54426 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54429 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54432 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54425 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54439 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54444 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54584 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54585 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54590 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54591 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [26695]
+INFO:     Started server process [30612]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [30612]
+INFO:     Started server process [31053]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [31053]
+INFO:     Started server process [31309]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:54714 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54715 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54717 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54716 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54719 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54722 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54725 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54730 - "POST /ask/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54737 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54751 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54750 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54756 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54757 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK

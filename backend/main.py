@@ -22,13 +22,16 @@ Endpoints:
 import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
 from services.repo import clone_repo
 from services.scanner import scan_files
-from services.ai import explain_file, summarize_repo, ask_question, classify_intent
+from services.ai import (
+    explain_file, summarize_repo, ask_question, stream_ask_question, classify_intent
+)
 from services.code_indexer import build_mental_model
 from services.mental_model import MentalModel, get_mental_model_summary
 from services.security_analyzer import analyze_repo_security
@@ -329,6 +332,54 @@ async def api_ask(req: AskRequest):
     store.add_message(conv_id, "ai", answer)
 
     return AskResponse(answer=answer, conversation_id=conv_id, intent=intent)
+
+
+@app.post("/ask/stream")
+async def api_ask_stream(req: AskRequest):
+    """Ask a question about a repository with real-time streaming response."""
+    repo_path = get_repo_path(req.repo_id)
+    if not repo_path.exists():
+        raise HTTPException(status_code=404, detail="Repository not found")
+
+    store = get_store()
+    conv_id = req.conversation_id
+    if not conv_id:
+        conv_id = store.create_conversation(req.repo_id, title=req.question[:60])
+
+    store.add_message(conv_id, "user", req.question)
+
+    async def event_generator():
+        full_response = ""
+        try:
+            # Create the sync generator
+            sync_gen = stream_ask_question(req.repo_id, req.question, conv_id)
+            
+            while True:
+                # Fetch the next chunk in a background thread to avoid blocking the loop
+                chunk = await asyncio.to_thread(next, sync_gen, None)
+                if chunk is None:
+                    break
+                    
+                full_response += chunk
+                yield chunk
+                # Force a context switch so FastAPI flushes the network buffer immediately
+                await asyncio.sleep(0)
+                
+            # Persist the final response once the stream is drained
+            store.add_message(conv_id, "ai", full_response)
+        except Exception as e:
+            yield f"\n[Stream Error: {str(e)}]"
+
+    return StreamingResponse(
+        event_generator(), 
+        media_type="text/plain",
+        headers={
+            "X-Accel-Buffering": "no",
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Content-Type": "text/plain; charset=utf-8",
+        }
+    )
 
 
 # ─── Conversation Endpoints ──────────────────────────────────────────

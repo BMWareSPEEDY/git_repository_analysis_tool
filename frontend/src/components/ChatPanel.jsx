@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { askQuestion, getConversations, getConversation } from '../api';
+import { askQuestion, streamAskQuestion, getConversations, getConversation } from '../api';
 
 const SUGGESTIONS = [
   'What does this project do?',
@@ -38,23 +38,32 @@ export default function ChatPanel({ repoId, onChatAction }) {
     if (!q || loading) return;
     setInput('');
     setMessages(prev => [...prev, { role: 'user', text: q }]);
+    
+    // Add a placeholder message for the AI
+    const aiMessageId = Date.now();
+    setMessages(prev => [...prev, { role: 'ai', text: '', id: aiMessageId }]);
     setLoading(true);
 
+    let fullResponse = "";
     try {
-      const res = await askQuestion(repoId, q, conversationId);
-      setMessages(prev => [...prev, { role: 'ai', text: res.answer }]);
+      await streamAskQuestion(repoId, q, conversationId, (chunk) => {
+        fullResponse += chunk;
+        setMessages(prev => prev.map(m => 
+          m.id === aiMessageId ? { ...m, text: fullResponse } : m
+        ));
+      });
       
-      // Track conversation ID for follow-ups
-      if (res.conversation_id) {
-        setConversationId(res.conversation_id);
-      }
-      
-      // Notify parent if the question was identified as a tracing intent
-      if (res.intent && res.intent.type === 'flow' && res.intent.target) {
-        if (onChatAction) onChatAction({ type: 'trace', target: res.intent.target });
+      // If we don't have a conversation ID yet, fetch the latest one from history
+      if (!conversationId) {
+        getConversations(repoId).then(d => {
+            const last = d.conversations?.[0];
+            if (last) setConversationId(last.id);
+        });
       }
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'ai', text: `Error: ${e.message}`, err: true }]);
+      setMessages(prev => prev.map(m => 
+        m.id === aiMessageId ? { ...m, text: `Error: ${e.message}`, err: true } : m
+      ));
     } finally {
       setLoading(false);
       setTimeout(() => inputRef.current?.focus(), 50);
@@ -198,20 +207,28 @@ export default function ChatPanel({ repoId, onChatAction }) {
         {messages.length === 0 && (
           <div style={{ paddingTop: 8 }}>
             <p style={{ fontSize: '12px', color: 'var(--text-3)', marginBottom: 10 }}>Suggested questions</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {SUGGESTIONS.map(s => (
+            {/* Suggested Queries */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+              {[
+                { label: 'Architectural Overview', q: 'Give me a high-level architectural overview of this project.' },
+                { label: 'Blast Radius Analysis', q: 'What breaks if I change the core logic in this repo?' },
+                { label: 'Data Flow Trace', q: 'How does data flow from the entry point to the storage layer?' },
+                { label: 'Technical Debt & Risks', q: 'Identify the top 3 architectural risks or areas with high technical debt.' },
+                { label: 'Logic Security Audit', q: 'Perform a logic security audit on this repository.' }
+              ].map((s, i) => (
                 <button
-                  key={s}
-                  onClick={() => send(s)}
+                  key={i}
+                  onClick={() => setInput(s.q)}
                   style={{
-                    textAlign: 'left', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 7,
-                    padding: '8px 12px', fontSize: '12.5px', color: 'var(--text-2)', cursor: 'pointer',
-                    transition: 'border-color 0.15s, color 0.15s',
+                    background: 'var(--bg-1)', border: '1px solid var(--border)', borderRadius: 10,
+                    padding: '12px 16px', textAlign: 'left', cursor: 'pointer', transition: 'all 0.2s',
+                    display: 'flex', flexDirection: 'column', gap: 4
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-2)'; e.currentTarget.style.color = 'var(--text)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-2)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#6366f1'; e.currentTarget.style.background = 'rgba(99,102,241,0.05)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.background = 'var(--bg-1)'; }}
                 >
-                  {s}
+                  <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)' }}>{s.label}</span>
+                  <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>{s.q}</span>
                 </button>
               ))}
             </div>

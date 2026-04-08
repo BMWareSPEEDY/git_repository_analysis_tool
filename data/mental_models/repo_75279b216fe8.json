@@ -1,0 +1,5867 @@
+{
+  "repo_id": "repo_75279b216fe8",
+  "modules": {
+    "CONTRIBUTING.md": {
+      "path": "CONTRIBUTING.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 90
+    },
+    "FUNDING.json": {
+      "path": "FUNDING.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 7
+    },
+    "README.md": {
+      "path": "README.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 512
+    },
+    "docs/index.md": {
+      "path": "docs/index.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 27
+    },
+    "docs/learn/getting-started/comparison.md": {
+      "path": "docs/learn/getting-started/comparison.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 483
+    },
+    "docs/learn/getting-started/introduction.md": {
+      "path": "docs/learn/getting-started/introduction.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 72
+    },
+    "docs/learn/guides/advanced-typescript.md": {
+      "path": "docs/learn/guides/advanced-typescript.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 542
+    },
+    "docs/learn/guides/auto-generating-selectors.md": {
+      "path": "docs/learn/guides/auto-generating-selectors.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 134
+    },
+    "docs/learn/guides/beginner-typescript.md": {
+      "path": "docs/learn/guides/beginner-typescript.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 378
+    },
+    "docs/learn/guides/connect-to-state-with-url-hash.md": {
+      "path": "docs/learn/guides/connect-to-state-with-url-hash.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 153
+    },
+    "docs/learn/guides/event-handler-in-pre-react-18.md": {
+      "path": "docs/learn/guides/event-handler-in-pre-react-18.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 24
+    },
+    "docs/learn/guides/flux-inspired-practice.md": {
+      "path": "docs/learn/guides/flux-inspired-practice.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 77
+    },
+    "docs/learn/guides/how-to-reset-state.md": {
+      "path": "docs/learn/guides/how-to-reset-state.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 45
+    },
+    "docs/learn/guides/immutable-state-and-merging.md": {
+      "path": "docs/learn/guides/immutable-state-and-merging.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 59
+    },
+    "docs/learn/guides/initialize-state-with-props.md": {
+      "path": "docs/learn/guides/initialize-state-with-props.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 180
+    },
+    "docs/learn/guides/maps-and-sets-usage.md": {
+      "path": "docs/learn/guides/maps-and-sets-usage.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 115
+    },
+    "docs/learn/guides/nextjs.md": {
+      "path": "docs/learn/guides/nextjs.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 316
+    },
+    "docs/learn/guides/practice-with-no-store-actions.md": {
+      "path": "docs/learn/guides/practice-with-no-store-actions.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 42
+    },
+    "docs/learn/guides/prevent-rerenders-with-use-shallow.md": {
+      "path": "docs/learn/guides/prevent-rerenders-with-use-shallow.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 63
+    },
+    "docs/learn/guides/slices-pattern.md": {
+      "path": "docs/learn/guides/slices-pattern.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 120
+    },
+    "docs/learn/guides/ssr-and-hydration.md": {
+      "path": "docs/learn/guides/ssr-and-hydration.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 198
+    },
+    "docs/learn/guides/testing.md": {
+      "path": "docs/learn/guides/testing.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 741
+    },
+    "docs/learn/guides/tutorial-tic-tac-toe.md": {
+      "path": "docs/learn/guides/tutorial-tic-tac-toe.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 1429
+    },
+    "docs/learn/guides/updating-state.md": {
+      "path": "docs/learn/guides/updating-state.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 141
+    },
+    "docs/learn/index.md": {
+      "path": "docs/learn/index.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 54
+    },
+    "docs/reference/apis/create-store.md": {
+      "path": "docs/reference/apis/create-store.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 517
+    },
+    "docs/reference/apis/create-with-equality-fn.md": {
+      "path": "docs/reference/apis/create-with-equality-fn.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 607
+    },
+    "docs/reference/apis/create.md": {
+      "path": "docs/reference/apis/create.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 571
+    },
+    "docs/reference/apis/shallow.md": {
+      "path": "docs/reference/apis/shallow.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 248
+    },
+    "docs/reference/hooks/use-shallow.md": {
+      "path": "docs/reference/hooks/use-shallow.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 269
+    },
+    "docs/reference/hooks/use-store-with-equality-fn.md": {
+      "path": "docs/reference/hooks/use-store-with-equality-fn.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 959
+    },
+    "docs/reference/hooks/use-store.md": {
+      "path": "docs/reference/hooks/use-store.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 923
+    },
+    "docs/reference/index.md": {
+      "path": "docs/reference/index.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 53
+    },
+    "docs/reference/integrations/immer-middleware.md": {
+      "path": "docs/reference/integrations/immer-middleware.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 129
+    },
+    "docs/reference/integrations/persisting-store-data.md": {
+      "path": "docs/reference/integrations/persisting-store-data.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 834
+    },
+    "docs/reference/integrations/third-party-libraries.md": {
+      "path": "docs/reference/integrations/third-party-libraries.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 82
+    },
+    "docs/reference/middlewares/combine.md": {
+      "path": "docs/reference/middlewares/combine.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 103
+    },
+    "docs/reference/middlewares/devtools.md": {
+      "path": "docs/reference/middlewares/devtools.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 350
+    },
+    "docs/reference/middlewares/immer.md": {
+      "path": "docs/reference/middlewares/immer.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 237
+    },
+    "docs/reference/middlewares/persist.md": {
+      "path": "docs/reference/middlewares/persist.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 986
+    },
+    "docs/reference/middlewares/redux.md": {
+      "path": "docs/reference/middlewares/redux.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 170
+    },
+    "docs/reference/middlewares/subscribe-with-selector.md": {
+      "path": "docs/reference/middlewares/subscribe-with-selector.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 119
+    },
+    "docs/reference/migrations/migrating-to-v4.md": {
+      "path": "docs/reference/migrations/migrating-to-v4.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 362
+    },
+    "docs/reference/migrations/migrating-to-v5.md": {
+      "path": "docs/reference/migrations/migrating-to-v5.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 241
+    },
+    "docs/reference/previous-versions/zustand-v3-create-context.md": {
+      "path": "docs/reference/previous-versions/zustand-v3-create-context.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 145
+    },
+    "eslint.config.mjs": {
+      "path": "eslint.config.mjs",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "@eslint/js",
+        "@vitest/eslint-plugin",
+        "eslint/config",
+        "eslint-plugin-import",
+        "eslint-plugin-jest-dom",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-testing-library",
+        "typescript-eslint"
+      ],
+      "exports": [],
+      "loc": 109
+    },
+    "examples/demo/eslint.config.js": {
+      "path": "examples/demo/eslint.config.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "@eslint/js",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-react-refresh",
+        "globals"
+      ],
+      "exports": [],
+      "loc": 43
+    },
+    "examples/demo/index.html": {
+      "path": "examples/demo/index.html",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 22
+    },
+    "examples/demo/package.json": {
+      "path": "examples/demo/package.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 42
+    },
+    "examples/demo/public/manifest.json": {
+      "path": "examples/demo/public/manifest.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 25
+    },
+    "examples/demo/public/robots.txt": {
+      "path": "examples/demo/public/robots.txt",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 3
+    },
+    "examples/demo/src/App.jsx": {
+      "path": "examples/demo/src/App.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "zustand",
+        "./components/CodePreview",
+        "./components/Details",
+        "./components/Scene"
+      ],
+      "exports": [],
+      "loc": 33
+    },
+    "examples/demo/src/components/CodePreview.jsx": {
+      "path": "examples/demo/src/components/CodePreview.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "zustand",
+        "prism-react-renderer",
+        "./CopyButton",
+        "./SnippetLang",
+        "../resources/javascript-code",
+        "../resources/typescript-code"
+      ],
+      "exports": [],
+      "loc": 37
+    },
+    "examples/demo/src/components/CopyButton.jsx": {
+      "path": "examples/demo/src/components/CopyButton.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "../utils/copy-to-clipboard"
+      ],
+      "exports": [],
+      "loc": 44
+    },
+    "examples/demo/src/components/Details.jsx": {
+      "path": "examples/demo/src/components/Details.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 24
+    },
+    "examples/demo/src/components/Fireflies.jsx": {
+      "path": "examples/demo/src/components/Fireflies.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "three",
+        "react",
+        "@react-three/fiber",
+        "meshline"
+      ],
+      "exports": [],
+      "loc": 63
+    },
+    "examples/demo/src/components/Scene.jsx": {
+      "path": "examples/demo/src/components/Scene.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "three",
+        "react",
+        "@react-three/fiber",
+        "@react-three/drei",
+        "postprocessing",
+        "./Fireflies",
+        "../resources/bg.jpg",
+        "../resources/stars.png",
+        "../resources/ground.png",
+        "../resources/bear.png",
+        "../resources/leaves1.png",
+        "../resources/leaves2.png"
+      ],
+      "exports": [],
+      "loc": 234
+    },
+    "examples/demo/src/components/SnippetLang.jsx": {
+      "path": "examples/demo/src/components/SnippetLang.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 12
+    },
+    "examples/demo/src/main.jsx": {
+      "path": "examples/demo/src/main.jsx",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "react-dom/client",
+        "./App"
+      ],
+      "exports": [],
+      "loc": 5
+    },
+    "examples/demo/src/materials/layerMaterial.js": {
+      "path": "examples/demo/src/materials/layerMaterial.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "@react-three/drei",
+        "@react-three/fiber"
+      ],
+      "exports": [],
+      "loc": 42
+    },
+    "examples/demo/src/pmndrs.css": {
+      "path": "examples/demo/src/pmndrs.css",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 123
+    },
+    "examples/demo/src/resources/javascript-code.js": {
+      "path": "examples/demo/src/resources/javascript-code.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "zustand"
+      ],
+      "exports": [],
+      "loc": 14
+    },
+    "examples/demo/src/resources/typescript-code.js": {
+      "path": "examples/demo/src/resources/typescript-code.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "zustand"
+      ],
+      "exports": [],
+      "loc": 18
+    },
+    "examples/demo/src/styles.css": {
+      "path": "examples/demo/src/styles.css",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 235
+    },
+    "examples/demo/src/utils/copy-to-clipboard.js": {
+      "path": "examples/demo/src/utils/copy-to-clipboard.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 3
+    },
+    "examples/demo/vite.config.js": {
+      "path": "examples/demo/vite.config.js",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "@vitejs/plugin-react-swc",
+        "vite"
+      ],
+      "exports": [],
+      "loc": 6
+    },
+    "examples/starter/README.md": {
+      "path": "examples/starter/README.md",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 20
+    },
+    "examples/starter/index.html": {
+      "path": "examples/starter/index.html",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 15
+    },
+    "examples/starter/package.json": {
+      "path": "examples/starter/package.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 23
+    },
+    "examples/starter/src/index.css": {
+      "path": "examples/starter/src/index.css",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 14
+    },
+    "examples/starter/src/index.tsx": {
+      "path": "examples/starter/src/index.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "react-dom/client",
+        "zustand",
+        "./assets/zustand-mascot.svg"
+      ],
+      "exports": [],
+      "loc": 51
+    },
+    "examples/starter/src/vite-env.d.ts": {
+      "path": "examples/starter/src/vite-env.d.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 1
+    },
+    "examples/starter/tsconfig.json": {
+      "path": "examples/starter/tsconfig.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 21
+    },
+    "examples/starter/vite.config.ts": {
+      "path": "examples/starter/vite.config.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "@vitejs/plugin-react-swc",
+        "vite"
+      ],
+      "exports": [],
+      "loc": 6
+    },
+    "package.json": {
+      "path": "package.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 180
+    },
+    "pnpm-lock.yaml": {
+      "path": "pnpm-lock.yaml",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 5230
+    },
+    "pnpm-workspace.yaml": {
+      "path": "pnpm-workspace.yaml",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 3
+    },
+    "rollup.config.mjs": {
+      "path": "rollup.config.mjs",
+      "language": "javascript",
+      "docstring": "",
+      "imports": [
+        "path",
+        "@rollup/plugin-alias",
+        "@rollup/plugin-node-resolve",
+        "@rollup/plugin-replace",
+        "@rollup/plugin-typescript",
+        "rollup-plugin-esbuild"
+      ],
+      "exports": [],
+      "loc": 98
+    },
+    "src/index.ts": {
+      "path": "src/index.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 2
+    },
+    "src/middleware.ts": {
+      "path": "src/middleware.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 17
+    },
+    "src/middleware/combine.ts": {
+      "path": "src/middleware/combine.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 13
+    },
+    "src/middleware/devtools.ts": {
+      "path": "src/middleware/devtools.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "@redux-devtools/extension"
+      ],
+      "exports": [],
+      "loc": 392
+    },
+    "src/middleware/immer.ts": {
+      "path": "src/middleware/immer.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "immer",
+        "immer",
+        "../vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 76
+    },
+    "src/middleware/persist.ts": {
+      "path": "src/middleware/persist.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 363
+    },
+    "src/middleware/redux.ts": {
+      "path": "src/middleware/redux.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "../vanilla.ts",
+        "./devtools.ts"
+      ],
+      "exports": [],
+      "loc": 40
+    },
+    "src/middleware/ssrSafe.ts": {
+      "path": "src/middleware/ssrSafe.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 24
+    },
+    "src/middleware/subscribeWithSelector.ts": {
+      "path": "src/middleware/subscribeWithSelector.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 66
+    },
+    "src/react.ts": {
+      "path": "src/react.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "./vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 53
+    },
+    "src/react/shallow.ts": {
+      "path": "src/react/shallow.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "../vanilla/shallow.ts"
+      ],
+      "exports": [],
+      "loc": 11
+    },
+    "src/shallow.ts": {
+      "path": "src/shallow.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 2
+    },
+    "src/traditional.ts": {
+      "path": "src/traditional.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "use-sync-external-store/shim/with-selector",
+        "./vanilla.ts"
+      ],
+      "exports": [],
+      "loc": 75
+    },
+    "src/types.d.ts": {
+      "path": "src/types.d.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 5
+    },
+    "src/vanilla.ts": {
+      "path": "src/vanilla.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 84
+    },
+    "src/vanilla/shallow.ts": {
+      "path": "src/vanilla/shallow.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 70
+    },
+    "tests/basic.test.tsx": {
+      "path": "tests/basic.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "react-dom",
+        "vitest",
+        "zustand",
+        "zustand",
+        "zustand/traditional"
+      ],
+      "exports": [],
+      "loc": 628
+    },
+    "tests/devtools.test.tsx": {
+      "path": "tests/devtools.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "vitest",
+        "zustand/middleware",
+        "zustand/vanilla",
+        "zustand/vanilla"
+      ],
+      "exports": [],
+      "loc": 2335
+    },
+    "tests/middlewareTypes.test.tsx": {
+      "path": "tests/middlewareTypes.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand",
+        "zustand",
+        "zustand/middleware/immer",
+        "zustand/vanilla"
+      ],
+      "exports": [],
+      "loc": 795
+    },
+    "tests/persistAsync.test.tsx": {
+      "path": "tests/persistAsync.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "vitest",
+        "zustand",
+        "zustand/middleware",
+        "./test-utils"
+      ],
+      "exports": [],
+      "loc": 927
+    },
+    "tests/persistSync.test.tsx": {
+      "path": "tests/persistSync.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand",
+        "zustand/middleware",
+        "./test-utils"
+      ],
+      "exports": [],
+      "loc": 661
+    },
+    "tests/setup.ts": {
+      "path": "tests/setup.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 1
+    },
+    "tests/shallow.test.tsx": {
+      "path": "tests/shallow.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "vitest",
+        "zustand",
+        "zustand/shallow",
+        "zustand/traditional"
+      ],
+      "exports": [],
+      "loc": 152
+    },
+    "tests/ssr.test.tsx": {
+      "path": "tests/ssr.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "react-dom/server",
+        "vitest",
+        "zustand"
+      ],
+      "exports": [],
+      "loc": 90
+    },
+    "tests/subscribe.test.tsx": {
+      "path": "tests/subscribe.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand",
+        "zustand/middleware"
+      ],
+      "exports": [],
+      "loc": 106
+    },
+    "tests/test-utils.ts": {
+      "path": "tests/test-utils.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 32
+    },
+    "tests/types.test.tsx": {
+      "path": "tests/types.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand",
+        "zustand/middleware"
+      ],
+      "exports": [],
+      "loc": 223
+    },
+    "tests/vanilla/basic.test.ts": {
+      "path": "tests/vanilla/basic.test.ts",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand/vanilla",
+        "zustand/vanilla"
+      ],
+      "exports": [],
+      "loc": 119
+    },
+    "tests/vanilla/shallow.test.tsx": {
+      "path": "tests/vanilla/shallow.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand/shallow"
+      ],
+      "exports": [],
+      "loc": 199
+    },
+    "tests/vanilla/subscribe.test.tsx": {
+      "path": "tests/vanilla/subscribe.test.tsx",
+      "language": "typescript",
+      "docstring": "",
+      "imports": [
+        "vitest",
+        "zustand/middleware",
+        "zustand/vanilla"
+      ],
+      "exports": [],
+      "loc": 113
+    },
+    "tsconfig.json": {
+      "path": "tsconfig.json",
+      "language": "unknown",
+      "docstring": "",
+      "imports": [],
+      "exports": [],
+      "loc": 26
+    }
+  },
+  "functions": {
+    "examples/demo/src/App.jsx::Counter": {
+      "name": "Counter",
+      "module": "examples/demo/src/App.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 11,
+      "line_end": 11,
+      "complexity": 1
+    },
+    "examples/demo/src/App.jsx::App": {
+      "name": "App",
+      "module": "examples/demo/src/App.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 21,
+      "line_end": 21,
+      "complexity": 1
+    },
+    "examples/demo/src/App.jsx::useStore": {
+      "name": "useStore",
+      "module": "examples/demo/src/App.jsx",
+      "class_name": "",
+      "params": [
+        "create((set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 6,
+      "line_end": 6,
+      "complexity": 1
+    },
+    "examples/demo/src/components/CodePreview.jsx::CodePreview": {
+      "name": "CodePreview",
+      "module": "examples/demo/src/components/CodePreview.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 15,
+      "line_end": 15,
+      "complexity": 1
+    },
+    "examples/demo/src/components/CodePreview.jsx::useStore": {
+      "name": "useStore",
+      "module": "examples/demo/src/components/CodePreview.jsx",
+      "class_name": "",
+      "params": [
+        "create((set",
+        "get"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "examples/demo/src/components/CopyButton.jsx::CopyButton": {
+      "name": "CopyButton",
+      "module": "examples/demo/src/components/CopyButton.jsx",
+      "class_name": "",
+      "params": [
+        "code",
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "examples/demo/src/components/CopyButton.jsx::handleCopy": {
+      "name": "handleCopy",
+      "module": "examples/demo/src/components/CopyButton.jsx",
+      "class_name": "",
+      "params": [
+        "useCallback(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 12,
+      "line_end": 12,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Details.jsx::Details": {
+      "name": "Details",
+      "module": "examples/demo/src/components/Details.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1,
+      "line_end": 1,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Fireflies.jsx::Fatline": {
+      "name": "Fatline",
+      "module": "examples/demo/src/components/Fireflies.jsx",
+      "class_name": "",
+      "params": [
+        "curve",
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 10,
+      "line_end": 10,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Fireflies.jsx::Fireflies": {
+      "name": "Fireflies",
+      "module": "examples/demo/src/components/Fireflies.jsx",
+      "class_name": "",
+      "params": [
+        "count",
+        "colors",
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 31,
+      "line_end": 31,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Fireflies.jsx::r": {
+      "name": "r",
+      "module": "examples/demo/src/components/Fireflies.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Fireflies.jsx::lines": {
+      "name": "lines",
+      "module": "examples/demo/src/components/Fireflies.jsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 32,
+      "line_end": 32,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::Experience": {
+      "name": "Experience",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 20,
+      "line_end": 20,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::Effects": {
+      "name": "Effects",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 130,
+      "line_end": 130,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::FallbackScene": {
+      "name": "FallbackScene",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 150,
+      "line_end": 150,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::Scene": {
+      "name": "Scene",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 178,
+      "line_end": 178,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::Canvas": {
+      "name": "Canvas",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [
+        "children",
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 193,
+      "line_end": 193,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::layers": {
+      "name": "layers",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [
+        "textures[0]",
+        "0",
+        "0",
+        "0",
+        "0.005",
+        "}",
+        "textures[1]",
+        "0",
+        "0",
+        "10",
+        "0.005",
+        "}",
+        "textures[2]",
+        "0",
+        "0",
+        "20",
+        "}",
+        "textures[3]",
+        "0",
+        "0",
+        "30",
+        "0.83",
+        "scaleN",
+        "}",
+        "textures[4]",
+        "0",
+        "0",
+        "40",
+        "0.03",
+        "1",
+        "0.6",
+        "scaleW",
+        "}",
+        "textures[5]",
+        "-20",
+        "-20",
+        "49",
+        "0.04",
+        "1.3",
+        "1",
+        "scaleW",
+        "}",
+        "useFrame((state",
+        "delta"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 35,
+      "line_end": 35,
+      "complexity": 1
+    },
+    "examples/demo/src/components/Scene.jsx::resize": {
+      "name": "resize",
+      "module": "examples/demo/src/components/Scene.jsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 219,
+      "line_end": 219,
+      "complexity": 1
+    },
+    "examples/demo/src/components/SnippetLang.jsx::SnippetLang": {
+      "name": "SnippetLang",
+      "module": "examples/demo/src/components/SnippetLang.jsx",
+      "class_name": "",
+      "params": [
+        "lang",
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1,
+      "line_end": 1,
+      "complexity": 1
+    },
+    "examples/demo/src/resources/javascript-code.js::Counter": {
+      "name": "Counter",
+      "module": "examples/demo/src/resources/javascript-code.js",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "examples/demo/src/resources/javascript-code.js::useStore": {
+      "name": "useStore",
+      "module": "examples/demo/src/resources/javascript-code.js",
+      "class_name": "",
+      "params": [
+        "create((set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 3,
+      "line_end": 3,
+      "complexity": 1
+    },
+    "examples/demo/src/resources/typescript-code.js::Counter": {
+      "name": "Counter",
+      "module": "examples/demo/src/resources/typescript-code.js",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 13,
+      "line_end": 13,
+      "complexity": 1
+    },
+    "examples/demo/src/utils/copy-to-clipboard.js::copyToClipboard": {
+      "name": "copyToClipboard",
+      "module": "examples/demo/src/utils/copy-to-clipboard.js",
+      "class_name": "",
+      "params": [
+        "str"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1,
+      "line_end": 1,
+      "complexity": 1
+    },
+    "examples/starter/src/index.tsx::App": {
+      "name": "App",
+      "module": "examples/starter/src/index.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 36,
+      "line_end": 36,
+      "complexity": 1
+    },
+    "examples/starter/src/index.tsx::useStore": {
+      "name": "useStore",
+      "module": "examples/starter/src/index.tsx",
+      "class_name": "",
+      "params": [
+        "create<Store>((set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 14,
+      "line_end": 14,
+      "complexity": 1
+    },
+    "examples/starter/src/index.tsx::Counter": {
+      "name": "Counter",
+      "module": "examples/starter/src/index.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 19,
+      "line_end": 19,
+      "complexity": 1
+    },
+    "examples/starter/src/index.tsx::count": {
+      "name": "count",
+      "module": "examples/starter/src/index.tsx",
+      "class_name": "",
+      "params": [
+        "useStore((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 20,
+      "line_end": 20,
+      "complexity": 1
+    },
+    "examples/starter/src/index.tsx::inc": {
+      "name": "inc",
+      "module": "examples/starter/src/index.tsx",
+      "class_name": "",
+      "params": [
+        "useStore((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 21,
+      "line_end": 21,
+      "complexity": 1
+    },
+    "rollup.config.mjs::external": {
+      "name": "external",
+      "module": "rollup.config.mjs",
+      "class_name": "",
+      "params": [
+        "id"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 18,
+      "line_end": 18,
+      "complexity": 1
+    },
+    "rollup.config.mjs::getEsbuild": {
+      "name": "getEsbuild",
+      "module": "rollup.config.mjs",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 22,
+      "line_end": 22,
+      "complexity": 1
+    },
+    "rollup.config.mjs::createDeclarationConfig": {
+      "name": "createDeclarationConfig",
+      "module": "rollup.config.mjs",
+      "class_name": "",
+      "params": [
+        "input",
+        "output"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 30,
+      "line_end": 30,
+      "complexity": 1
+    },
+    "rollup.config.mjs::createESMConfig": {
+      "name": "createESMConfig",
+      "module": "rollup.config.mjs",
+      "class_name": "",
+      "params": [
+        "input",
+        "output"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 47,
+      "line_end": 47,
+      "complexity": 1
+    },
+    "rollup.config.mjs::createCommonJSConfig": {
+      "name": "createCommonJSConfig",
+      "module": "rollup.config.mjs",
+      "class_name": "",
+      "params": [
+        "input",
+        "output"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 75,
+      "line_end": 75,
+      "complexity": 1
+    },
+    "src/middleware/combine.ts::combine": {
+      "name": "combine",
+      "module": "src/middleware/combine.ts",
+      "class_name": "",
+      "params": [
+        "T",
+        "StateCreator<T",
+        "Mps",
+        "Mcs",
+        "U>"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 5,
+      "line_end": 5,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::removeStoreFromTrackedConnections": {
+      "name": "removeStoreFromTrackedConnections",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "undefined",
+        "undefined"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 156,
+      "line_end": 156,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::findCallerName": {
+      "name": "findCallerName",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "undefined"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 169,
+      "line_end": 169,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::apiSetStateLineIndex": {
+      "name": "apiSetStateLineIndex",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "traceLines.findIndex((traceLine"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 172,
+      "line_end": 172,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::devtoolsImpl": {
+      "name": "devtoolsImpl",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "fn",
+        "{}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 180,
+      "line_end": 180,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::isRecording": {
+      "name": "isRecording",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "((state",
+        "replace",
+        "Action"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 208,
+      "line_end": 208,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::setStateFromDevtools": {
+      "name": "setStateFromDevtools",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "...a"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 251,
+      "line_end": 251,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::didWarnAboutReservedActionType": {
+      "name": "didWarnAboutReservedActionType",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "any[]"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 276,
+      "line_end": 276,
+      "complexity": 1
+    },
+    "src/middleware/devtools.ts::devtools": {
+      "name": "devtools",
+      "module": "src/middleware/devtools.ts",
+      "class_name": "",
+      "params": [
+        "string",
+        "T"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 417,
+      "line_end": 417,
+      "complexity": 1
+    },
+    "src/middleware/immer.ts::immerImpl": {
+      "name": "immerImpl",
+      "module": "src/middleware/immer.ts",
+      "class_name": "",
+      "params": [
+        "initializer"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 74,
+      "line_end": 74,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::createJSONStorage": {
+      "name": "createJSONStorage",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 31,
+      "line_end": 31,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::persistStorage": {
+      "name": "persistStorage",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "(name"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 42,
+      "line_end": 42,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::parse": {
+      "name": "parse",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "null"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 44,
+      "line_end": 44,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::toThenable": {
+      "name": "toThenable",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "<Result",
+        "Input"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 157,
+      "line_end": 157,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::persistImpl": {
+      "name": "persistImpl",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "config",
+        "baseOptions"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 187,
+      "line_end": 187,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::options": {
+      "name": "options",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "createJSONStorage<S",
+        "void>(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 189,
+      "line_end": 189,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::setItem": {
+      "name": "setItem",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 221,
+      "line_end": 221,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::savedSetState": {
+      "name": "savedSetState",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "(state",
+        "replace"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 229,
+      "line_end": 229,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::configResult": {
+      "name": "configResult",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "(...args"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 236,
+      "line_end": 236,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::stateFromStorage": {
+      "name": "stateFromStorage",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 250,
+      "line_end": 250,
+      "complexity": 1
+    },
+    "src/middleware/persist.ts::currentVersion": {
+      "name": "currentVersion",
+      "module": "src/middleware/persist.ts",
+      "class_name": "",
+      "params": [
+        "hydrationListeners.forEach((cb"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 262,
+      "line_end": 262,
+      "complexity": 1
+    },
+    "src/middleware/redux.ts::reduxImpl": {
+      "name": "reduxImpl",
+      "module": "src/middleware/redux.ts",
+      "class_name": "",
+      "params": [
+        "reducer",
+        "initial"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 39,
+      "line_end": 39,
+      "complexity": 1
+    },
+    "src/middleware/ssrSafe.ts::ssrSafe": {
+      "name": "ssrSafe",
+      "module": "src/middleware/ssrSafe.ts",
+      "class_name": "",
+      "params": [
+        "StateCreator<T",
+        "Mps",
+        "Mcs",
+        "U>",
+        "'undefined'"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 6,
+      "line_end": 6,
+      "complexity": 1
+    },
+    "src/middleware/ssrSafe.ts::ssrSet": {
+      "name": "ssrSet",
+      "module": "src/middleware/ssrSafe.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 19,
+      "line_end": 19,
+      "complexity": 1
+    },
+    "src/middleware/subscribeWithSelector.ts::subscribeWithSelectorImpl": {
+      "name": "subscribeWithSelectorImpl",
+      "module": "src/middleware/subscribeWithSelector.ts",
+      "class_name": "",
+      "params": [
+        "fn"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 46,
+      "line_end": 46,
+      "complexity": 1
+    },
+    "src/middleware/subscribeWithSelector.ts::origSubscribe": {
+      "name": "origSubscribe",
+      "module": "src/middleware/subscribeWithSelector.ts",
+      "class_name": "",
+      "params": [
+        "Listener"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 50,
+      "line_end": 50,
+      "complexity": 1
+    },
+    "src/react.ts::useStore": {
+      "name": "useStore",
+      "module": "src/react.ts",
+      "class_name": "",
+      "params": [
+        "ReadonlyStoreApi<TState>",
+        "TState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 26,
+      "line_end": 26,
+      "complexity": 1
+    },
+    "src/react.ts::slice": {
+      "name": "slice",
+      "module": "src/react.ts",
+      "class_name": "",
+      "params": [
+        "api.subscribe",
+        "React.useCallback(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 30,
+      "line_end": 30,
+      "complexity": 1
+    },
+    "src/react.ts::createImpl": {
+      "name": "createImpl",
+      "module": "src/react.ts",
+      "class_name": "",
+      "params": [
+        "StateCreator<T",
+        "[]",
+        "[]>"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 53,
+      "line_end": 53,
+      "complexity": 1
+    },
+    "src/react.ts::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "src/react.ts",
+      "class_name": "",
+      "params": [
+        "any"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 56,
+      "line_end": 56,
+      "complexity": 1
+    },
+    "src/react.ts::create": {
+      "name": "create",
+      "module": "src/react.ts",
+      "class_name": "",
+      "params": [
+        "StateCreator<T",
+        "[]",
+        "undefined"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 63,
+      "line_end": 63,
+      "complexity": 1
+    },
+    "src/react/shallow.ts::useShallow": {
+      "name": "useShallow",
+      "module": "src/react/shallow.ts",
+      "class_name": "",
+      "params": [
+        "S"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 4,
+      "line_end": 4,
+      "complexity": 1
+    },
+    "src/traditional.ts::useStoreWithEqualityFn": {
+      "name": "useStoreWithEqualityFn",
+      "module": "src/traditional.ts",
+      "class_name": "",
+      "params": [
+        "ReadonlyStoreApi<TState>",
+        "TState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 31,
+      "line_end": 31,
+      "complexity": 1
+    },
+    "src/traditional.ts::createWithEqualityFnImpl": {
+      "name": "createWithEqualityFnImpl",
+      "module": "src/traditional.ts",
+      "class_name": "",
+      "params": [
+        "StateCreator<T",
+        "[]",
+        "[]>",
+        "U",
+        "U"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 66,
+      "line_end": 66,
+      "complexity": 1
+    },
+    "src/traditional.ts::useBoundStoreWithEqualityFn": {
+      "name": "useBoundStoreWithEqualityFn",
+      "module": "src/traditional.ts",
+      "class_name": "",
+      "params": [
+        "any",
+        "defaultEqualityFn"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 72,
+      "line_end": 72,
+      "complexity": 1
+    },
+    "src/traditional.ts::createWithEqualityFn": {
+      "name": "createWithEqualityFn",
+      "module": "src/traditional.ts",
+      "class_name": "",
+      "params": [
+        "StateCreator<T",
+        "[]",
+        "undefined",
+        "U",
+        "U"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 82,
+      "line_end": 82,
+      "complexity": 1
+    },
+    "src/vanilla.ts::createStoreImpl": {
+      "name": "createStoreImpl",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [
+        "createState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 60,
+      "line_end": 60,
+      "complexity": 1
+    },
+    "src/vanilla.ts::setState": {
+      "name": "setState",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [
+        "partial",
+        "replace"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 66,
+      "line_end": 66,
+      "complexity": 1
+    },
+    "src/vanilla.ts::nextState": {
+      "name": "nextState",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [
+        "TState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 69,
+      "line_end": 69,
+      "complexity": 1
+    },
+    "src/vanilla.ts::getState": {
+      "name": "getState",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 83,
+      "line_end": 83,
+      "complexity": 1
+    },
+    "src/vanilla.ts::getInitialState": {
+      "name": "getInitialState",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 85,
+      "line_end": 85,
+      "complexity": 1
+    },
+    "src/vanilla.ts::subscribe": {
+      "name": "subscribe",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [
+        "listener"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 88,
+      "line_end": 88,
+      "complexity": 1
+    },
+    "src/vanilla.ts::createStore": {
+      "name": "createStore",
+      "module": "src/vanilla.ts",
+      "class_name": "",
+      "params": [
+        "(createState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 99,
+      "line_end": 99,
+      "complexity": 1
+    },
+    "src/vanilla/shallow.ts::shallow": {
+      "name": "shallow",
+      "module": "src/vanilla/shallow.ts",
+      "class_name": "",
+      "params": [
+        "T",
+        "T"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 48,
+      "line_end": 48,
+      "complexity": 1
+    },
+    "src/vanilla/shallow.ts::compareIterables": {
+      "name": "compareIterables",
+      "module": "src/vanilla/shallow.ts",
+      "class_name": "",
+      "params": [
+        "Iterable<unknown>",
+        "Iterable<unknown>"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 30,
+      "line_end": 30,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Counter": {
+      "name": "Counter",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 708,
+      "line_end": 708,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Component": {
+      "name": "Component",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 733,
+      "line_end": 733,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Control": {
+      "name": "Control",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 145,
+      "line_end": 145,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::staticSelector": {
+      "name": "staticSelector",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "State"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 527,
+      "line_end": 527,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::changeState": {
+      "name": "changeState",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 577,
+      "line_end": 577,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Child": {
+      "name": "Child",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "Props"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 585,
+      "line_end": 585,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Parent": {
+      "name": "Parent",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 590,
+      "line_end": 590,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::increment": {
+      "name": "increment",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 618,
+      "line_end": 618,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Count": {
+      "name": "Count",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 622,
+      "line_end": 622,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::CountWithInitialIncrement": {
+      "name": "CountWithInitialIncrement",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 627,
+      "line_end": 627,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Count1": {
+      "name": "Count1",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 664,
+      "line_end": 664,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::Count2": {
+      "name": "Count2",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 669,
+      "line_end": 669,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::consoleError": {
+      "name": "consoleError",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "afterEach(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 16,
+      "line_end": 16,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::result": {
+      "name": "result",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "create((...args"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 24,
+      "line_end": 24,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 661,
+      "line_end": 661,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::count": {
+      "name": "count",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore((state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 140,
+      "line_end": 140,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::inc": {
+      "name": "inc",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 706,
+      "line_end": 706,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::item": {
+      "name": "item",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "(s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 103,
+      "line_end": 103,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::selector": {
+      "name": "selector",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "State"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 377,
+      "line_end": 377,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::initialState": {
+      "name": "initialState",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "createWithEqualityFn(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 374,
+      "line_end": 374,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::equalityFn": {
+      "name": "equalityFn",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "State",
+        "State"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 378,
+      "line_end": 378,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::text": {
+      "name": "text",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 586,
+      "line_end": 586,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::childStates": {
+      "name": "childStates",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 591,
+      "line_end": 591,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::c": {
+      "name": "c",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 670,
+      "line_end": 670,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::useCount": {
+      "name": "useCount",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 705,
+      "line_end": 705,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::useUndefined": {
+      "name": "useUndefined",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 731,
+      "line_end": 731,
+      "complexity": 1
+    },
+    "tests/basic.test.tsx::str": {
+      "name": "str",
+      "module": "tests/basic.test.tsx",
+      "class_name": "",
+      "params": [
+        "useUndefined((v"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 734,
+      "line_end": 734,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::assertAllAreDefined": {
+      "name": "assertAllAreDefined",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "undefined"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 32,
+      "line_end": 32,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getNamedConnectionApis": {
+      "name": "getNamedConnectionApis",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "Keys"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 37,
+      "line_end": 37,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getNamedConnectionSubscribers": {
+      "name": "getNamedConnectionSubscribers",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "Keys"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 44,
+      "line_end": 44,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getUnnamedConnectionApis": {
+      "name": "getUnnamedConnectionApis",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "Keys"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 58,
+      "line_end": 58,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getUnnamedConnectionSubscribers": {
+      "name": "getUnnamedConnectionSubscribers",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "Keys"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 63,
+      "line_end": 63,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getKeyFromOptions": {
+      "name": "getKeyFromOptions",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "any"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 78,
+      "line_end": 78,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::apis": {
+      "name": "apis",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "keys.map((k"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 59,
+      "line_end": 59,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::subscribers": {
+      "name": "subscribers",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "keys.map((k"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 64,
+      "line_end": 64,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::extensionConnector": {
+      "name": "extensionConnector",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "any"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 86,
+      "line_end": 86,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::areNameUndefinedMapsNeeded": {
+      "name": "areNameUndefinedMapsNeeded",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "unknown"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 90,
+      "line_end": 90,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::options": {
+      "name": "options",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "'test-filter'",
+        "true",
+        "['secret.*']",
+        "createStore(devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2526,
+      "line_end": 2526,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::initialState": {
+      "name": "initialState",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "0",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 539,
+      "line_end": 539,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::api": {
+      "name": "api",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "createStore(devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 695,
+      "line_end": 695,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::increment": {
+      "name": "increment",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 506,
+      "line_end": 506,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::originalWindow": {
+      "name": "originalWindow",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "expect(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 683,
+      "line_end": 683,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::options1": {
+      "name": "options1",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "'123'",
+        "'231'",
+        "devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2273,
+      "line_end": 2273,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::connectionName": {
+      "name": "connectionName",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "connectionName",
+        "'store1123'",
+        "connectionName",
+        "'store1414'",
+        "createStore(devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 809,
+      "line_end": 809,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::connectionNameGroup1": {
+      "name": "connectionNameGroup1",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "connectionNameGroup1",
+        "'store1123'",
+        "'bar2'",
+        "connectionNameGroup1",
+        "'store1232'",
+        "'bar3'",
+        "connectionNameGroup2",
+        "'store61661'",
+        "'bar4'",
+        "connectionNameGroup2",
+        "'store14632'",
+        "'bar5'",
+        "newDevtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 873,
+      "line_end": 873,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::api1": {
+      "name": "api1",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1541,
+      "line_end": 1541,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::api2": {
+      "name": "api2",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "newDevtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2451,
+      "line_end": 2451,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::api3": {
+      "name": "api3",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2291,
+      "line_end": 2291,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::testPayload": {
+      "name": "testPayload",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "'ACTION'",
+        "}'",
+        "subscribers.forEach((sub"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2416,
+      "line_end": 2416,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::getTestPayload": {
+      "name": "getTestPayload",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "number"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2465,
+      "line_end": 2465,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::action": {
+      "name": "action",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "'DISPATCH'",
+        "}",
+        "subscribers.forEach((sub"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1519,
+      "line_end": 1519,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::initialState2": {
+      "name": "initialState2",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "2",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1539,
+      "line_end": 1539,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::initialState3": {
+      "name": "initialState3",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "5",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1540,
+      "line_end": 1540,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::increment1": {
+      "name": "increment1",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1871,
+      "line_end": 1871,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::increment2": {
+      "name": "increment2",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1872,
+      "line_end": 1872,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::increment3": {
+      "name": "increment3",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1873,
+      "line_end": 1873,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::api4": {
+      "name": "api4",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2297,
+      "line_end": 2297,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::name1": {
+      "name": "name1",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "name1",
+        "store1",
+        "store1",
+        "name2",
+        "store2",
+        "store2",
+        "newDevtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2432,
+      "line_end": 2432,
+      "complexity": 1
+    },
+    "tests/devtools.test.tsx::store2": {
+      "name": "store2",
+      "module": "tests/devtools.test.tsx",
+      "class_name": "",
+      "params": [
+        "createStore(devtools(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 2506,
+      "line_end": 2506,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [
+        "CounterState",
+        "['zustand/subscribeWithSelector'",
+        "never]",
+        "['zustand/persist'",
+        "CounterState]",
+        "(set",
+        "get"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 749,
+      "line_end": 749,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::TestComponent": {
+      "name": "TestComponent",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 828,
+      "line_end": 828,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::testSubtyping": {
+      "name": "testSubtyping",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [
+        "persist(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 274,
+      "line_end": 274,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::exampleMiddleware": {
+      "name": "exampleMiddleware",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [
+        "(initializer"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 86,
+      "line_end": 86,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::createBearSlice": {
+      "name": "createBearSlice",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [
+        "set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 802,
+      "line_end": 802,
+      "complexity": 1
+    },
+    "tests/middlewareTypes.test.tsx::createFishSlice": {
+      "name": "createFishSlice",
+      "module": "tests/middlewareTypes.test.tsx",
+      "class_name": "",
+      "params": [
+        "set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 813,
+      "line_end": 813,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::Counter": {
+      "name": "Counter",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 789,
+      "line_end": 789,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::Counter2": {
+      "name": "Counter2",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 196,
+      "line_end": 196,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::Component": {
+      "name": "Component",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 302,
+      "line_end": 302,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::MapDisplay": {
+      "name": "MapDisplay",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 879,
+      "line_end": 879,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::MapDisplay2": {
+      "name": "MapDisplay2",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 915,
+      "line_end": 915,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::createPersistantStore": {
+      "name": "createPersistantStore",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "null"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 10,
+      "line_end": 10,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::setItem": {
+      "name": "setItem",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "string",
+        "string"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 18,
+      "line_end": 18,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::removeItem": {
+      "name": "removeItem",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "string"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 24,
+      "line_end": 24,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::consoleError": {
+      "name": "consoleError",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "beforeEach(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 43,
+      "line_end": 43,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::storage": {
+      "name": "storage",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 981,
+      "line_end": 981,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "persist(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1036,
+      "line_end": 1036,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::createStore": {
+      "name": "createStore",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 864,
+      "line_end": 864,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::migrateSpy": {
+      "name": "migrateSpy",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 218,
+      "line_end": 218,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::unstorableMethod": {
+      "name": "unstorableMethod",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 533,
+      "line_end": 533,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::storageValue": {
+      "name": "storageValue",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "'{\"state\":{\"count\":1}",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 612,
+      "line_end": 612,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::patchedDuringHydration": {
+      "name": "patchedDuringHydration",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore.subscribe((state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 781,
+      "line_end": 781,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::callCount": {
+      "name": "callCount",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 935,
+      "line_end": 935,
+      "complexity": 1
+    },
+    "tests/persistAsync.test.tsx::migrationCount": {
+      "name": "migrationCount",
+      "module": "tests/persistAsync.test.tsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 1023,
+      "line_end": 1023,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::createPersistentStore": {
+      "name": "createPersistentStore",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "null"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::setItem": {
+      "name": "setItem",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "string",
+        "string"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 15,
+      "line_end": 15,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::removeItem": {
+      "name": "removeItem",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "string"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 19,
+      "line_end": 19,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::consoleError": {
+      "name": "consoleError",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "afterEach(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 36,
+      "line_end": 36,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::storage": {
+      "name": "storage",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "string"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 741,
+      "line_end": 741,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "persist(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 750,
+      "line_end": 750,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::createStore": {
+      "name": "createStore",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 695,
+      "line_end": 695,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::migrateSpy": {
+      "name": "migrateSpy",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "vi.fn(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 139,
+      "line_end": 139,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::unstorableMethod": {
+      "name": "unstorableMethod",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 309,
+      "line_end": 309,
+      "complexity": 1
+    },
+    "tests/persistSync.test.tsx::storageValue": {
+      "name": "storageValue",
+      "module": "tests/persistSync.test.tsx",
+      "class_name": "",
+      "params": [
+        "'{\"state\":{\"count\":1}",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 499,
+      "line_end": 499,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "createWithEqualityFn(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 21,
+      "line_end": 21,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::Component": {
+      "name": "Component",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 24,
+      "line_end": 24,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::villages": {
+      "name": "villages",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore((state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 14,
+      "line_end": 14,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::refetchTimestamp": {
+      "name": "refetchTimestamp",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "(state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 25,
+      "line_end": 25,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::TestUseShallowSimple": {
+      "name": "TestUseShallowSimple",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "selector",
+        "state",
+        "Record<string",
+        "Record<string",
+        "unknown>"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 37,
+      "line_end": 37,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::TestShallow": {
+      "name": "TestShallow",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "(state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 126,
+      "line_end": 126,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::TestShallowWithState": {
+      "name": "TestShallowWithState",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 162,
+      "line_end": 162,
+      "complexity": 1
+    },
+    "tests/shallow.test.tsx::output": {
+      "name": "output",
+      "module": "tests/shallow.test.tsx",
+      "class_name": "",
+      "params": [
+        "useShallow((state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 164,
+      "line_end": 164,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::Counter": {
+      "name": "Counter",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 21,
+      "line_end": 21,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::initialState": {
+      "name": "initialState",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [
+        "BearStoreAction>((set"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 15,
+      "line_end": 15,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::bears": {
+      "name": "bears",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [
+        "useStore((state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 76,
+      "line_end": 76,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::increasePopulation": {
+      "name": "increasePopulation",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [
+        "}"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 23,
+      "line_end": 23,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::useStore": {
+      "name": "useStore",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 66,
+      "line_end": 66,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::Component": {
+      "name": "Component",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 75,
+      "line_end": 75,
+      "complexity": 1
+    },
+    "tests/ssr.test.tsx::hydratePromise": {
+      "name": "hydratePromise",
+      "module": "tests/ssr.test.tsx",
+      "class_name": "",
+      "params": [
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 94,
+      "line_end": 94,
+      "complexity": 1
+    },
+    "tests/subscribe.test.tsx::initialState": {
+      "name": "initialState",
+      "module": "tests/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(subscribeWithSelector(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 90,
+      "line_end": 90,
+      "complexity": 1
+    },
+    "tests/subscribe.test.tsx::unsub": {
+      "name": "unsub",
+      "module": "tests/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "useBoundStore.subscribe((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 78,
+      "line_end": 78,
+      "complexity": 1
+    },
+    "tests/subscribe.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "create(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 125,
+      "line_end": 125,
+      "complexity": 1
+    },
+    "tests/test-utils.ts::sleep": {
+      "name": "sleep",
+      "module": "tests/test-utils.ts",
+      "class_name": "",
+      "params": [
+        "number"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 35,
+      "line_end": 35,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::checkAllTypes": {
+      "name": "checkAllTypes",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "StoreApi<ExampleState>['getState']",
+        "ExampleState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 71,
+      "line_end": 71,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::listener": {
+      "name": "listener",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "ExampleState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 20,
+      "line_end": 20,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::selector": {
+      "name": "selector",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "ExampleState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 27,
+      "line_end": 27,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::partial": {
+      "name": "partial",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "2",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 28,
+      "line_end": 28,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::partialFn": {
+      "name": "partialFn",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "state"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 32,
+      "line_end": 32,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::equalityFn": {
+      "name": "equalityFn",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "ExampleState",
+        "ExampleState"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 38,
+      "line_end": 38,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::storeApi": {
+      "name": "storeApi",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "create<ExampleState>((set",
+        "get"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 41,
+      "line_end": 41,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::useBoundStore": {
+      "name": "useBoundStore",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "(set",
+        "get"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 57,
+      "line_end": 57,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::store": {
+      "name": "store",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "create<State>(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 145,
+      "line_end": 145,
+      "complexity": 1
+    },
+    "tests/types.test.tsx::foo": {
+      "name": "foo",
+      "module": "tests/types.test.tsx",
+      "class_name": "",
+      "params": [
+        "StateCreator<State",
+        "("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 226,
+      "line_end": 226,
+      "complexity": 1
+    },
+    "tests/vanilla/basic.test.ts::consoleError": {
+      "name": "consoleError",
+      "module": "tests/vanilla/basic.test.ts",
+      "class_name": "",
+      "params": [
+        "afterEach(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 8,
+      "line_end": 8,
+      "complexity": 1
+    },
+    "tests/vanilla/basic.test.ts::result": {
+      "name": "result",
+      "module": "tests/vanilla/basic.test.ts",
+      "class_name": "",
+      "params": [
+        "createStore((...args"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 15,
+      "line_end": 15,
+      "complexity": 1
+    },
+    "tests/vanilla/basic.test.ts::store": {
+      "name": "store",
+      "module": "tests/vanilla/basic.test.ts",
+      "class_name": "",
+      "params": [
+        "createStore<number>(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 141,
+      "line_end": 141,
+      "complexity": 1
+    },
+    "tests/vanilla/basic.test.ts::initial": {
+      "name": "initial",
+      "module": "tests/vanilla/basic.test.ts",
+      "class_name": "",
+      "params": [
+        "createStore(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 74,
+      "line_end": 74,
+      "complexity": 1
+    },
+    "tests/vanilla/basic.test.ts::inc": {
+      "name": "inc",
+      "module": "tests/vanilla/basic.test.ts",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 142,
+      "line_end": 142,
+      "complexity": 1
+    },
+    "tests/vanilla/shallow.test.tsx::firstFnCompare": {
+      "name": "firstFnCompare",
+      "module": "tests/vanilla/shallow.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 130,
+      "line_end": 130,
+      "complexity": 1
+    },
+    "tests/vanilla/shallow.test.tsx::secondFnCompare": {
+      "name": "secondFnCompare",
+      "module": "tests/vanilla/shallow.test.tsx",
+      "class_name": "",
+      "params": [],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 134,
+      "line_end": 134,
+      "complexity": 1
+    },
+    "tests/vanilla/subscribe.test.tsx::initialState": {
+      "name": "initialState",
+      "module": "tests/vanilla/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "createStore(subscribeWithSelector(("
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 126,
+      "line_end": 126,
+      "complexity": 1
+    },
+    "tests/vanilla/subscribe.test.tsx::unsub": {
+      "name": "unsub",
+      "module": "tests/vanilla/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "subscribe((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 105,
+      "line_end": 105,
+      "complexity": 1
+    },
+    "tests/vanilla/subscribe.test.tsx::isRoughEqual": {
+      "name": "isRoughEqual",
+      "module": "tests/vanilla/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "number",
+        "number"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 100,
+      "line_end": 100,
+      "complexity": 1
+    },
+    "tests/vanilla/subscribe.test.tsx::unsub2": {
+      "name": "unsub2",
+      "module": "tests/vanilla/subscribe.test.tsx",
+      "class_name": "",
+      "params": [
+        "subscribe((s"
+      ],
+      "return_type": "",
+      "docstring": "",
+      "calls": [],
+      "called_by": [],
+      "decorators": [],
+      "is_async": false,
+      "line_start": 113,
+      "line_end": 113,
+      "complexity": 1
+    }
+  },
+  "classes": {
+    "tests/basic.test.tsx::ErrorBoundary": {
+      "name": "ErrorBoundary",
+      "module": "tests/basic.test.tsx",
+      "bases": [
+        "ClassComponent"
+      ],
+      "methods": [],
+      "attributes": [],
+      "docstring": "",
+      "decorators": [],
+      "line_start": 382,
+      "line_end": 382
+    }
+  },
+  "dependencies": [
+    {
+      "source": "eslint.config.mjs",
+      "target": "@eslint/js",
+      "imports": [
+        "@eslint/js"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "@vitest/eslint-plugin",
+      "imports": [
+        "@vitest/eslint-plugin"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint/config",
+      "imports": [
+        "eslint/config"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint-plugin-import",
+      "imports": [
+        "eslint-plugin-import"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint-plugin-jest-dom",
+      "imports": [
+        "eslint-plugin-jest-dom"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint-plugin-react",
+      "imports": [
+        "eslint-plugin-react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint-plugin-react-hooks",
+      "imports": [
+        "eslint-plugin-react-hooks"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "eslint-plugin-testing-library",
+      "imports": [
+        "eslint-plugin-testing-library"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "eslint.config.mjs",
+      "target": "typescript-eslint",
+      "imports": [
+        "typescript-eslint"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/eslint.config.js",
+      "target": "@eslint/js",
+      "imports": [
+        "@eslint/js"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/eslint.config.js",
+      "target": "eslint-plugin-react",
+      "imports": [
+        "eslint-plugin-react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/eslint.config.js",
+      "target": "eslint-plugin-react-hooks",
+      "imports": [
+        "eslint-plugin-react-hooks"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/eslint.config.js",
+      "target": "eslint-plugin-react-refresh",
+      "imports": [
+        "eslint-plugin-react-refresh"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/eslint.config.js",
+      "target": "globals",
+      "imports": [
+        "globals"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/App.jsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/App.jsx",
+      "target": "examples/demo/src/components/CodePreview.jsx",
+      "imports": [
+        "./components/CodePreview"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/App.jsx",
+      "target": "examples/demo/src/components/Details.jsx",
+      "imports": [
+        "./components/Details"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/App.jsx",
+      "target": "examples/demo/src/components/Scene.jsx",
+      "imports": [
+        "./components/Scene"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "prism-react-renderer",
+      "imports": [
+        "prism-react-renderer"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "examples/demo/src/components/CopyButton.jsx",
+      "imports": [
+        "./CopyButton"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "examples/demo/src/components/SnippetLang.jsx",
+      "imports": [
+        "./SnippetLang"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "examples/demo/src/resources/javascript-code.js",
+      "imports": [
+        "../resources/javascript-code"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CodePreview.jsx",
+      "target": "examples/demo/src/resources/typescript-code.js",
+      "imports": [
+        "../resources/typescript-code"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CopyButton.jsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/CopyButton.jsx",
+      "target": "examples/demo/src/utils/copy-to-clipboard.js",
+      "imports": [
+        "../utils/copy-to-clipboard"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/Fireflies.jsx",
+      "target": "three",
+      "imports": [
+        "three"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Fireflies.jsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/Fireflies.jsx",
+      "target": "@react-three/fiber",
+      "imports": [
+        "@react-three/fiber"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Fireflies.jsx",
+      "target": "meshline",
+      "imports": [
+        "meshline"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "three",
+      "imports": [
+        "three"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "@react-three/fiber",
+      "imports": [
+        "@react-three/fiber"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "@react-three/drei",
+      "imports": [
+        "@react-three/drei"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "postprocessing",
+      "imports": [
+        "postprocessing"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/components/Fireflies.jsx",
+      "imports": [
+        "./Fireflies"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/bg.jpg",
+      "imports": [
+        "../resources/bg.jpg"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/stars.png",
+      "imports": [
+        "../resources/stars.png"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/ground.png",
+      "imports": [
+        "../resources/ground.png"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/bear.png",
+      "imports": [
+        "../resources/bear.png"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/leaves1.png",
+      "imports": [
+        "../resources/leaves1.png"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/components/Scene.jsx",
+      "target": "examples/demo/src/resources/leaves2.png",
+      "imports": [
+        "../resources/leaves2.png"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/main.jsx",
+      "target": "react-dom/client",
+      "imports": [
+        "react-dom/client"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/main.jsx",
+      "target": "examples/demo/src/App.jsx",
+      "imports": [
+        "./App"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/demo/src/materials/layerMaterial.js",
+      "target": "@react-three/drei",
+      "imports": [
+        "@react-three/drei"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/materials/layerMaterial.js",
+      "target": "@react-three/fiber",
+      "imports": [
+        "@react-three/fiber"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/resources/javascript-code.js",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/src/resources/typescript-code.js",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/vite.config.js",
+      "target": "@vitejs/plugin-react-swc",
+      "imports": [
+        "@vitejs/plugin-react-swc"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/demo/vite.config.js",
+      "target": "vite",
+      "imports": [
+        "vite"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/starter/src/index.tsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "examples/starter/src/index.tsx",
+      "target": "react-dom/client",
+      "imports": [
+        "react-dom/client"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/starter/src/index.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/starter/src/index.tsx",
+      "target": "examples/starter/src/assets/zustand-mascot.svg",
+      "imports": [
+        "./assets/zustand-mascot.svg"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/starter/vite.config.ts",
+      "target": "@vitejs/plugin-react-swc",
+      "imports": [
+        "@vitejs/plugin-react-swc"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "examples/starter/vite.config.ts",
+      "target": "vite",
+      "imports": [
+        "vite"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "path",
+      "imports": [
+        "path"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "@rollup/plugin-alias",
+      "imports": [
+        "@rollup/plugin-alias"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "@rollup/plugin-node-resolve",
+      "imports": [
+        "@rollup/plugin-node-resolve"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "@rollup/plugin-replace",
+      "imports": [
+        "@rollup/plugin-replace"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "@rollup/plugin-typescript",
+      "imports": [
+        "@rollup/plugin-typescript"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "rollup.config.mjs",
+      "target": "rollup-plugin-esbuild",
+      "imports": [
+        "rollup-plugin-esbuild"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "src/middleware/combine.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/devtools.ts",
+      "target": "@redux-devtools/extension",
+      "imports": [
+        "@redux-devtools/extension"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "src/middleware/immer.ts",
+      "target": "immer",
+      "imports": [
+        "immer"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/immer.ts",
+      "target": "immer",
+      "imports": [
+        "immer"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/immer.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/redux.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/redux.ts",
+      "target": "src/middleware/devtools.ts",
+      "imports": [
+        "./devtools.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/ssrSafe.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/middleware/subscribeWithSelector.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "../vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/react.ts",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/react.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "./vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/react/shallow.ts",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/react/shallow.ts",
+      "target": "src/vanilla/shallow.ts",
+      "imports": [
+        "../vanilla/shallow.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/traditional.ts",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "src/traditional.ts",
+      "target": "use-sync-external-store/shim/with-selector",
+      "imports": [
+        "use-sync-external-store/shim/with-selector"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "src/traditional.ts",
+      "target": "src/vanilla.ts",
+      "imports": [
+        "./vanilla.ts"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "@testing-library/react",
+      "imports": [
+        "@testing-library/react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "react-dom",
+      "imports": [
+        "react-dom"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/basic.test.tsx",
+      "target": "zustand/traditional",
+      "imports": [
+        "zustand/traditional"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/devtools.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/devtools.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/devtools.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/devtools.test.tsx",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/devtools.test.tsx",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/middlewareTypes.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/middlewareTypes.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/middlewareTypes.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/middlewareTypes.test.tsx",
+      "target": "zustand/middleware/immer",
+      "imports": [
+        "zustand/middleware/immer"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/middlewareTypes.test.tsx",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "@testing-library/react",
+      "imports": [
+        "@testing-library/react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistAsync.test.tsx",
+      "target": "tests/test-utils.ts",
+      "imports": [
+        "./test-utils"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/persistSync.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistSync.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistSync.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/persistSync.test.tsx",
+      "target": "tests/test-utils.ts",
+      "imports": [
+        "./test-utils"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "@testing-library/react",
+      "imports": [
+        "@testing-library/react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "zustand/shallow",
+      "imports": [
+        "zustand/shallow"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/shallow.test.tsx",
+      "target": "zustand/traditional",
+      "imports": [
+        "zustand/traditional"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/ssr.test.tsx",
+      "target": "react",
+      "imports": [
+        "react"
+      ],
+      "is_external": false
+    },
+    {
+      "source": "tests/ssr.test.tsx",
+      "target": "@testing-library/react",
+      "imports": [
+        "@testing-library/react"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/ssr.test.tsx",
+      "target": "react-dom/server",
+      "imports": [
+        "react-dom/server"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/ssr.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/ssr.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/subscribe.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/subscribe.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/subscribe.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/types.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/types.test.tsx",
+      "target": "zustand",
+      "imports": [
+        "zustand"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/types.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/basic.test.ts",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/basic.test.ts",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/basic.test.ts",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/shallow.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/shallow.test.tsx",
+      "target": "zustand/shallow",
+      "imports": [
+        "zustand/shallow"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/subscribe.test.tsx",
+      "target": "vitest",
+      "imports": [
+        "vitest"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/subscribe.test.tsx",
+      "target": "zustand/middleware",
+      "imports": [
+        "zustand/middleware"
+      ],
+      "is_external": true
+    },
+    {
+      "source": "tests/vanilla/subscribe.test.tsx",
+      "target": "zustand/vanilla",
+      "imports": [
+        "zustand/vanilla"
+      ],
+      "is_external": true
+    }
+  ],
+  "metadata": {
+    "importance_scores": {
+      "CONTRIBUTING.md": 0.0,
+      "FUNDING.json": 0.0,
+      "README.md": 0.0,
+      "docs/index.md": 0.0,
+      "docs/learn/getting-started/comparison.md": 0.0,
+      "docs/learn/getting-started/introduction.md": 0.0,
+      "docs/learn/guides/advanced-typescript.md": 0.0,
+      "docs/learn/guides/auto-generating-selectors.md": 0.0,
+      "docs/learn/guides/beginner-typescript.md": 0.0,
+      "docs/learn/guides/connect-to-state-with-url-hash.md": 0.0,
+      "docs/learn/guides/event-handler-in-pre-react-18.md": 0.0,
+      "docs/learn/guides/flux-inspired-practice.md": 0.0,
+      "docs/learn/guides/how-to-reset-state.md": 0.0,
+      "docs/learn/guides/immutable-state-and-merging.md": 0.0,
+      "docs/learn/guides/initialize-state-with-props.md": 0.0,
+      "docs/learn/guides/maps-and-sets-usage.md": 0.0,
+      "docs/learn/guides/nextjs.md": 0.0,
+      "docs/learn/guides/practice-with-no-store-actions.md": 0.0,
+      "docs/learn/guides/prevent-rerenders-with-use-shallow.md": 0.0,
+      "docs/learn/guides/slices-pattern.md": 0.0,
+      "docs/learn/guides/ssr-and-hydration.md": 0.0,
+      "docs/learn/guides/testing.md": 0.0,
+      "docs/learn/guides/tutorial-tic-tac-toe.md": 0.0,
+      "docs/learn/guides/updating-state.md": 0.0,
+      "docs/learn/index.md": 0.0,
+      "docs/reference/apis/create-store.md": 5.0,
+      "docs/reference/apis/create-with-equality-fn.md": 5.0,
+      "docs/reference/apis/create.md": 5.0,
+      "docs/reference/apis/shallow.md": 5.0,
+      "docs/reference/hooks/use-shallow.md": 0.0,
+      "docs/reference/hooks/use-store-with-equality-fn.md": 0.0,
+      "docs/reference/hooks/use-store.md": 0.0,
+      "docs/reference/index.md": 0.0,
+      "docs/reference/integrations/immer-middleware.md": 0.0,
+      "docs/reference/integrations/persisting-store-data.md": 0.0,
+      "docs/reference/integrations/third-party-libraries.md": 0.0,
+      "docs/reference/middlewares/combine.md": 0.0,
+      "docs/reference/middlewares/devtools.md": 0.0,
+      "docs/reference/middlewares/immer.md": 0.0,
+      "docs/reference/middlewares/persist.md": 0.0,
+      "docs/reference/middlewares/redux.md": 0.0,
+      "docs/reference/middlewares/subscribe-with-selector.md": 0.0,
+      "docs/reference/migrations/migrating-to-v4.md": 0.0,
+      "docs/reference/migrations/migrating-to-v5.md": 0.0,
+      "docs/reference/previous-versions/zustand-v3-create-context.md": 0.0,
+      "eslint.config.mjs": 0.0,
+      "examples/demo/eslint.config.js": 0.0,
+      "examples/demo/index.html": 0.0,
+      "examples/demo/package.json": 0.0,
+      "examples/demo/public/manifest.json": 0.0,
+      "examples/demo/public/robots.txt": 0.0,
+      "examples/demo/src/App.jsx": 10.0,
+      "examples/demo/src/components/CodePreview.jsx": 0.0,
+      "examples/demo/src/components/CopyButton.jsx": 0.0,
+      "examples/demo/src/components/Details.jsx": 0.0,
+      "examples/demo/src/components/Fireflies.jsx": 0.0,
+      "examples/demo/src/components/Scene.jsx": 0.0,
+      "examples/demo/src/components/SnippetLang.jsx": 0.0,
+      "examples/demo/src/main.jsx": 0.0,
+      "examples/demo/src/materials/layerMaterial.js": 0.0,
+      "examples/demo/src/pmndrs.css": 0.0,
+      "examples/demo/src/resources/javascript-code.js": 0.0,
+      "examples/demo/src/resources/typescript-code.js": 0.0,
+      "examples/demo/src/styles.css": 0.0,
+      "examples/demo/src/utils/copy-to-clipboard.js": 0.0,
+      "examples/demo/vite.config.js": 0.0,
+      "examples/starter/README.md": 0.0,
+      "examples/starter/index.html": 0.0,
+      "examples/starter/package.json": 0.0,
+      "examples/starter/src/index.css": 0.0,
+      "examples/starter/src/index.tsx": 0.0,
+      "examples/starter/src/vite-env.d.ts": 0.0,
+      "examples/starter/tsconfig.json": 0.0,
+      "examples/starter/vite.config.ts": 0.0,
+      "package.json": 0.0,
+      "pnpm-lock.yaml": 0.0,
+      "pnpm-workspace.yaml": 0.0,
+      "rollup.config.mjs": 0.0,
+      "src/index.ts": 10.0,
+      "src/middleware.ts": 0.0,
+      "src/middleware/combine.ts": 0.0,
+      "src/middleware/devtools.ts": 0.0,
+      "src/middleware/immer.ts": 0.0,
+      "src/middleware/persist.ts": 0.0,
+      "src/middleware/redux.ts": 0.0,
+      "src/middleware/ssrSafe.ts": 0.0,
+      "src/middleware/subscribeWithSelector.ts": 0.0,
+      "src/react.ts": 0.0,
+      "src/react/shallow.ts": 0.0,
+      "src/shallow.ts": 0.0,
+      "src/traditional.ts": 0.0,
+      "src/types.d.ts": 0.0,
+      "src/vanilla.ts": 0.0,
+      "src/vanilla/shallow.ts": 0.0,
+      "tests/basic.test.tsx": 0.0,
+      "tests/devtools.test.tsx": 0.0,
+      "tests/middlewareTypes.test.tsx": 0.0,
+      "tests/persistAsync.test.tsx": 0.0,
+      "tests/persistSync.test.tsx": 0.0,
+      "tests/setup.ts": 0.0,
+      "tests/shallow.test.tsx": 0.0,
+      "tests/ssr.test.tsx": 0.0,
+      "tests/subscribe.test.tsx": 0.0,
+      "tests/test-utils.ts": 0.0,
+      "tests/types.test.tsx": 0.0,
+      "tests/vanilla/basic.test.ts": 0.0,
+      "tests/vanilla/shallow.test.tsx": 0.0,
+      "tests/vanilla/subscribe.test.tsx": 0.0,
+      "tsconfig.json": 0.0
+    },
+    "parser_stats": {
+      "python_ast": 0,
+      "treesitter": 0,
+      "regex_fallback": 49,
+      "unknown": 60
+    }
+  }
+}

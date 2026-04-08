@@ -110,6 +110,45 @@ class MentalModel:
     def add_dependency(self, edge: DependencyEdge):
         self.dependencies.append(edge)
 
+    def compute_importance_scores(self) -> dict[str, float]:
+        """
+        Calculate weighted architectural importance.
+        Formula: (in_degree * 2) + (out_degree * 1.5) + (entry_point ? 10 : 0) + (core_folder ? 5 : 0)
+        """
+        in_degree = {path: 0 for path in self.modules}
+        out_degree = {path: 0 for path in self.modules}
+        
+        for dep in self.dependencies:
+            if not dep.is_external:
+                if dep.target in in_degree: in_degree[dep.target] += 1
+                if dep.source in out_degree: out_degree[dep.source] += 1
+        
+        entry_patterns = ["main.py", "index.js", "index.ts", "app.py", "App.jsx", "App.tsx", "server.js", "manage.py"]
+        core_folders = ["core", "services", "api", "models", "logic", "modules", "controllers"]
+        
+        raw_scores = {}
+        for path in self.modules:
+            # 1. Degrees
+            score = (in_degree.get(path, 0) * 2.0) + (out_degree.get(path, 0) * 1.5)
+            
+            # 2. Entry Point Bonus
+            if any(path.endswith(ep) for ep in entry_patterns):
+                score += 10.0
+            
+            # 3. Core Folder Bonus
+            if any(cf in path.lower() for cf in core_folders):
+                score += 5.0
+                
+            raw_scores[path] = score
+            
+        # Normalize to 0-10
+        max_raw = max(raw_scores.values()) if raw_scores else 1
+        scores = {path: round((s / max_raw) * 10, 1) for path, s in raw_scores.items()}
+        
+        self.metadata["importance_scores"] = scores
+        self.importance_scores = scores
+        return scores
+
     def build_call_graph(self):
         """Build forward and reverse call graphs from function nodes with cross-module resolution."""
         self.call_graph = {}
@@ -511,14 +550,15 @@ class MentalModel:
                     text_parts.append(f"  Called by: {', '.join(func.called_by[:8])}")
 
         if related_deps:
-            text_parts.append("\n## Dependency Links")
+            text_parts.append("\n## Architectural Dependency Traces")
             seen = set()
             for dep in related_deps[:15]:
                 key = f"{dep.source}->{dep.target}"
                 if key not in seen:
                     seen.add(key)
                     label = "external" if dep.is_external else "internal"
-                    text_parts.append(f"- {dep.source} → {dep.target} ({label})")
+                    symbols = f" (imports: {', '.join(dep.imports)})" if dep.imports else ""
+                    text_parts.append(f"- {dep.source} → {dep.target} [{label}]{symbols}")
 
         return {
             "context_text": "\n".join(text_parts),
@@ -532,13 +572,14 @@ class MentalModel:
         Convert the mental model into ReactFlow-compatible nodes and edges.
         Uses a hierarchical layering algorithm for a clean, non-blocking layout.
         """
-        # 1. Identify connected modules and entry points
+        # 1. Identify connected modules and functional entry points
         connected_modules = set()
         edges_to_render = []
         
         # Adjacency list for internal dependencies
         adj = {path: [] for path in self.modules}
         in_degree = {path: 0 for path in self.modules}
+        out_degree = {path: 0 for path in self.modules}
         
         for dep in self.dependencies:
             if not dep.is_external and dep.source in self.modules and dep.target in self.modules:
@@ -547,28 +588,24 @@ class MentalModel:
                 edges_to_render.append(dep)
                 adj[dep.source].append(dep.target)
                 in_degree[dep.target] += 1
+                out_degree[dep.source] += 1
         
-        entry_points = {path for path, mod in self.modules.items() 
-                        if any(path.endswith(ep) for ep in [
-                            "main.py", "index.js", "index.ts", "app.py", "App.jsx", "App.tsx", 
-                            "main.go", "cli.py", "__init__.py", "vite.config.ts", "vite.config.js",
-                            "package.json", "tsconfig.json", "go.mod", "Cargo.toml"
-                        ])}
-        
-        modules_to_show = connected_modules | entry_points
+        # A module is shown ONLY if it has real architectural connections (in-degree or out-degree > 0)
+        modules_to_show = {path for path in connected_modules}
 
-        # Fallback: if we found nothing to show, show the largest modules
         if not modules_to_show:
+            # Fallback: if we found absolutely no connections, show the top 15 modules by size
+            # so the graph isn't a blank void, but prioritize code over config.
             sorted_by_size = sorted(self.modules.keys(), key=lambda x: self.modules[x].loc, reverse=True)
-            modules_to_show = set(sorted_by_size[:15])
+            modules_to_show = {p for p in sorted_by_size[:15] if self.modules[p].language != "unknown"}
 
         # 2. Hierarchical Ranking (Layers)
         layers = {} # path -> layer_index
         queue = []
         
-        # Start with nodes that have in-degree 0 (or entry points)
+        # Start with nodes that have in-degree 0
         for path in modules_to_show:
-            if in_degree.get(path, 0) == 0 or path in entry_points:
+            if in_degree.get(path, 0) == 0:
                 layers[path] = 0
                 queue.append(path)
         

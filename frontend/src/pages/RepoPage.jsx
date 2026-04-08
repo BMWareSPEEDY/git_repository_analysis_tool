@@ -26,9 +26,8 @@ const VIEWS = [
     id: 'model',   
     label: 'Mental Model',  
     icon: (
-      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 14v-2m0-4h.01" />
-        <path d="M15 9a3 3 0 10-6 0c0 1.657 1.343 3 3 3s3-1.343 3-3z" />
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.54-2.44 2.5 2.5 0 01-2-2.44V10a2.5 2.5 0 012-2.44 2.5 2.5 0 012.54-2.44A2.5 2.5 0 019.5 2zM14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.54-2.44 2.5 2.5 0 002-2.44V10a2.5 2.5 0 00-2-2.44 2.5 2.5 0 00-2.54-2.44A2.5 2.5 0 0014.5 2z" />
       </svg>
     ) 
   },
@@ -166,9 +165,8 @@ export default function RepoPage() {
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               boxShadow: '0 0 10px rgba(99,102,241,0.2)',
             }}>
-              <svg width="11" height="11" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="3" />
-                <path strokeLinecap="round" d="M12 2v4m0 12v4m-7.07-2.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83" />
+              <svg width="12" height="12" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.54-2.44 2.5 2.5 0 01-2-2.44V10a2.5 2.5 0 012-2.44 2.5 2.5 0 012.54-2.44A2.5 2.5 0 019.5 2zM14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.54-2.44 2.5 2.5 0 002-2.44V10a2.5 2.5 0 00-2-2.44 2.5 2.5 0 00-2.54-2.44A2.5 2.5 0 0014.5 2z" />
               </svg>
             </div>
             <span style={{
@@ -247,7 +245,10 @@ export default function RepoPage() {
               background: 'var(--green-dim)', border: '1px solid rgba(34,197,94,0.2)',
               borderRadius: 6, padding: '4px 10px',
             }}>
-              <span>✓</span> Done
+              <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Done
             </div>
           )}
 
@@ -261,10 +262,15 @@ export default function RepoPage() {
                 border: '1px solid ' + (showSummary ? 'var(--border-2)' : 'var(--border)'),
                 borderRadius: 6, padding: '4px 10px',
                 fontSize: '12px', color: showSummary ? 'var(--text)' : 'var(--text-2)',
-                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5,
+                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6,
               }}
             >
-              <span>🗂</span>Overview
+              <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v12a2 2 0 01-2 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 2v6h6" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 13h8M8 17h8" />
+              </svg>
+              Overview
             </button>
           )}
 
@@ -369,36 +375,6 @@ export default function RepoPage() {
           </>
         )}
       </div>
-
-      {/* ── Status bar ────────────────────────────────── */}
-      <footer style={{
-        height: 24, display: 'flex', alignItems: 'center',
-        justifyContent: 'space-between', padding: '0 14px',
-        background: 'var(--bg-1)', borderTop: '1px solid var(--border)', flexShrink: 0,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: '11px', color: 'var(--text-3)' }}>
-          <span>{files.length} files</span>
-          {selected && <span style={{ fontFamily: 'var(--mono)' }}>{selected}</span>}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '11px', color: 'var(--text-3)' }}>
-          <span style={{
-            background: 'linear-gradient(135deg, #c7d2fe, #818cf8)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            fontWeight: 600,
-          }}>
-            PEEK
-          </span>
-          <span>·</span>
-          <span>gemini-3-flash-preview</span>
-          <span style={{
-            width: 6, height: 6, borderRadius: '50%',
-            background: analyzing
-              ? 'var(--amber)'
-              : status.status === 'done' ? 'var(--green)' : 'var(--text-3)',
-            display: 'inline-block',
-          }} />
-        </div>
-      </footer>
     </div>
   );
 }

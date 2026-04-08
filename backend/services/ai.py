@@ -15,9 +15,10 @@ from utils.file_utils import (
 
 load_dotenv()
 
-# Initialize Gemini client
+# Model Configurations
 _client = None
-MODEL = "gemini-3.1-flash-lite-preview"
+MODEL_BATCH = "gemini-3.1-flash-lite-preview" # For background analysis & summaries
+MODEL_QUERY = "gemini-3-flash-preview"        # For interactive Query Engine
 
 
 def _get_client() -> genai.Client:
@@ -84,12 +85,17 @@ Detail what external or internal resources this file relies on (libraries, servi
 
 ## Summary
 A sharp, high-density 2-3 sentence technical summary mapping the file's inputs to its outputs. Optimize this for another AI to quickly grasp the file's exact architectural role.
+
+## Extracted Entities (STRICT)
+- Classes:
+- Functions:
+- Key Variables:
 """
 
     try:
         client = _get_client()
         response = client.models.generate_content(
-            model=MODEL,
+            model=MODEL_BATCH,
             contents=prompt,
         )
         explanation = response.text
@@ -184,6 +190,12 @@ Trace how data enters the system (the ingress/entry points), how it is processed
 ## 🧱 Core Components
 List the 3-5 most critical modules, subsystems, or files, using the prioritized summaries provided. Briefly describe the responsibility of each and why it acts as a load-bearing pillar for the system.
 
+## 📍 Entry Points
+Identify system entry points (main, API routes, UI bootstrap).
+
+## ⚡ Critical Paths
+Describe the most important execution flows through the system.
+
 ## 🚀 Setup & Execution 
 Synthesizing hints from build files (Makefiles, Dockerfiles, package.json, requirements.txt, etc.), outline the probable steps required for a new developer to configure and run this project locally.
 
@@ -194,7 +206,7 @@ Provide a concise, 2-3 paragraph architectural abstract. This should be highly t
     try:
         client = _get_client()
         response = client.models.generate_content(
-            model=MODEL,
+            model=MODEL_BATCH,
             contents=prompt,
         )
         summary_text = response.text
@@ -213,28 +225,25 @@ import json
 
 def classify_intent(user_input: str) -> dict:
     """
-    Classify whether the user is asking to trace an architectural flow.
-    Returns: { "type": "flow" | "question", "target": "file1, file2..." | null }
+    Classify whether the user is asking to trace a flow or perform a security audit.
     """
     prompt = f"""You are the PEEK Intent Engine. 
-Your job is to identify if a developer is asking to trace an execution pipeline, state transition, or architectural flow.
+Your job is to identify if a developer is asking to:
+1. Trace an execution flow (type: "flow")
+2. Perform a security audit for logic flaws, auth bypass, or secrets (type: "security")
+3. General technical question (type: "question")
+4. Impact analysis of changing a specific part (type: "impact")
+5. High-level architecture explanation (type: "architecture")
 
 EXAMPLES:
-Input: "How does the login work?"
-Response: {{"type": "flow", "target": "auth.ts, login.ts, session.ts"}}
-
-Input: "Show me the Zustand state flow"
-Response: {{"type": "flow", "target": "vanilla.ts, index.ts, middleware.ts"}}
-
-Input: "What are our dependencies?"
-Response: {{"type": "question", "target": null}}
-
+Input: "How does the login work?" -> {{"type": "flow", "target": "auth.ts, login.ts"}}
+Input: "Are there any auth bypass vulnerabilities?" -> {{"type": "security", "target": null}}
+Input: "What happens if I change the User class?" -> {{"type": "impact", "target": "User"}}
 Input: "{user_input}"
-Response:
 """
     try:
         client = _get_client()
-        response = client.models.generate_content(model=MODEL, contents=prompt)
+        response = client.models.generate_content(model=MODEL_QUERY, contents=prompt)
         text = response.text.replace('```json', '').replace('```', '').strip()
         data = json.loads(text)
         return {"type": data.get("type", "question"), "target": data.get("target")}
@@ -242,30 +251,91 @@ Response:
         return {"type": "question", "target": None}
 
 
-def ask_question(repo_id: str, question: str, conversation_id: str | None = None) -> str:
-    """Answer a question about the codebase (Synchronous)."""
-    prompt = _build_ask_prompt(repo_id, question, conversation_id)
+def perform_security_audit(repo_id: str, query: str = "") -> str:
+    """
+    Perform a high-level logic security audit using the architectural mental model.
+    Focuses on: Auth Bypass, Direct DB Access, Exposed Secrets, and Insecure Endpoints.
+    """
+    repo_summary = load_json(get_repo_summary_path(repo_id))
+    
+    # Collect summaries of critical files (Entry points, Auth, DB)
+    summaries_dir = Path(get_file_summary_path(repo_id, "")).parent
+    context_parts = []
+    if summaries_dir.exists():
+        for json_file in sorted(summaries_dir.glob("*.json")):
+            data = load_json(json_file)
+            if data and any(k in data.get('file', '').lower() for k in ['auth', 'login', 'db', 'api', 'env', 'config', 'index']):
+                context_parts.append(f"### {data['file']}\n{data['explanation']}")
+
+    prompt = f"""You are a 'Red Team' Security Architect. Perform a high-level logic security audit of this repository.
+
+**Codebase Architecture:**
+{repo_summary.get('summary', '') if repo_summary else 'Unknown'}
+
+**Critical Module Summaries:**
+{"\n".join(context_parts)}
+
+**Security Objective:** {query or "Identify the top 3 architectural security risks."}
+
+Analyze the cross-module flows and identify:
+1. **Authorization Bypasses**: Are there any paths where an unauthenticated user can reach protected logic?
+2. **Direct Data Exposure**: Does any UI component or public endpoint access the database directly without shifting through a service/security layer?
+3. **Exposed Secrets**: Based on the file summaries, are there hints of hardcoded API keys, bearer tokens, or unsecured configs?
+4. **Insecure Endpoints**: Are there endpoints that lack proper input validation or CORS protection?
+
+**Focus on cross-module interaction flaws, not just isolated file issues.**
+
+Structure your response with:
+- **SUMMARY**: 1-sentence risk level (CRITICAL | HIGH | MEDIUM | LOW).
+- **VULNERABILITY DESCRIPTION**: A technical breakdown of the logic flaw.
+- **IMPACT**: Why this matters.
+- **REMEDIATION**: Specific code steps to fix it.
+"""
     try:
         client = _get_client()
-        response = client.models.generate_content(model=MODEL, contents=prompt)
+        response = client.models.generate_content(model=MODEL_QUERY, contents=prompt)
         return response.text
     except Exception as e:
-        return f"Error generating answer: {str(e)}"
+        return f"Error performing security audit: {str(e)}"
+
+
+def ask_question(repo_id: str, question: str, conversation_id: str | None = None) -> str:
+    """Answer a question about the codebase (Synchronous)."""
+    intent = classify_intent(question)
+    
+    if intent["type"] == "security":
+        return perform_security_audit(repo_id, question)
+        
+    prompt = _build_ask_prompt(repo_id, question, conversation_id, intent_type=intent["type"])
+    try:
+        client = _get_client()
+        response = client.models.generate_content(model=MODEL_QUERY, contents=prompt)
+        return response.text
+    except Exception as e:
+        return f"Error asking question: {str(e)}"
 
 
 def stream_ask_question(repo_id: str, question: str, conversation_id: str | None = None):
     """Generator that yields chunks of the AI's response in real-time."""
-    prompt = _build_ask_prompt(repo_id, question, conversation_id)
+    intent = classify_intent(question)
+    
+    if intent["type"] == "security":
+        # Stream security audit (not currently supported as a separate stream function, but we can wrap it)
+        text = perform_security_audit(repo_id, question)
+        yield text
+        return
+
+    prompt = _build_ask_prompt(repo_id, question, conversation_id, intent_type=intent["type"])
     try:
         client = _get_client()
-        for chunk in client.models.generate_content_stream(model=MODEL, contents=prompt):
+        for chunk in client.models.generate_content_stream(model=MODEL_QUERY, contents=prompt):
             if chunk.text:
                 yield chunk.text
     except Exception as e:
         yield f"Error in stream: {str(e)}"
 
 
-def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None = None) -> str:
+def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None = None, intent_type: str = "question") -> str:
     """Synthesize graph RAG, file summaries, and conversation memory into an enriched prompt."""
     # ── 1. Graph RAG context
     graph_context = ""
@@ -313,11 +383,55 @@ def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None =
     # ── 5. Assemble
     prompt_parts = [
         "You are **PEEK**, an elite AI Staff Engineer. Answer with authoritative precision.\n",
-        "1. **Be Exact:** Cite specific file paths, class names, functions.\n",
-        "2. **Trace the Graph:** Trace call chains (A -> B mutates C) using Context Graph.\n",
-        "3. **Code over Prose:** Prefer short, illustrative code snippets.\n",
+        "### Reasoning Protocol (MANDATORY)",
+        "When answering:",
+        "1. Identify the target entity (file/module/function)",
+        "2. Determine its architectural role",
+        "3. Trace direct dependencies (what it uses)",
+        "4. Trace reverse dependencies (what uses it)",
+        "5. Identify critical paths (entry points → core logic)",
+        "6. Perform impact analysis (if relevant)",
+        "Do NOT skip steps. Think step-by-step using the provided graph.\n",
     ]
-    if graph_context: prompt_parts.append(f"## Architecture Graph Context\n{graph_context}\n")
+
+    # Intent-specific injections
+    if intent_type == "impact":
+        prompt_parts.append("### SPECIAL INSTRUCTION: IMPACT ANALYSIS")
+        prompt_parts.append("The user is asking about the impact of a change. You MUST prioritize tracing reverse dependencies (what breaks) and assigning a clear [RISK LEVEL].\n")
+    elif intent_type == "architecture":
+        prompt_parts.append("### SPECIAL INSTRUCTION: ARCHITECTURAL EXPLAINER")
+        prompt_parts.append("The user is asking for an architectural explanation. Focus on design patterns, structural separation of concerns, and the 'role' of the components in the macroscopic system.\n")
+
+    prompt_parts.extend([
+        "### Output Format (STRICT)",
+        "Return your answer in this structure:",
+        "- **ROLE**",
+        "- **FLOW TRACE**",
+        "- **DEPENDENCIES**",
+        "- **BLAST RADIUS** (if applicable)",
+        "- **RISK LEVEL** (if applicable)",
+        "- **SUMMARY**",
+        "Be concise, technical, and precise.\n",
+        "### Uncertainty Handling",
+        "If the provided context is insufficient:",
+        "- State assumptions clearly",
+        "- Do NOT invent dependencies or flows\n",
+        "1. **Be Exact:** Cite specific file paths, class names, functions.",
+        "2. **Trace the Graph:** Trace call chains (A -> B mutates C) using Context Graph.",
+        "3. **Impact Analysis Protocol:** If the user asks 'what breaks' or 'what is the risk of changing X':",
+        "   - Perform a topological search for all dependents (files that import X).",
+        "   - Assign a **Risk Level**: [CRITICAL] (if core/many dependents), [HIGH], [MEDIUM], or [LOW].",
+        "   - List specific 'Blast Radius' modules and potential logic regression areas.",
+        "4. **Code over Prose:** Prefer short, illustrative code snippets.\n",
+    ])
+    if graph_context: 
+        prompt_parts.append("The following is a structured dependency graph.")
+        prompt_parts.append("Interpret edges as:")
+        prompt_parts.append("- A → B = A depends on B")
+        prompt_parts.append("- Use edge semantics to understand function/class usage")
+        prompt_parts.append("- Prioritize direct dependencies over indirect ones\n")
+        prompt_parts.append(f"## Architecture Graph Context\n{graph_context}\n")
+        
     if "\n".join(context_parts): prompt_parts.append(f"## File Summaries\n" + "\n".join(context_parts) + "\n")
     if repo_context: prompt_parts.append(repo_context)
     if chat_history: prompt_parts.append(f"## Previous Conversation\n{chat_history}\n")
@@ -366,17 +480,24 @@ def _build_graph_rag_context(model, question: str) -> str:
     # Search the graph for matching nodes
     search_query = " ".join(keywords)
     search_results = model.search_nodes(search_query, limit=10)
+    
+    # Get importance scores
+    scores = model.metadata.get("importance_scores", {})
 
     context_parts = []
 
     if search_results:
-        context_parts.append("### Matching Entities")
+        context_parts.append("### Architectural Landmarks (Scored by Importance)")
         for result in search_results:
+            path = result.get('module', result.get('name'))
+            score = scores.get(path, 0)
+            status = " [CORE PILLAR]" if score >= 7 else ""
+            
             if result["type"] == "function":
                 params = ", ".join(result.get("params", []))
                 context_parts.append(
                     f"- **fn** `{result['name']}({params})` in `{result['module']}` "
-                    f"[L{result.get('lines', '?')}]"
+                    f"(Importance: {score}/10){status}"
                 )
                 if result.get("calls"):
                     context_parts.append(f"  → calls: {', '.join(result['calls'][:6])}")
@@ -385,12 +506,12 @@ def _build_graph_rag_context(model, question: str) -> str:
             elif result["type"] == "class":
                 context_parts.append(
                     f"- **class** `{result['name']}` in `{result['module']}` "
-                    f"bases={result.get('bases', [])}, methods={result.get('methods', [])[:8]}"
+                    f"(Importance: {score}/10){status}"
                 )
             elif result["type"] == "module":
                 context_parts.append(
-                    f"- **module** `{result['name']}` ({result.get('language', '?')}, "
-                    f"{result.get('loc', 0)} LOC)"
+                    f"- **module** `{result['name']}` "
+                    f"(Importance: {score}/10){status}"
                 )
 
     # For top matches, get subgraph context (multi-hop traversal)

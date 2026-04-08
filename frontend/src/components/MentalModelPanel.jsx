@@ -28,21 +28,20 @@ const LANG_COLORS = {
 };
 
 function ModuleNodeComponent({ data }) {
-  const [isHovered, setIsHovered] = useState(false);
   const langColor = LANG_COLORS[data.language] || LANG_COLORS.unknown;
   const opacity = data.dimmed ? 0.3 : 1;
-  const tooltipTexts = generateTooltipText(data);
+  const isGlowing = data.glow;
 
   return (
     <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       style={{
         background: 'rgba(17, 17, 17, 0.9)', border: `1px solid ${data.color || 'var(--border, #2a2a2a)'}`,
         borderRadius: 10, padding: '12px 14px', minWidth: 160, maxWidth: 240,
-        fontFamily: "'Inter', sans-serif", transition: 'border-color 0.2s, box-shadow 0.2s', cursor: 'grab',
-        opacity, boxShadow: data.dimmed ? 'none' : `0 4px 16px ${data.color || '#000'}30`,
-        position: 'relative', backdropFilter: 'blur(10px)'
+        fontFamily: "'Inter', sans-serif", cursor: 'grab',
+        opacity, 
+        boxShadow: isGlowing ? '0 0 20px rgba(99, 102, 241, 0.6)' : (data.dimmed ? 'none' : `0 4px 16px ${data.color || '#000'}30`),
+        position: 'relative', backdropFilter: 'blur(10px)',
+        transition: 'all 0.1s ease-out'
       }}>
       {/* Port Configuration for Horizontal Flow */}
       <Handle type="target" position={Position.Left} style={{ background: '#6366f1', width: 8, height: 8, border: '2px solid #000', left: -4 }} />
@@ -63,20 +62,6 @@ function ModuleNodeComponent({ data }) {
         {data.functions > 0 && <span style={{ fontSize: '10px', padding: '1px 5px', borderRadius: 4, background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)', color: '#a5b4fc', fontWeight: 500 }}>{data.functions} fn</span>}
         <span style={{ fontSize: '10px', padding: '1px 5px', borderRadius: 4, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#ccc' }}>{data.loc} LOC</span>
       </div>
-
-      {isHovered && tooltipTexts.length > 0 && !data.dimmed && (
-        <div style={{
-          position: 'absolute', bottom: '110%', left: '50%', transform: 'translateX(-50%)',
-          background: 'rgba(10, 10, 10, 0.95)', border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: 8, padding: '8px 12px', zIndex: 1000, width: 'max-content',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5)', backdropFilter: 'blur(12px)',
-          display: 'flex', flexDirection: 'column', gap: 4, pointerEvents: 'none'
-        }}>
-          {tooltipTexts.map((text, i) => (
-             <span key={i} style={{ fontSize: 11, color: '#bbb', fontFamily: "'Inter', sans-serif" }}>• {text}</span>
-          ))}
-        </div>
-      )}
 
       <Handle type="source" position={Position.Right} style={{ background: '#3b82f6', width: 8, height: 8, border: '2px solid #000', right: -4 }} />
     </div>
@@ -107,12 +92,18 @@ function FunctionNodeComponent({ data }) {
 }
 
 function ResizableGroupNode({ data, selected }) {
+  const borderStyle = selected ? 'solid' : 'dashed';
+  const borderColor = 'rgba(255, 255, 255, 0.1)';
+  
   return (
     <div style={{
       width: '100%', height: '100%', 
       background: 'rgba(255, 255, 255, 0.01)',
-      border: `1px ${selected ? 'solid' : 'dashed'} rgba(255, 255, 255, 0.1)`,
-      borderRadius: 16, borderTop: '24px solid rgba(255, 255, 255, 0.05)',
+      borderLeft: `1px ${borderStyle} ${borderColor}`,
+      borderRight: `1px ${borderStyle} ${borderColor}`,
+      borderBottom: `1px ${borderStyle} ${borderColor}`,
+      borderTop: '24px solid rgba(255, 255, 255, 0.05)',
+      borderRadius: 16,
       position: 'relative', overflow: 'visible'
     }}>
       <NodeResizer minWidth={200} minHeight={150} color="#6366f1" isVisible={selected} />
@@ -122,6 +113,61 @@ function ResizableGroupNode({ data, selected }) {
         letterSpacing: '0.05em'
       }}>
         {data.label}
+      </div>
+    </div>
+  );
+}
+
+function EdgeDetailOverlay({ edge, nodes, mousePos }) {
+  if (!edge || !mousePos) return null;
+  
+  const sourceNode = nodes.find(n => n.id === edge.source);
+  const targetNode = nodes.find(n => n.id === edge.target);
+  const symbols = edge.data?.allImports || [];
+  
+  return (
+    <div style={{
+      position: 'fixed', left: mousePos.x + 20, top: mousePos.y + 20,
+      width: 280, background: 'rgba(10, 10, 10, 0.95)', border: '1px solid rgba(99, 102, 241, 0.4)',
+      borderRadius: 12, padding: '14px', zIndex: 10000, pointerEvents: 'none',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.6)', backdropFilter: 'blur(16px)',
+      fontFamily: "'Inter', sans-serif"
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12, fontSize: 11, fontWeight: 700, color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" /><path d="M10.172 13.828a4 4 0 005.656 0l4-4a4 4 0 10-5.656-5.656l-1.101 1.101" /></svg>
+        Structural Link
+      </div>
+      
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+        <div style={{ fontSize: 12, color: '#fff', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis' }}>{sourceNode?.data.label}</div>
+        <div style={{ color: '#6366f1' }}>→</div>
+        <div style={{ fontSize: 12, color: '#fff', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis' }}>{targetNode?.data.label}</div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div>
+          <div style={{ fontSize: 10, color: '#666', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>Dependency Type</div>
+          <div style={{ fontSize: 11, color: '#aaa' }}>{edge.data?.isExternal ? 'External Library' : 'Internal Call Logic'}</div>
+        </div>
+
+        {symbols.length > 0 && (
+          <div>
+            <div style={{ fontSize: 10, color: '#666', fontWeight: 700, textTransform: 'uppercase', marginBottom: 6 }}>Symbols Used</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+              {symbols.slice(0, 8).map(s => (
+                <span key={s} style={{ fontSize: 10, fontFamily: 'var(--mono)', background: 'rgba(99, 102, 241, 0.1)', color: '#a5b4fc', border: '1px solid rgba(99, 102, 241, 0.2)', padding: '2px 6px', borderRadius: 4 }}>{s}</span>
+              ))}
+              {symbols.length > 8 && <span style={{ fontSize: 10, color: '#444' }}>+{symbols.length - 8} more</span>}
+            </div>
+          </div>
+        )}
+
+        <div>
+           <div style={{ fontSize: 10, color: '#666', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>Purpose</div>
+           <div style={{ fontSize: 11, color: '#ddd', lineHeight: 1.5 }}>
+             Consumes logic from {targetNode?.data.label} to extend module functionality.
+           </div>
+        </div>
       </div>
     </div>
   );
@@ -148,6 +194,7 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [tracedNodeIds, setTracedNodeIds] = useState([]); // Array of IDs to trace from
   const [hoveredEdgeId, setHoveredEdgeId] = useState(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [selectedNode, setSelectedNode] = useState(null);
   const [mermaidSvg, setMermaidSvg] = useState('');
   
@@ -223,18 +270,30 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
         theme: 'dark',
         securityLevel: 'loose'
       });
-      const text = generateMermaidText(rawGraph.nodes, rawGraph.edges);
+
+      // Filter nodes based on category and search
+      const visibleNodes = rawGraph.nodes.filter(n => {
+        if (categoryFilter !== 'all' && n.data.category !== categoryFilter) return false;
+        if (searchQuery && !n.data.label.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+        return true;
+      });
+
+      const visibleNodeIds = new Set(visibleNodes.map(n => n.id));
+      const visibleEdges = rawGraph.edges.filter(e => 
+        visibleNodeIds.has(e.source) && visibleNodeIds.has(e.target)
+      );
+
+      const text = generateMermaidText(visibleNodes, visibleEdges);
       const renderId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
       
       mermaid.render(renderId, text)
         .then(res => setMermaidSvg(res.svg))
         .catch(e => {
           console.error("Mermaid error:", e);
-          // Fallback or clear if error
           setMermaidSvg('<div style="color: #666; padding: 20px;">Unable to render static graph. Try refreshing.</div>');
         });
     }
-  }, [rawGraph.nodes, rawGraph.edges, format]);
+  }, [rawGraph.nodes, rawGraph.edges, format, categoryFilter, searchQuery]);
 
   useEffect(() => {
     if (!rawGraph.nodes.length) return;
@@ -261,19 +320,49 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
       [...depth1, ...depth2].forEach(id => traceSet.add(id));
     }
 
+    // Calculation for Focus State (Hovered Edge)
+    let focusNodeIds = new Set();
+    if (hoveredEdgeId) {
+      const hoveredEdge = rawGraph.edges.find(e => e.id === hoveredEdgeId);
+      if (hoveredEdge) {
+        focusNodeIds.add(hoveredEdge.source);
+        focusNodeIds.add(hoveredEdge.target);
+      }
+    }
+
     setNodes(currentNodes => {
+      // Create maps for both position and dimensions so we don't lose user adjustments
       const posMap = new Map(currentNodes.map(cn => [cn.id, cn.position]));
+      const dimMap = new Map(currentNodes.map(cn => [cn.id, { width: cn.width, height: cn.height, measured: cn.measured }]));
       
       return rawGraph.nodes.map(n => {
         let dimmed = false;
-        if (categoryFilter !== 'all' && n.data.category !== categoryFilter) dimmed = true;
-        if (searchQuery && !n.data.label.toLowerCase().includes(searchQuery.toLowerCase())) dimmed = true;
-        if (tracedNodeIds.length > 0 && !traceSet.has(n.id)) dimmed = true;
+        
+        // Priority 1: Focus isolation during hover
+        if (hoveredEdgeId && !focusNodeIds.has(n.id)) {
+          dimmed = true;
+        } 
+        // Priority 2: Global filters
+        else if (categoryFilter !== 'all' && n.data.category !== categoryFilter) {
+          dimmed = true;
+        }
+        else if (searchQuery && !n.data.label.toLowerCase().includes(searchQuery.toLowerCase())) {
+          dimmed = true;
+        }
+        // Priority 3: Trace results
+        else if (tracedNodeIds.length > 0 && !traceSet.has(n.id)) {
+          dimmed = true;
+        }
+
+        const existingDims = dimMap.get(n.id) || {};
 
         return {
           ...n,
           position: posMap.get(n.id) || n.position,
-          data: { ...n.data, dimmed }
+          width: existingDims.width || n.width,
+          height: existingDims.height || n.height,
+          measured: existingDims.measured || n.measured,
+          data: { ...n.data, dimmed, glow: hoveredEdgeId && focusNodeIds.has(n.id) }
         };
       });
     });
@@ -283,15 +372,21 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
       for (let i = 0; i < id.length; i++) {
         hash = (Math.imul(31, hash) + id.charCodeAt(i)) | 0;
       }
-      const x = (hash % 40) - 20; // -20 to 20px jitter
-      const y = ((hash >> 4) % 30) - 15; // -15 to 15px jitter
-      return { x, y };
+      return { x: (hash % 40) - 20, y: ((hash >> 4) % 30) - 15 };
     };
 
     let finalEdges = rawGraph.edges.map(e => {
-      let isTraced = tracedNodeIds.length > 0 && (traceSet.has(e.source) && traceSet.has(e.target));
+      const isTraced = tracedNodeIds.length > 0 && (traceSet.has(e.source) && traceSet.has(e.target));
       const isHovered = hoveredEdgeId === e.id;
       const offset = getLabelOffset(e.id);
+
+      // Determine visual isolation level
+      let edgeOpacity = 0.85;
+      if (hoveredEdgeId) {
+        edgeOpacity = isHovered ? 1 : 0.05;
+      } else if (isTraced) {
+        edgeOpacity = 1;
+      }
 
       return {
         ...e,
@@ -352,7 +447,11 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
     return (
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
         <div style={{ background: 'var(--bg-1)', border: '1px solid var(--border)', borderRadius: 12, padding: '2rem', maxWidth: 400, textAlign: 'center' }}>
-          <div style={{ fontSize: '28px', marginBottom: 12 }}>🧠</div>
+          <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'center' }}>
+            <svg width="40" height="40" fill="none" stroke="#6366f1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.54-2.44 2.5 2.5 0 01-2-2.44V10a2.5 2.5 0 012-2.44 2.5 2.5 0 012.54-2.44A2.5 2.5 0 019.5 2zM14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.54-2.44 2.5 2.5 0 002-2.44V10a2.5 2.5 0 00-2-2.44 2.5 2.5 0 00-2.54-2.44A2.5 2.5 0 0014.5 2z" />
+            </svg>
+          </div>
           <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Mental Model Not Ready</h3>
           <p style={{ fontSize: '13px', color: 'var(--text-3)', lineHeight: 1.6 }}>The mental model will be available once the analysis completes.</p>
         </div>
@@ -505,31 +604,42 @@ export default function MentalModelPanel({ repoId, traceTarget }) {
             </div>
           </div>
         ) : (
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onNodeClick={onNodeClick}
-            onEdgeMouseEnter={(_, edge) => setHoveredEdgeId(edge.id)}
-            onEdgeMouseLeave={() => setHoveredEdgeId(null)}
-            onPaneClick={() => { setSelectedNode(null); setTracedNodeIds([]); }}
-            nodeTypes={nodeTypes}
-            fitView
-            fitViewOptions={{ padding: 0.2 }}
-            minZoom={0.1}
-            maxZoom={1.5}
-            defaultEdgeOptions={{ zIndex: 0 }}
-            style={{ background: 'var(--bg, #0a0a0a)' }}
-          >
-            <Background color="#333" gap={16} />
-            <Controls style={{ background: 'var(--bg-2)', borderColor: 'var(--border)', fill: 'var(--text-2)' }} />
-            <MiniMap
-              nodeColor={(n) => n.data?.color || LANG_COLORS[n.data?.language] || '#555'}
-              maskColor="rgba(0,0,0,0.7)"
-              style={{ background: 'var(--bg-1)', border: '1px solid var(--border)', borderRadius: 8 }}
-            />
-          </ReactFlow>
+          <div style={{ width: '100%', height: '100%', position: 'relative' }} onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}>
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              onNodesChange={onNodesChange}
+              onEdgesChange={onEdgesChange}
+              onNodeClick={onNodeClick}
+              onNodeMouseEnter={() => setHoveredEdgeId(null)}
+              onEdgeMouseEnter={(_, edge) => setHoveredEdgeId(edge.id)}
+              onEdgeMouseLeave={() => setHoveredEdgeId(null)}
+              onPaneClick={() => { setSelectedNode(null); setTracedNodeIds([]); }}
+              onPaneMouseEnter={() => setHoveredEdgeId(null)}
+              nodeTypes={nodeTypes}
+              fitView
+              fitViewOptions={{ padding: 0.2 }}
+              minZoom={0.1}
+              maxZoom={1.5}
+              defaultEdgeOptions={{ zIndex: 0 }}
+              style={{ background: 'var(--bg, #0a0a0a)' }}
+            >
+              <Background color="#333" gap={16} />
+              <Controls style={{ background: 'var(--bg-2)', borderColor: 'var(--border)', fill: 'var(--text-2)' }} />
+              <MiniMap
+                nodeColor={(n) => n.data?.color || LANG_COLORS[n.data?.language] || '#555'}
+                maskColor="rgba(0,0,0,0.7)"
+                style={{ background: 'var(--bg-1)', border: '1px solid var(--border)', borderRadius: 8 }}
+              />
+            </ReactFlow>
+            {hoveredEdgeId && (
+              <EdgeDetailOverlay 
+                edge={edges.find(e => e.id === hoveredEdgeId)} 
+                nodes={nodes} 
+                mousePos={mousePos} 
+              />
+            )}
+          </div>
         )}
         
         {/* Node Detail Side Panel */}

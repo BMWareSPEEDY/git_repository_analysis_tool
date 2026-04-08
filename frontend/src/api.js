@@ -81,13 +81,13 @@ export async function getRepoSummary(repoId) {
  * @param {string} repoId
  * @param {string} question
  * @param {string} [conversationId]
- * @param {Function} onChunk - Callback for each stream chunk: ({ type, ...data })
+ * @param {Function} onChunk - Callback for each stream chunk: (text)
  */
 export async function streamAskQuestion(repoId, question, conversationId, onChunk) {
   const body = { repo_id: repoId, question };
   if (conversationId) body.conversation_id = conversationId;
 
-  const response = await fetch(`${BASE_URL}/ask`, {
+  const response = await fetch(`${BASE_URL}/ask/stream`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -100,32 +100,12 @@ export async function streamAskQuestion(repoId, question, conversationId, onChun
 
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
-  let metadataReceived = false;
-  let buffer = '';
 
   while (true) {
     const { value, done } = await reader.read();
     if (done) break;
-    
     const chunk = decoder.decode(value, { stream: true });
-    buffer += chunk;
-
-    if (!metadataReceived && buffer.includes('\n--SEP--\n')) {
-      const parts = buffer.split('\n--SEP--\n');
-      try {
-        const metadata = JSON.parse(parts[0]);
-        metadataReceived = true;
-        buffer = parts.slice(1).join('\n--SEP--\n');
-        onChunk({ type: 'metadata', ...metadata });
-      } catch (e) {
-        // Maybe partial metadata, wait for next chunk
-      }
-    }
-
-    if (metadataReceived && buffer) {
-      onChunk({ type: 'text', text: buffer });
-      buffer = '';
-    }
+    onChunk(chunk);
   }
 }
 

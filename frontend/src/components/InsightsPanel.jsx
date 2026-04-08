@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getSecurityReport, getCodeSmells } from '../api';
 
 const SEVERITY_CONFIG = {
-  critical: { color: '#ef4444', bg: 'rgba(239,68,68,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 6px #ef444480'}} /> },
-  high:     { color: '#f97316', bg: 'rgba(249,115,22,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f97316', boxShadow: '0 0 6px #f9731680'}} /> },
-  medium:   { color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b80'}} /> },
-  low:      { color: '#22c55e', bg: 'rgba(34,197,94,0.08)',  icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e80'}} /> },
-  info:     { color: '#6366f1', bg: 'rgba(99,102,241,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#6366f1', boxShadow: '0 0 6px #6366f180'}} /> },
-  warning:  { color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b80'}} /> },
-  error:    { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 6px #ef444480'}} /> },
+  critical: { color: '#ef4444', label: 'Error', bg: 'rgba(239,68,68,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 6px #ef444480'}} /> },
+  high:     { color: '#f97316', label: 'Error', bg: 'rgba(249,115,22,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f97316', boxShadow: '0 0 6px #f9731680'}} /> },
+  medium:   { color: '#f59e0b', label: 'Warning', bg: 'rgba(245,158,11,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b80'}} /> },
+  low:      { color: '#22c55e', label: 'Warning', bg: 'rgba(34,197,94,0.08)',  icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e80'}} /> },
+  info:     { color: '#6366f1', label: 'Warning', bg: 'rgba(99,102,241,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#6366f1', boxShadow: '0 0 6px #6366f180'}} /> },
+  warning:  { color: '#f59e0b', label: 'Warning', bg: 'rgba(245,158,11,0.08)', icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b80'}} /> },
+  error:    { color: '#ef4444', label: 'Error', bg: 'rgba(239,68,68,0.08)',  icon: <div style={{width: 8, height: 8, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 6px #ef444480'}} /> },
 };
 
 function RiskMeter({ score }) {
@@ -106,6 +106,38 @@ function FindingCard({ finding }) {
   );
 }
 
+const FilterBar = ({ counts, filter, setFilter }) => (
+  <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
+    {[
+      { id: 'all', label: 'All', count: counts.total },
+      { id: 'error', label: 'Errors', count: counts.errors, color: '#ef4444' },
+      { id: 'warning', label: 'Warnings', count: counts.warnings, color: '#f59e0b' }
+    ].map(f => (
+      <button
+        key={f.id}
+        onClick={() => setFilter(f.id)}
+        style={{
+          background: filter === f.id ? 'var(--bg-3)' : 'transparent',
+          color: filter === f.id ? 'var(--text)' : 'var(--text-3)',
+          border: '1px solid',
+          borderColor: filter === f.id ? 'var(--border)' : 'transparent',
+          borderRadius: 6, padding: '4px 10px', fontSize: '11px', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.1s'
+        }}
+      >
+        <span style={{ fontWeight: 600 }}>{f.label}</span>
+        {f.count > 0 && (
+          <span style={{ 
+            fontSize: '9px', background: f.color ? `${f.color}20` : 'rgba(255,255,255,0.05)', 
+            color: f.color || 'inherit', padding: '1px 6px', borderRadius: 10, fontWeight: 700 
+          }}>
+            {f.count}
+          </span>
+        )}
+      </button>
+    ))}
+  </div>
+);
 
 export default function InsightsPanel({ repoId }) {
   const [activeTab, setActiveTab] = useState('security');
@@ -137,6 +169,26 @@ export default function InsightsPanel({ repoId }) {
     return () => { cancelled = true; };
   }, [repoId]);
 
+  const securityCounts = useMemo(() => {
+    if (!security) return { total: 0, errors: 0, warnings: 0 };
+    let e = 0, w = 0;
+    Object.entries(security.summary || {}).forEach(([severity, count]) => {
+      if (SEVERITY_CONFIG[severity]?.label === 'Error') e += count;
+      else w += count;
+    });
+    return { total: security.total_findings, errors: e, warnings: w };
+  }, [security]);
+
+  const smellCounts = useMemo(() => {
+    if (!smells) return { total: 0, errors: 0, warnings: 0 };
+    let e = 0, w = 0;
+    (smells.smells || []).forEach(s => {
+      if (SEVERITY_CONFIG[s.severity]?.label === 'Error' || s.severity === 'critical' || s.severity === 'high') e++;
+      else w++;
+    });
+    return { total: smells.total, errors: e, warnings: w };
+  }, [smells]);
+
   if (loading) {
     return (
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
@@ -147,18 +199,8 @@ export default function InsightsPanel({ repoId }) {
   }
 
   const tabs = [
-    { id: 'security', label: (
-      <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
-        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-        Security
-      </div>
-    ), count: security?.total_findings || 0 },
-    { id: 'smells',   label: (
-      <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
-        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        Code Smells
-      </div>
-    ), count: smells?.total || 0 },
+    { id: 'security', label: 'Security', counts: securityCounts },
+    { id: 'smells',   label: 'Code Smells', counts: smellCounts },
   ];
 
   return (
@@ -173,193 +215,106 @@ export default function InsightsPanel({ repoId }) {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              padding: '10px 14px',  background: 'none', border: 'none',
+              padding: '12px 14px', background: 'none', border: 'none',
               borderBottom: activeTab === tab.id ? '2px solid #6366f1' : '2px solid transparent',
               color: activeTab === tab.id ? 'var(--text)' : 'var(--text-3)',
-              fontSize: '12px', fontWeight: 500, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: 6,
-              transition: 'color 0.15s',
+              fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 8, transition: 'all 0.15s',
             }}
           >
             {tab.label}
-            {tab.count > 0 && (
-              <span style={{
-                fontSize: '10px', padding: '1px 6px', borderRadius: 10,
-                background: tab.count > 0 ? 'rgba(239,68,68,0.1)' : 'var(--bg-2)',
-                color: tab.count > 0 ? '#ef4444' : 'var(--text-3)',
-                fontFamily: 'var(--mono)', fontWeight: 600,
-              }}>
-                {tab.count}
-              </span>
-            )}
+            <div style={{ display: 'flex', gap: 4 }}>
+              {tab.counts.errors > 0 && <span style={{ fontSize: '9px', color: '#ef4444', fontWeight: 800 }}>{tab.counts.errors}E</span>}
+              {tab.counts.warnings > 0 && <span style={{ fontSize: '9px', color: '#f59e0b', fontWeight: 800 }}>{tab.counts.warnings}W</span>}
+            </div>
           </button>
         ))}
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '14px 16px' }}>
-        {activeTab === 'security' && (
-          <SecurityTab data={security} />
-        )}
-        {activeTab === 'smells' && (
-          <SmellsTab data={smells} />
-        )}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px' }}>
+        {activeTab === 'security' && <SecurityTab data={security} counts={securityCounts} />}
+        {activeTab === 'smells' && <SmellsTab data={smells} counts={smellCounts} />}
       </div>
     </div>
   );
 }
 
-function SecurityTab({ data }) {
+function SecurityTab({ data, counts }) {
+  const [filter, setFilter] = useState('all');
+
   if (!data || data.total_findings === 0) {
-    return (
-      <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-        <div style={{ color: '#22c55e', marginBottom: 12 }}>
-          <svg width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>
-          No Security Issues Found
-        </h3>
-        <p style={{ fontSize: '13px', color: 'var(--text-3)' }}>
-          The codebase passed all security checks.
-        </p>
-      </div>
-    );
+    return <EmptyState title="No Security Issues Found" />;
   }
 
-  const allFindings = Object.values(data.by_severity || {}).flat();
+  const filteredFindings = useMemo(() => {
+    return Object.values(data.by_severity || {}).flat().filter(f => {
+      if (filter === 'all') return true;
+      const type = SEVERITY_CONFIG[f.severity]?.label.toLowerCase();
+      return type === filter;
+    });
+  }, [data, filter]);
 
   return (
     <div className="fade-up">
-      {/* Risk score */}
       <div style={{
         background: 'var(--bg-1)', border: '1px solid var(--border)',
-        borderRadius: 10, padding: '14px 18px', marginBottom: 14,
+        borderRadius: 10, padding: '16px', marginBottom: 16,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text)' }}>Risk Score</span>
-          <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>
-            {data.files_scanned} files scanned
-          </span>
-        </div>
         <RiskMeter score={data.risk_score || 0} />
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
-          {/* Complexity */}
-          <div style={{ background: 'var(--bg-2)', padding: '8px 12px', borderRadius: 8 }}>
-            <div style={{ fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-3)', letterSpacing: '0.05em', marginBottom: 4 }}>Complexity</div>
-            <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)' }}>
-              {data.complexity_score || 0}<span style={{ fontSize: '11px', color: 'var(--text-3)', fontWeight: 400 }}>/100</span>
-            </div>
-          </div>
-          {/* Test Coverage */}
-          <div style={{ background: 'var(--bg-2)', padding: '8px 12px', borderRadius: 8 }}>
-            <div style={{ fontSize: '10px', textTransform: 'uppercase', color: 'var(--text-3)', letterSpacing: '0.05em', marginBottom: 4 }}>Test Coverage</div>
-            <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)' }}>
-              ~{data.test_coverage_est || 0}%
-            </div>
-          </div>
-        </div>
-
-        {/* Severity breakdown */}
-        <div style={{ display: 'flex', gap: 10, marginTop: 10, flexWrap: 'wrap' }}>
-          {Object.entries(data.summary || {}).map(([severity, count]) => {
-            const sev = SEVERITY_CONFIG[severity] || SEVERITY_CONFIG.info;
-            return count > 0 ? (
-              <span key={severity} style={{
-                fontSize: '11px', padding: '3px 8px', borderRadius: 10,
-                background: sev.bg, color: sev.color, fontWeight: 600,
-              }}>
-                {count} {severity}
-              </span>
-            ) : null;
-          })}
-        </div>
       </div>
+      
+      <FilterBar counts={counts} filter={filter} setFilter={setFilter} />
 
-      {/* Findings list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {allFindings.map((f, i) => (
-          <FindingCard key={i} finding={f} />
-        ))}
+        {filteredFindings.map((f, i) => <FindingCard key={i} finding={f} />)}
+        {filteredFindings.length === 0 && <div style={{ textAlign: 'center', padding: '20px', color: '#555', fontSize: 12 }}>No {filter}s found in this category.</div>}
       </div>
     </div>
   );
 }
 
-function SmellsTab({ data }) {
+function SmellsTab({ data, counts }) {
+  const [filter, setFilter] = useState('all');
+
   if (!data || data.total === 0) {
-    return (
-      <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-        <div style={{ color: '#6366f1', marginBottom: 12 }}>
-          <svg width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.143-7.714L1 12l6.857-2.143L11 3z"/></svg>
-        </div>
-        <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>
-          Clean Architecture
-        </h3>
-        <p style={{ fontSize: '13px', color: 'var(--text-3)' }}>
-          No code smells or architecture issues detected.
-        </p>
-      </div>
-    );
+    return <EmptyState title="Clean Architecture" />;
   }
 
-  // Filter out unreachable functions for a separate section
-  const unreachable = (data.smells || []).filter(s => s.type === 'unreachable_function');
-  const otherSmells = (data.smells || []).filter(s => s.type !== 'unreachable_function');
+  const filteredSmells = useMemo(() => {
+    return (data.smells || []).filter(s => {
+      if (filter === 'all') return true;
+      const type = SEVERITY_CONFIG[s.severity]?.label.toLowerCase() || (['critical', 'high'].includes(s.severity) ? 'error' : 'warning');
+      return type === filter;
+    });
+  }, [data, filter]);
 
   return (
     <div className="fade-up">
-      <div style={{
-        fontSize: '12px', color: 'var(--text-3)', marginBottom: 12,
-        display: 'flex', alignItems: 'center', gap: 6,
-      }}>
-        <span style={{ fontWeight: 600, color: 'var(--text)', fontFamily: 'var(--mono)' }}>{data.total}</span>
-        issues detected
+      <FilterBar counts={counts} filter={filter} setFilter={setFilter} />
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {filteredSmells.map((smell, i) => (
+          <FindingCard key={i} finding={{
+            title: smell.type?.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+            severity: smell.severity,
+            description: smell.message,
+            file_path: smell.module,
+            line_number: smell.line,
+          }} />
+        ))}
+        {filteredSmells.length === 0 && <div style={{ textAlign: 'center', padding: '20px', color: '#555', fontSize: 12 }}>No {filter}s found.</div>}
       </div>
-
-      {unreachable.length > 0 && (
-        <div style={{ marginBottom: 20 }}>
-          <h4 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <svg width="14" height="14" fill="none" stroke="#ef4444" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-            Dead Code (Unreachable Functions)
-          </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {unreachable.map((smell, i) => (
-              <FindingCard key={i} finding={{
-                title: 'Unreachable Function',
-                severity: smell.severity,
-                description: smell.message,
-                file_path: smell.module,
-                line_number: smell.line,
-                location: smell.location,
-              }} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {otherSmells.length > 0 && (
-        <div>
-          {unreachable.length > 0 && (
-            <h4 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <svg width="14" height="14" fill="none" stroke="#6366f1" strokeWidth="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              Architecture & Coupling
-            </h4>
-          )}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {otherSmells.map((smell, i) => (
-              <FindingCard key={`smell-${i}`} finding={{
-                title: smell.type?.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
-                severity: smell.severity,
-                description: smell.message,
-                file_path: smell.module,
-                line_number: smell.line,
-                location: smell.location,
-              }} />
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
+
+const EmptyState = ({ title }) => (
+  <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+    <div style={{ color: '#22c55e', marginBottom: 12 }}>
+      <svg width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>{title}</h3>
+    <p style={{ fontSize: '13px', color: 'var(--text-3)' }}>The codebase passed all checks.</p>
+  </div>
+);
