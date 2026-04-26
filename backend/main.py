@@ -43,6 +43,8 @@ from utils.file_utils import (
     get_repo_summary_path,
     load_json,
 )
+from services.flow_service import generate_contextual_flow, list_saved_flows, get_saved_flow
+
 
 load_dotenv()
 
@@ -531,15 +533,38 @@ async def api_security(repo_id: str):
     return report
 
 
-def _group_by(items: list[dict], key: str) -> dict:
-    """Group a list of dicts by a specific key."""
-    groups: dict[str, list] = {}
-    for item in items:
-        val = item.get(key, "unknown")
-        if val not in groups:
-            groups[val] = []
-        groups[val].append(item)
     return groups
+
+
+@app.get("/repo/{repo_id}/flow")
+async def api_generate_flow(
+    repo_id: str,
+    query: str = Query(..., description="The user query that triggered this flow"),
+    answer: str = Query(..., description="The AI's previous response")
+):
+    """
+    Generate and save a contextual execution flow diagram (Mermaid).
+    """
+    repo_id = _resolve_repo_id(repo_id)
+    flow = await asyncio.to_thread(generate_contextual_flow, repo_id, query, answer)
+    if "error" in flow:
+        raise HTTPException(status_code=500, detail=flow["error"])
+    return flow
+
+@app.get("/repo/{repo_id}/flows")
+async def api_list_flows(repo_id: str):
+    """List all saved flows for a repo."""
+    repo_id = _resolve_repo_id(repo_id)
+    return list_saved_flows(repo_id)
+
+@app.get("/repo/{repo_id}/flows/{flow_id}")
+async def api_get_flow(repo_id: str, flow_id: str):
+    """Get a specific saved flow."""
+    repo_id = _resolve_repo_id(repo_id)
+    flow = get_saved_flow(repo_id, flow_id)
+    if not flow:
+        raise HTTPException(status_code=404, detail="Flow not found")
+    return flow
 
 
 if __name__ == "__main__":

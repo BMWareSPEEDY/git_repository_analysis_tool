@@ -370,15 +370,20 @@ def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None =
     if conversation_id:
         try:
             from services.conversation_store import get_store
-            history = get_store().get_history(conversation_id, limit=10)
+            history = get_store().get_history(conversation_id, limit=6)
             if history:
                 h_parts = []
+                # Ensure we show what the user and AI said previously
                 for msg in history:
-                    prefix = "Developer" if msg["role"] == "user" else "PEEK"
-                    content = msg["content"][:300] + "…" if msg["role"] == "ai" and len(msg["content"]) > 300 else msg["content"]
-                    h_parts.append(f"**{prefix}:** {content}")
+                    role_label = "DEVELOPER (User)" if msg["role"] == "user" else "PEEK (AI)"
+                    content = msg["content"]
+                    # For long AI responses, we still want to keep most of the technical context
+                    if msg["role"] == "ai" and len(content) > 1200:
+                        content = content[:1200] + "… [truncated for prompt efficiency]"
+                    h_parts.append(f"### {role_label}\n{content}")
                 chat_history = "\n\n".join(h_parts)
-        except Exception: pass
+        except Exception: 
+            pass
 
     # ── 5. Assemble
     prompt_parts = [
@@ -434,8 +439,11 @@ def _build_ask_prompt(repo_id: str, question: str, conversation_id: str | None =
         
     if "\n".join(context_parts): prompt_parts.append(f"## File Summaries\n" + "\n".join(context_parts) + "\n")
     if repo_context: prompt_parts.append(repo_context)
-    if chat_history: prompt_parts.append(f"## Previous Conversation\n{chat_history}\n")
-    prompt_parts.append(f"## Developer's Query\n{question}\n\nFormulate a senior-level response.")
+    if chat_history: 
+        prompt_parts.append("## CONTEXT: PREVIOUS CONVERSATION TURNS")
+        prompt_parts.append("The current question is a follow-up. Use the history below to maintain continuity.")
+        prompt_parts.append(chat_history + "\n")
+    prompt_parts.append(f"## Developer's New Question (Follow-up)\n{question}\n\nFormulate a senior-level response.")
 
     return "\n".join(prompt_parts)
 

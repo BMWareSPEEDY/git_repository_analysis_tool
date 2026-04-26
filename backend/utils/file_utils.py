@@ -10,11 +10,12 @@ BASE_DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 REPOS_DIR = BASE_DATA_DIR / "repos"
 SUMMARIES_DIR = BASE_DATA_DIR / "summaries"
 REPO_SUMMARIES_DIR = BASE_DATA_DIR / "repo_summaries"
+FLOWS_DIR = BASE_DATA_DIR / "flows"
 
 
 def ensure_dirs():
     """Create all required data directories if they don't exist."""
-    for d in [REPOS_DIR, SUMMARIES_DIR, REPO_SUMMARIES_DIR]:
+    for d in [REPOS_DIR, SUMMARIES_DIR, REPO_SUMMARIES_DIR, FLOWS_DIR]:
         d.mkdir(parents=True, exist_ok=True)
 
 

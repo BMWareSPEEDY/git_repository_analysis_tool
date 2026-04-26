@@ -7,6 +7,8 @@ import ChatPanel from '../components/ChatPanel';
 import RepoSummary from '../components/RepoSummary';
 import MentalModelPanel from '../components/MentalModelPanel';
 import InsightsPanel from '../components/InsightsPanel';
+import FlowDiagramPanel from '../components/FlowDiagramPanel';
+
 
 const SIDEBAR_W = 260;
 const CHAT_W    = 340;
@@ -40,6 +42,15 @@ const VIEWS = [
       </svg>
     ) 
   },
+  { 
+    id: 'flows', 
+    label: 'Flow Models',     
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ) 
+  },
 ];
 
 export default function RepoPage() {
@@ -54,6 +65,8 @@ export default function RepoPage() {
   const [showSummary, setShowSummary] = useState(false);
   const [activeView,  setActiveView]  = useState('code');
   const [traceTarget, setTraceTarget] = useState(null);
+  const [activeFlowId, setActiveFlowId] = useState(null);
+
 
   // Resizable Chat logic
   const [chatWidth, setChatWidth] = useState(340);
@@ -85,6 +98,9 @@ export default function RepoPage() {
     if (action.type === 'trace') {
       setActiveView('model');
       setTraceTarget(action.target);
+    } else if (action.type === 'view-flow') {
+      setActiveFlowId(action.flowId);
+      setActiveView('flows');
     }
   }, []);
 
@@ -349,6 +365,9 @@ export default function RepoPage() {
           )}
           {activeView === 'insights' && (
             <InsightsPanel repoId={repoId} />
+          )}
+          {activeView === 'flows' && (
+            <FlowDiagramPanel repoId={repoId} activeFlowId={activeFlowId} />
           )}
         </main>
 

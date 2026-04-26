@@ -216,3 +216,34 @@ export async function getCodeSmells(repoId) {
 export async function getSecurityReport(repoId) {
   return request(`/repo/${repoId}/security`);
 }
+
+/**
+ * Generate a contextual execution flow diagram.
+ * @param {string} repoId
+ * @param {string} query
+ * @param {string} answer
+ */
+export async function getFlowDiagram(repoId, query, answer) {
+  const params = new URLSearchParams({ query, answer });
+  return request(`/repo/${repoId}/flow?${params}`);
+}
+
+/**
+ * List all saved flows for a repo.
+ * @param {string} repoId
+ */
+export async function listFlows(repoId) {
+  return request(`/repo/${repoId}/flows`);
+}
+
+/**
+ * Get a specific saved flow.
+ * @param {string} repoId
+ * @param {string} flowId
+ */
+export async function getFlow(repoId, flowId) {
+  return request(`/repo/${repoId}/flows/${flowId}`);
+}
+
+
+

@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { askQuestion, streamAskQuestion, getConversations, getConversation } from '../api';
+import { askQuestion, streamAskQuestion, getConversations, getConversation, getFlowDiagram } from '../api';
+import MermaidViewer from './chat/MermaidViewer';
+
 
 const SUGGESTIONS = [
   'What does this project do?',
@@ -15,7 +17,9 @@ export default function ChatPanel({ repoId, onChatAction }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [generatingFlow, setGeneratingFlow] = useState(false);
   const [conversationId, setConversationId] = useState(null);
+
   const [conversations, setConversations] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const bottomRef = useRef(null);
@@ -67,6 +71,22 @@ export default function ChatPanel({ repoId, onChatAction }) {
     } finally {
       setLoading(false);
       setTimeout(() => inputRef.current?.focus(), 50);
+    }
+  };
+
+  const generateFlow = async (msgId, query, answer) => {
+    setGeneratingFlow(true);
+    try {
+      const data = await getFlowDiagram(repoId, query, answer);
+      if (data.mermaid) {
+        setMessages(prev => prev.map(m => 
+          m.id === msgId ? { ...m, flowDiagram: data.mermaid, flowId: data.id } : m
+        ));
+      }
+    } catch (e) {
+      console.error('Flow generation failed:', e);
+    } finally {
+      setGeneratingFlow(false);
     }
   };
 
@@ -259,9 +279,54 @@ export default function ChatPanel({ repoId, onChatAction }) {
                   <ReactMarkdown>{m.text}</ReactMarkdown>
                 </div>
                 
-                {/* Contextual Trace Button */}
-                {m.text && !m.err && (
-                  <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end' }}>
+                
+                {/* Flow Diagram (Mermaid) */}
+                {m.flowDiagram && (
+                  <div style={{ position: 'relative' }}>
+                    <MermaidViewer chart={m.flowDiagram} />
+                    <button
+                      onClick={() => onChatAction({ type: 'view-flow', flowId: m.flowId })}
+                      style={{
+                        position: 'absolute', top: 5, right: 5,
+                        background: 'rgba(99,102,241,0.9)', border: 'none',
+                        borderRadius: 4, padding: '2px 6px', fontSize: '9px',
+                        color: 'white', cursor: 'pointer', fontWeight: 600,
+                        zIndex: 10, boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      Open Full View
+                    </button>
+                  </div>
+                )}
+
+                {/* Contextual Trace & Flow Buttons */}
+                {!m.err && m.text && (
+                  <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+                    {/* Flow Diagram Button */}
+                    {!m.flowDiagram && m.role === 'ai' && (
+                      <button
+                        onClick={() => generateFlow(m.id, messages[i-1]?.text, m.text)}
+                        disabled={generatingFlow}
+                        style={{
+                          background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)',
+                          borderRadius: 5, padding: '3px 8px', fontSize: '10px',
+                          color: '#a855f7', cursor: generatingFlow ? 'not-allowed' : 'pointer', fontWeight: 600,
+                          display: 'flex', alignItems: 'center', gap: 4
+                        }}
+                        onMouseEnter={e => !generatingFlow && (e.currentTarget.style.background = 'rgba(168,85,247,0.15)')}
+                        onMouseLeave={e => !generatingFlow && (e.currentTarget.style.background = 'rgba(168,85,247,0.1)')}
+                      >
+                        {generatingFlow ? (
+                          <div className="spinner" style={{ width: 8, height: 8, borderWidth: 1.5 }} />
+                        ) : (
+                          <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        )}
+                        {generatingFlow ? 'Generating...' : 'Generate Flow Diagram'}
+                      </button>
+                    )}
+
                     <button
                       onClick={() => {
                         // Regex to find file-like strings (e.g., vanilla.ts, index.js, src/store.py)

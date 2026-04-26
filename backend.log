@@ -1,80 +1,149 @@
 INFO:     Will watch for changes in these directories: ['/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [26663] using WatchFiles
-INFO:     Started server process [26695]
+INFO:     Started reloader process [82102] using WatchFiles
+INFO:     Started server process [82163]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:54263 - "POST /clone HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54264 - "POST /repo/repo_75279b216fe8/analyze HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54265 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54266 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54269 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54271 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54267 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54274 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54277 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54280 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54283 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54288 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54289 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54292 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54295 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54301 - "GET /repo/repo_75279b216fe8/code-smells HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54304 - "GET /repo/repo_75279b216fe8/code-smells HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54300 - "GET /repo/repo_75279b216fe8/security HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54307 - "GET /repo/repo_75279b216fe8/security HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54315 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54316 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54319 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54322 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54325 - "GET /repo/repo_75279b216fe8/file-summary?path=src%2Ftraditional.ts HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54424 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54426 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54429 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54432 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54425 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54435 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54439 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54444 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54584 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54585 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54590 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54591 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [26695]
-INFO:     Started server process [30612]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [30612]
-INFO:     Started server process [31053]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'services/ai.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [31053]
-INFO:     Started server process [31309]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:54714 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54715 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54717 - "GET /repo/repo_75279b216fe8/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54718 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54716 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54719 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54722 - "GET /repo/repo_75279b216fe8/files HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54725 - "GET /repo/repo_75279b216fe8/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54730 - "POST /ask/stream HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54737 - "GET /repo/repo_75279b216fe8/conversations HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54751 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54750 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54756 - "GET /repo/repo_75279b216fe8/mental-model/summary HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54757 - "GET /repo/repo_75279b216fe8/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61855 - "POST /clone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61858 - "POST /repo/repo_d122b7b9605e/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61865 - "GET /repo/repo_d122b7b9605e/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61866 - "GET /repo/repo_d122b7b9605e/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61872 - "GET /repo/repo_d122b7b9605e/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61873 - "GET /repo/repo_d122b7b9605e/conversations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61867 - "GET /repo/repo_d122b7b9605e/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61876 - "GET /repo/repo_d122b7b9605e/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61879 - "GET /repo/repo_d122b7b9605e/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61882 - "GET /repo/repo_d122b7b9605e/files HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61885 - "GET /repo/repo_d122b7b9605e/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61888 - "GET /repo/repo_d122b7b9605e/file-summary?path=server%2Formconfig.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61891 - "GET /repo/repo_d122b7b9605e/file-summary?path=server%2Fpackage.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61896 - "GET /repo/repo_d122b7b9605e/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61897 - "GET /repo/repo_d122b7b9605e/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61900 - "GET /repo/repo_d122b7b9605e/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61903 - "GET /repo/repo_d122b7b9605e/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61908 - "GET /repo/repo_d122b7b9605e/code-smells HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/backend/main.py", line 519, in api_code_smells
+    "by_type": _group_by(smells, "type"),
+               ^^^^^^^^^
+NameError: name '_group_by' is not defined
+INFO:     127.0.0.1:61912 - "GET /repo/repo_d122b7b9605e/code-smells HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ashishpaliwal/PycharmProjects/github_repo_summerizer/backend/main.py", line 519, in api_code_smells
+    "by_type": _group_by(smells, "type"),
+               ^^^^^^^^^
+NameError: name '_group_by' is not defined
+INFO:     127.0.0.1:61909 - "GET /repo/repo_d122b7b9605e/security HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61915 - "GET /repo/repo_d122b7b9605e/security HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61918 - "GET /repo/repo_d122b7b9605e/flows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61921 - "GET /repo/repo_d122b7b9605e/flows HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61925 - "GET /repo/repo_d122b7b9605e/flows/1fa2b05d37b8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62168 - "GET /repo/repo_d122b7b9605e/flows/5e3f36ff143a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62174 - "GET /repo/repo_d122b7b9605e/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62173 - "GET /repo/repo_d122b7b9605e/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62180 - "GET /repo/repo_d122b7b9605e/mental-model HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62179 - "GET /repo/repo_d122b7b9605e/mental-model/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62183 - "GET /repo/repo_d122b7b9605e/file-summary?path=server%2Fpackage.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62186 - "GET /repo/repo_d122b7b9605e/file-summary?path=server%2Fpackage.json HTTP/1.1" 200 OK
