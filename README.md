@@ -176,6 +176,10 @@ https://vimeo.com/1186625702?share=copy&fl=sv&fe=ci#t=0
 
 ---
 
+#AI Use
+
+I am being honest. I did make use of AI in this project. I mainly had to use it for the UI as you could tell. I am mainly good with backends and I am still learning react and ts for frontend devolopment. I learned a lot while working on this project. Not just UI wise but also on how to connect frontend and backend. I also used it for a bit of an experiment. As you can check in the project file there is a shell script. That is completely AI generated and it is used to launch both the frontend and the backend at the same time and open the URL in my broswer. This made it a lot easier to test the code after breaks and cloding my IDE and broswer.
+
 ## 📝 License
 
 MIT
